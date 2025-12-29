@@ -1,0 +1,27 @@
+{
+  "name": "oxlo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "chart.js": "^4.3.0",
+    "eslint": "8.41.0",
+    "eslint-config-next": "13.4.3",
+    "framer-motion": "^10.12.16",
+    "jquery": "^3.7.0",
+    "next": "13.4.3",
+    "nodemailer": "^6.9.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-owl-carousel": "^2.3.3",
+    "react-scroll-into-view": "^1.12.1",
+    "swiper": "^11.2.6",
+    "tiny-slider": "^2.9.4",
+    "lucide-react": "^0.454.0"
+  }
+}
