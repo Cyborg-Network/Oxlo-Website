@@ -420,7 +420,7 @@ const [searchQuery, setSearchQuery] = useState("")
                         )
                       })}
                     </div>
-                    <button className="deploy-btn">Deploy <MoveRight size={15} /></button>
+                    <a href="https://portal.oxlo.ai/" className="deploy-btn">Deploy <MoveRight size={15} /></a>
                   </div>
                 </div>
               ))}

@@ -88,7 +88,7 @@ export default function Pricing() {
                 </ul>
                 <Button
                   title="Get started for free"
-                  link=""
+                  link="https://portal.oxlo.ai/"
                   size="btn-md"
                   theme="dark"
                 />
@@ -133,7 +133,7 @@ export default function Pricing() {
                 </ul>
                 <Button
                   title="Start free for 15 days"
-                  link=""
+                  link="https://portal.oxlo.ai/"
                   size="btn-md"
                   theme="dark"
                 />
@@ -177,7 +177,7 @@ export default function Pricing() {
                 </ul>
                 <Button
                   title="Get Pro free for 30 days"
-                  link=""
+                  link="https://portal.oxlo.ai/"
                   size="btn-md"
                 />
                 <p className="payment-info">
@@ -216,7 +216,7 @@ export default function Pricing() {
                 </ul>
                 <Button
                   title="Email Us!"
-                  link=""
+                  link="https://portal.oxlo.ai/"
                   size="btn-sm"
                   theme="dark"
                 />
@@ -276,7 +276,7 @@ export default function Pricing() {
                       </div>
                       <Button
                         title="Get started for free"
-                        link=""
+                        link="https://portal.oxlo.ai/"
                         size="btn-md"
                         theme="dark"
                       />
@@ -290,7 +290,7 @@ export default function Pricing() {
                       </div>
                        <Button
                         title="Start free for 15 days"
-                        link=""
+                        link="https://portal.oxlo.ai/"
                         size="btn-md"
                         theme="dark"
                       />
@@ -304,7 +304,7 @@ export default function Pricing() {
                       </div>
                       <Button
                         title="Get Pro free for 30 days"
-                        link=""
+                        link="https://portal.oxlo.ai/"
                         size="btn-md"
                       />
                     </div>
@@ -315,7 +315,7 @@ export default function Pricing() {
                       <div className="price">Custom pricing</div>
                        <Button
                         title="Email Us!"
-                        link=""
+                        link="https://portal.oxlo.ai/"
                         size="btn-md"
                         theme="dark"
                       />

@@ -80,7 +80,7 @@ export default function Home() {
                 </p>
                 <Button
                   title="Get started for free"
-                  link=""
+                  link="https://portal.oxlo.ai/"
                   size="btn-md"
                   icon={rocket}
                 />
@@ -153,7 +153,7 @@ export default function Home() {
                 >
                 <Button
                   title="Start running AI in seconds"
-                  link=""
+                  link="https://portal.oxlo.ai/"
                   size="btn-md"
                   icon={shock}
                 />
@@ -279,7 +279,7 @@ export default function Home() {
               >
                 <Button
                   title="Get started with Oxlo.ai"
-                  link=""
+                  link="https://portal.oxlo.ai/"
                   size="btn-md"
                   icon={rocket}
                 />
@@ -317,7 +317,7 @@ export default function Home() {
               >
                 <Button
                   title="Deploy Now"
-                  link=""
+                  link="https://portal.oxlo.ai/"
                   size="btn-md"
                   icon={rocket}
                   theme="light"

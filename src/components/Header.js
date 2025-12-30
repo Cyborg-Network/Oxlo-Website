@@ -19,11 +19,11 @@ const Header = () => {
         <nav>
             <ul>
                 <li className='submenu'>
-                    <Link href="/">Products</Link>
+                    <Link href="https://portal.oxlo.ai/">Products</Link>
                     <div className='dropdown'>
                         <ul>
-                            <li onClick={()=>setToggle(!toggle)}><Link href="/" className={`${router.asPath === "/" ? "active" : ""}`}>OxAPI</Link></li>
-                            <li onClick={()=>setToggle(!toggle)}><Link href="/" className={`${router.asPath === "/" ? "active" : ""}`}>OxCompute <small>(Coming Soon)</small></Link></li>
+                            <li onClick={()=>setToggle(!toggle)}><Link href="https://portal.oxlo.ai/" className={`${router.asPath === "/" ? "active" : ""}`}>OxAPI</Link></li>
+                            <li onClick={()=>setToggle(!toggle)}><Link href="https://portal.oxlo.ai/" className={`${router.asPath === "/" ? "active" : ""}`}>OxCompute <small>(Coming Soon)</small></Link></li>
                         </ul>
                     </div>
                 </li>
@@ -34,10 +34,10 @@ const Header = () => {
         <div className='header-btn'>
             <nav>
                 <ul>
-                    <li onClick={()=>setToggle(!toggle)}><Link href="/">Log In</Link></li>
+                    <li onClick={()=>setToggle(!toggle)}><Link href="https://portal.oxlo.ai/">Log In</Link></li>
                 </ul>
             </nav>
-            <Button onClick={()=>setToggle(!toggle)} title="Start Free" link="/" size="btn-md"/>
+            <Button onClick={()=>setToggle(!toggle)} title="Start Free" link="https://portal.oxlo.ai/" size="btn-md"/>
         </div>
         <div className={`toggle-menu ${toggle ? "" : "active"}`} onClick={()=>setToggle(!toggle)}>
             <div className='toggle-wrap'>
