@@ -262,8 +262,8 @@ export default function Home() {
                 </div>
                 {[1, 2, 3].map(n => (
                   <div key={n} className="cell">
-                    <div className="icon-circle icon-check-gray">
-                      <div className="check-mark check-mark-light"></div>
+                    <div className="icon-circle icon-check-green">
+                      <div className="check-mark"></div>
                     </div>
                   </div>
                 ))}

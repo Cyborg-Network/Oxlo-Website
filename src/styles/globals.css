@@ -4351,7 +4351,7 @@ filter: blur(75px);
   padding-top: 0;
 }
 .fiveg-wrap {
-  padding: 60px 55px;
+  padding: 55px;
 }
 .gs-text h5 {
   font-size: 26px;
@@ -4447,7 +4447,7 @@ filter: blur(75px);
   margin-top: 30px;
 }
 .fiveg-section .hero-desc, .fiveg-section .hero-heading{
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 .animated-emblem svg {
     max-width: 76px;
@@ -4815,7 +4815,10 @@ nav > ul{
   margin: 0 auto;
 }
 .fiveg-wrap {
-  padding: 35px 25px;
+  padding: 30px;
+}
+.fiveg-wrap .d-right > div{
+  text-align: center;
 }
 .app-image-web{
   display: none;
@@ -5362,7 +5365,7 @@ nav > ul{
   margin: 20px 0;
 }
 .fiveg-wrap {
-  padding: 25px 15px;
+  padding: 20px;
 }
 .miner-right h1 {
   font-size: 24px;
