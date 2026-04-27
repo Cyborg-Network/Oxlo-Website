@@ -129,7 +129,7 @@ export default function Blogs() {
                           <span className="blog-date-new">{post.date}</span>
                         </div>
                         <h3 className="blog-title-new unbounded-font">{post.title}</h3>
-                        <p className="blog-excerpt-new unbounded-font">{post.excerpt}</p>
+                        <p className="blog-excerpt-new">{post.excerpt}</p>
                       </div>
                     </div>
                   </Link>

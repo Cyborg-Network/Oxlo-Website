@@ -29,7 +29,7 @@ const Header = () => {
                 </li>
                 <li onClick={()=>setToggle(!toggle)}><Link href="/models" className={`${router.asPath === "/models" ? "active" : ""}`}>Models</Link></li>
                 <li onClick={()=>setToggle(!toggle)}><Link href="https://docs.oxlo.ai/" className={`${router.asPath === "/docs" ? "active" : ""}`}>Docs</Link></li>
-                <li onClick={()=>setToggle(!toggle)}><Link href="/blogs" className={`${router.asPath.includes("/blogs") ? "active" : ""}`}>Blogs</Link></li>
+                <li onClick={()=>setToggle(!toggle)}><Link href="/blogs" className={`${router.asPath.includes("/blogs") ? "active" : ""}`}>Resources</Link></li>
                 <li onClick={()=>setToggle(!toggle)}><Link href="/pricing" className={`${router.asPath === "/pricing" ? "active" : ""}`}>Pricing</Link></li>
             </ul>
         </nav>

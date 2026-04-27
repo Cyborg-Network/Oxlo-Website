@@ -160,7 +160,7 @@ export default function BlogPost() {
             >
               {post.title}
             </motion.h1>
-            <p className="blog-subtitle-new unbounded-font">{post.excerpt}</p>
+            <p className="blog-subtitle-new">{post.excerpt}</p>
           </div>
 
           <div className="blog-two-column-layout">
@@ -256,7 +256,7 @@ export default function BlogPost() {
                           <span className="blog-date-new">{rPost.date}</span>
                         </div>
                         <h3 className="blog-title-new unbounded-font">{rPost.title}</h3>
-                        <p className="blog-excerpt-new unbounded-font">{rPost.excerpt}</p>
+                        <p className="blog-excerpt-new">{rPost.excerpt}</p>
                       </div>
                     </div>
                   </Link>
