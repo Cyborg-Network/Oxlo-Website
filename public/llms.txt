@@ -30,6 +30,9 @@ Request-based pricing: one flat cost per API call, regardless of token count. No
 - GPT-Oss 120B: Large-scale open-source GPT model (Premium)
 - Kimi K2 Thinking: Advanced reasoning with chain-of-thought (Premium)
 - Kimi K2.5: Latest Kimi reasoning model (Premium)
+- Kimi K2.6: Latest multimodal reasoning model with video input and 131K context (Premium)
+- Falcon 11B: Enhanced reasoning and text generation (Pro)
+- Falcon 7B: Efficient reliable text generation (Free)
 - DeepSeek V3: Fast general-purpose inference (Free)
 - DeepSeek V3.2: Improved coding and reasoning (Free)
 - Mistral 7B v0.3: Fast and efficient for lightweight tasks (Free)
@@ -53,7 +56,8 @@ Request-based pricing: one flat cost per API call, regardless of token count. No
 ### Code Models
 - Qwen 3 Coder 30B: Specialised coding model with 30B parameters (Premium)
 - DeepSeek Coder: Code generation and understanding (Pro)
-- Oxlo Coder Fast: Optimised for fast code completion (Pro)
+- Qwen 2.5 Coder 7B: Accurate coding assistance and debugging (Pro)
+- Oxlo Coder Fast: High-speed code generation and completion (Pro)
 
 ### Image Generation
 - Oxlo Image Pro: Premium Flux 2-based image generation (Premium)
@@ -90,12 +94,16 @@ Request-based pricing. No token counting. No variable billing. One price per req
 
 All plans include a 7-day free trial with full access to every model.
 
+### Enterprise Pricing Guarantee
+Custom pricing is available for Enterprise users. We guarantee to provide a 30% discount off your current provider's API pricing for equivalent models.
+
+
 ## Key Differentiators
 
 - **Request-based pricing**: Pay per API call, not per token. A 100-token prompt and a 10,000-token prompt cost the same.
 - **No cold starts**: All popular models stay loaded in GPU memory for instant inference.
 - **OpenAI SDK drop-in replacement**: Change one line of code to switch from OpenAI, Together AI, or any compatible provider.
-- **40+ models across 7 categories**: LLMs, vision, code, image gen, audio, embeddings, and detection.
+- **45+ models across 7 categories**: LLMs, vision, code, image gen, audio, embeddings, and detection.
 - **7-day free trial**: Full access to every model, no credit card required.
 
 ## API Details

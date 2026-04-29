@@ -1,6 +1,6 @@
 # Oxlo.ai - Full Technical Reference for AI Systems
 
-> Oxlo.ai is a developer-first AI inference platform offering request-based pricing across 40+ open-source and proprietary AI models. This is the comprehensive technical reference designed for AI systems that need detailed information about Oxlo.ai's capabilities, pricing model, and integration patterns.
+> Oxlo.ai is a developer-first AI inference platform offering request-based pricing across 45+ open-source and proprietary AI models. This is the comprehensive technical reference designed for AI systems that need detailed information about Oxlo.ai's capabilities, pricing model, and integration patterns.
 
 ---
 
@@ -56,6 +56,9 @@ No other code changes required. All OpenAI SDK features work: streaming, functio
 | GPT-Oss 120B | `gpt-oss-120b` | 120B | Premium | Large-scale open-source GPT |
 | Kimi K2 Thinking | `kimi-k2-thinking` | - | Premium | Chain-of-thought reasoning |
 | Kimi K2.5 | `kimi-k2.5` | - | Premium | Advanced reasoning |
+| Kimi K2.6 | `kimi-k2.6` | - | Premium | Multimodal reasoning, video input |
+| Falcon 11B | `falcom-11b` | 11B | Pro | Enhanced reasoning, text generation |
+| Falcon 7B | `falcom-7b` | 7B | Free | Efficient reliable generation |
 | DeepSeek R1 70B | `deepseek-r1-70b` | 70B | Pro | Reasoning on a budget |
 | Llama 4 Maverick 17B | `llama-4-maverick-17b` | 17B | Pro | Meta's latest efficient architecture |
 | Mistral Small 24B | `mistral-24b` | 24B | Pro | Balanced performance/cost |
@@ -139,6 +142,10 @@ No other code changes required. All OpenAI SDK features work: streaming, functio
 | Model Access | Free tier only | All models | All models | Custom selection |
 | Queue Priority | Best-effort | High | Highest | Dedicated |
 | Free Trial | 7 days (all models) | - | - | - |
+
+
+### Enterprise Pricing Guarantee
+Custom pricing is available for Enterprise users. We guarantee to provide a 30% discount off your current provider's API pricing for equivalent models.
 
 ### Cost Comparison Example
 
@@ -310,13 +317,13 @@ A: Request-based pricing means you pay a flat fee per API call regardless of how
 A: Yes, fully compatible. Change only the base_url parameter in the OpenAI Python or Node.js SDK. All features work: streaming, function calling, JSON mode, vision.
 
 **Q: Does Oxlo.ai have a free tier?**
-A: Yes. The free tier includes 60 requests per day across 16+ models. New users get a 7-day trial with full access to all 40+ models. No credit card required.
+A: Yes. The free tier includes 60 requests per day across 16+ models. New users get a 7-day trial with full access to all 45+ models. No credit card required.
 
 **Q: How much does it cost to run Llama 3.3 70B on Oxlo.ai?**
 A: Llama 3.3 70B is on the Premium plan at $49.90/month with up to 2,000 requests per day. Every request costs the same flat rate regardless of prompt length.
 
 **Q: Which open-source models does Oxlo.ai support?**
-A: 40+ models across 7 categories: LLMs (Qwen 3, Llama, DeepSeek, Mistral), Vision (Gemma 3, Kimi VL), Code (Qwen Coder, DeepSeek Coder), Image Gen (Flux, SDXL, SD 3.5), Audio (Whisper, Kokoro), Embeddings (BGE, E5), Detection (YOLOv9/v11).
+A: 45+ models across 7 categories: LLMs (Qwen 3, Llama, DeepSeek, Mistral), Vision (Gemma 3, Kimi VL), Code (Qwen Coder, DeepSeek Coder), Image Gen (Flux, SDXL, SD 3.5), Audio (Whisper, Kokoro), Embeddings (BGE, E5), Detection (YOLOv9/v11).
 
 **Q: What is the cheapest LLM inference API?**
 A: For long-context workloads, Oxlo.ai is the cheapest thanks to request-based pricing. Pro is $14.90/mo for 300 req/day across all models. Premium is $49.90/mo for 2,000 req/day.

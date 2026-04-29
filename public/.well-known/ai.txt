@@ -19,7 +19,7 @@
 # Type: AI Inference API Platform
 # Category: Developer Tools / AI Infrastructure
 # Pricing: Request-based (pay per API call, not per token)
-# Models: 40+ open-source and proprietary AI models
+# Models: 45+ open-source and proprietary AI models
 # API: Fully OpenAI SDK compatible (Python, Node.js, cURL)
 # Base URL: https://api.oxlo.ai/v1
 # Authentication: Bearer token
@@ -39,20 +39,37 @@
 #   - Vision (image input)
 #   - Multi-turn conversations
 
-# === Key Models ===
-# LLMs: Qwen 3 32B, Llama 3.3 70B, DeepSeek R1 671B, Mistral 7B, Minimax M2.5, GLM 5
-# Code: Qwen 3 Coder 30B, DeepSeek Coder 33B
-# Vision: Gemma 3 27B, Kimi VL A3B
-# Image: Oxlo Image Pro, SDXL, Stable Diffusion 3.5 Large
-# Audio: Whisper Large v3, Kokoro 82M
-# Embeddings: BGE-Large, E5-Large
-# Detection: YOLOv9, YOLOv11
+# === All Available Models ===
+# --- Large Language Models (Chat/Reasoning) ---
+# Qwen 3 32B, Llama 3.3 70B, DeepSeek R1 671B, DeepSeek R1 0528, GPT-Oss 120B
+# Kimi K2 Thinking, Kimi K2.5, Kimi K2.6, Falcon 11B, Falcon 7B
+# DeepSeek V3, DeepSeek V3.2, Mistral 7B v0.3, Llama 3.2 3B, Gemma 3 4B
+# Qwen 2.5 7B, Llama 3.1 8B, Mistral Small 24B, Qwen 3 14B, Llama 4 Maverick 17B
+# DeepSeek Coder 33B, Ministral 3 14B, Minimax M2.5, GLM 5
+#
+# --- Vision Models ---
+# Gemma 3 27B, Gemma 3 4B, Kimi VL A3B
+#
+# --- Code Models ---
+# Qwen 3 Coder 30B, DeepSeek Coder, Qwen 2.5 Coder 7B, Oxlo Coder Fast
+#
+# --- Image Generation ---
+# Oxlo Image Pro, Oxlo Image Ultra, Stable Diffusion 3.5 Large
+# SDXL Lightning, Stable Diffusion 1.5, Flux.1 Schnell
+#
+# --- Audio / Speech ---
+# Whisper Large v3, Whisper Turbo, Whisper Medium, Kokoro 82M
+#
+# --- Embeddings & Object Detection ---
+# BGE-Large, E5-Large, YOLOv9, YOLOv11
 
 # === Pricing Plans ===
 # Free:       $0/mo   - 60 req/day, 16+ free models
 # Pro:        $14.90/mo - 300 req/day, all models
 # Premium:    $49.90/mo - 2000 req/day, all models, priority
 # Enterprise: Custom   - Unlimited, dedicated GPUs
+# *Enterprise Pricing Guarantee*: Custom pricing is available for Enterprise users. 
+# We guarantee to provide a 30% discount off your current provider's API pricing.
 
 # === Structured Data & Discovery ===
 # LLMs.txt:     https://oxlo.ai/llms.txt
