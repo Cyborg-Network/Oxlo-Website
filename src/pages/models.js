@@ -12,8 +12,8 @@ const modelsItemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   "name": "Oxlo.ai AI Model Registry",
-  "description": "40+ open-source and proprietary AI models available via Oxlo.ai's request-based API. Includes LLMs, vision, code, image generation, audio, embeddings, and object detection models.",
-  "numberOfItems": 37,
+  "description": "45+ open-source and proprietary AI models available via Oxlo.ai's request-based API. Includes LLMs, vision, code, image generation, audio, embeddings, and object detection models.",
+  "numberOfItems": 45,
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Qwen 3 32B", "description": "State-of-the-art multilingual reasoning and agent tasks" },
     { "@type": "ListItem", "position": 2, "name": "Llama 3.3 70B", "description": "Meta's flagship 70B parameter general-purpose LLM" },
@@ -24,7 +24,12 @@ const modelsItemListSchema = {
     { "@type": "ListItem", "position": 7, "name": "BGE-Large", "description": "BAAI's top-performing text embedding model" },
     { "@type": "ListItem", "position": 8, "name": "YOLOv9", "description": "State-of-the-art real-time object detection" },
     { "@type": "ListItem", "position": 9, "name": "Kokoro 82M", "description": "Natural-sounding text-to-speech model" },
-    { "@type": "ListItem", "position": 10, "name": "DeepSeek Coder 33B", "description": "Specialized model for code generation and programming assistance" }
+    { "@type": "ListItem", "position": 10, "name": "DeepSeek Coder 33B", "description": "Specialized model for code generation and programming assistance" },
+    { "@type": "ListItem", "position": 11, "name": "Kimi K2.6", "description": "Latest multimodal reasoning model with video input and 131K context for complex multi-step tasks." },
+    { "@type": "ListItem", "position": 12, "name": "Gemma 3 27B", "description": "High-resolution multimodal analysis for complex visual and text tasks." },
+    { "@type": "ListItem", "position": 13, "name": "GLM 5", "description": "744B parameter MoE model for complex systems engineering and long-horizon agentic tasks." },
+    { "@type": "ListItem", "position": 14, "name": "Minimax M2.5", "description": "Mixture-of-Experts model optimized for coding, agentic tool use, and complex workflows." },
+    { "@type": "ListItem", "position": 15, "name": "Qwen 3 Coder 30B", "description": "State-of-the-art 30B code model for complex software engineering tasks." }
   ]
 };
   
@@ -327,8 +332,8 @@ const MODELS_DATA = [
     comingSoon: false,
   },
   {
-    id: "gemma-27b",
-    title: "Gemma-27B",
+    id: "gemma-3-27b",
+    title: "Gemma-3-27B",
     description: "Large language model focused on high-quality text generation and reasoning.",
     tags: ["LLM", "Text"],
     logo: "/images/models/google.png",
@@ -389,7 +394,15 @@ const MODELS_DATA = [
     trending: false,
     comingSoon: false,
   },
-  
+  {
+    id: "kimi-k2-6",
+    title: "Kimi K2.6",
+    description: "Latest high-capacity reasoning model built for long context understanding, research workflows, and complex problem solving.",
+    tags: ["LLM", "Text", "Long Context"],
+    logo: "/images/models/moon.png",
+    trending: true,
+    comingSoon: false,
+  },
 ]
 
 const FILTER_TAGS = [
@@ -447,18 +460,18 @@ const [searchQuery, setSearchQuery] = useState("")
   return (
     <>
       <Head>
-        <title>AI Models - 40+ Open-Source Models for Inference | Oxlo.ai</title>
+        <title>AI Models - 45+ Open-Source Models for Inference | Oxlo.ai</title>
         <meta
           name="description"
-          content="Browse 40+ AI models available on Oxlo.ai: Qwen 3 32B, Llama 3.3 70B, DeepSeek R1, Mistral 7B, Whisper, SDXL, YOLOv9, BGE-Large, and more. Deploy any model in seconds with request-based pricing."
+          content="Browse 45+ AI models available on Oxlo.ai: Kimi K2.6, Gemma 3 27B, Qwen 3 32B, Llama 3.3 70B, DeepSeek R1, Mistral 7B, Whisper, SDXL, YOLOv9, BGE-Large, and more. Deploy any model in seconds with request-based pricing."
         />
         <meta
           name="keywords"
-          content="AI models, open-source LLM, Qwen 3 32B, Llama 3.3 70B, DeepSeek R1, Mistral 7B, Whisper API, SDXL API, BGE embedding, YOLOv9 API, AI model registry"
+          content="AI models, open-source LLM, Kimi K2.6, Gemma 3 27B, Qwen 3 32B, Llama 3.3 70B, DeepSeek R1, Mistral 7B, Whisper API, SDXL API, BGE embedding, YOLOv9 API, AI model registry"
         />
         <link rel="canonical" href="https://oxlo.ai/models" />
-        <meta property="og:title" content="40+ AI Models for Inference - Oxlo.ai Model Registry" />
-        <meta property="og:description" content="Deploy Qwen 3 32B, Llama 3.3 70B, DeepSeek R1, and 40+ more models in seconds." />
+        <meta property="og:title" content="45+ AI Models for Inference - Oxlo.ai Model Registry" />
+        <meta property="og:description" content="Deploy Kimi K2.6, Gemma 3 27B, DeepSeek R1, and 45+ more models in seconds." />
         <meta property="og:url" content="https://oxlo.ai/models" />
         <meta name="robots" content="index, follow" />
 
