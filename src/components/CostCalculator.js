@@ -10,14 +10,16 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 //   Groq:         groq.com (web search, LPU inference)
 //   Hugging Face: huggingface.co (gateway, pass-through pricing)
 //
-// Oxlo Plans (from seed_plans.py):
-//   Pro:     $14.90/mo, 300 req/day, 4096 in / 8192 out per req
-//   Premium: $49.90/mo, 2000 req/day, 16384 in / 32768 out per req
-//   Enterprise: Custom, unlimited tokens, 30% guaranteed reduction
+// Oxlo Plans:
+//   Pro:     $80/mo,  1000 req/day
+//   Premium: $350/mo, 5000 req/day
+//   Enterprise: Custom, 30% guaranteed reduction
 // ═══════════════════════════════════════════════════════════════════════════
 
 const MODELS = [
   { id: 'dsr1', name: 'DeepSeek R1' },
+  { id: 'dsv4f', name: 'DeepSeek V4 Flash' },
+  { id: 'kimik26', name: 'Kimi K2.6' },
   { id: 'kimik25', name: 'Kimi K2.5' },
   { id: 'kimik2t', name: 'Kimi K2 Thinking' },
   { id: 'llama4m', name: 'Llama 4 Maverick' },
@@ -32,6 +34,8 @@ const MODELS = [
 // Competitor pricing per 1M tokens { i: input, o: output }
 const COMP = {
   dsr1: { fw: { i: 0.55, o: 2.19 }, tog: { i: 3.00, o: 7.00 }, hf: { i: 0.60, o: 2.50 }, groq: { i: 0.75, o: 0.99 }, or: { i: 0.55, o: 2.19 } },
+  dsv4f: { fw: { i: 0.14, o: 0.28 }, tog: { i: 0.18, o: 0.35 }, hf: { i: 0.14, o: 0.28 }, groq: { i: 0.10, o: 0.20 }, or: { i: 0.14, o: 0.28 } },
+  kimik26: { fw: { i: 0.95, o: 4.00 }, tog: { i: 0.80, o: 3.50 }, hf: { i: 0.70, o: 3.00 }, groq: { i: 0.65, o: 2.80 }, or: { i: 0.80, o: 3.50 } },
   kimik25: { fw: { i: 0.60, o: 3.00 }, tog: { i: 0.50, o: 2.80 }, hf: { i: 0.55, o: 2.80 }, groq: { i: 0.50, o: 2.50 }, or: { i: 0.55, o: 2.90 } },
   kimik2t: { fw: { i: 0.60, o: 3.00 }, tog: { i: 1.00, o: 3.00 }, hf: { i: 0.58, o: 2.90 }, groq: { i: 0.55, o: 2.80 }, or: { i: 0.60, o: 3.00 } },
   llama4m: { fw: { i: 0.40, o: 1.60 }, tog: { i: 0.60, o: 3.60 }, hf: { i: 0.35, o: 1.40 }, groq: { i: 0.20, o: 0.60 }, or: { i: 0.30, o: 1.30 } },
@@ -386,25 +390,25 @@ export default function CostCalculator() {
   const minCompCost = Math.min(...compCostValues);
   const maxCompCost = Math.max(...compCostValues);
 
-  // ─── OXLO PRICING (Always flat, always cheapest) ───
+  // ─── OXLO PRICING (plan recommendation based on cheapest competitor) ───
+  // ≤ $80 cheapest competitor → Pro ($80/mo)
+  // > $80 and ≤ $500 → Premium ($350/mo) — self-serve, instant signup
+  // > $500 → Enterprise (30% off cheapest competitor) — custom contract
   let tierKey = 'pro';
-  if (avgCompCost > 220) tierKey = 'enterprise';
-  else if (avgCompCost > 60) tierKey = 'premium';
+  if (minCompCost > 500) tierKey = 'enterprise';
+  else if (minCompCost > 80) tierKey = 'premium';
 
   let oxloCost = 0;
   let tierLabel = '';
   if (tierKey === 'pro') {
-    oxloCost = 14.90;
+    oxloCost = 80;
     tierLabel = 'Pro';
   } else if (tierKey === 'premium') {
-    oxloCost = 49.90;
+    oxloCost = 350;
     tierLabel = 'Premium';
   } else {
-    if (minCompCost <= 450) {
-      oxloCost = minCompCost * 0.50;
-    } else {
-      oxloCost = minCompCost * 0.70;
-    }
+    // Enterprise: guaranteed 30% cost reduction vs cheapest competitor
+    oxloCost = minCompCost * 0.70;
     tierLabel = 'Enterprise';
   }
 
@@ -460,7 +464,7 @@ export default function CostCalculator() {
             <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#03F7B5' }}></div>
             <span style={{ fontSize: '12px', fontWeight: 700, color: '#03F7B5' }}>{tierLabel}</span>
             <span style={{ fontSize: '11px', color: '#6B7280', fontWeight: 600 }}>
-              {tierKey === 'enterprise' ? 'Custom' : tierKey === 'premium' ? '$49.90/mo' : '$14.90/mo'}
+              {tierKey === 'enterprise' ? 'Custom' : tierKey === 'premium' ? '$350/mo' : '$80/mo'}
             </span>
           </div>
 

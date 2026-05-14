@@ -17,7 +17,7 @@ const pricingProductSchema = {
   "offers": [
     { "@type": "Offer", "name": "Free Plan", "price": "0", "priceCurrency": "USD", "description": "60 requests/day, 16+ free models, community support, no credit card required", "eligibleQuantity": { "@type": "QuantitativeValue", "value": 60, "unitText": "requests per day" } },
     { "@type": "Offer", "name": "Pro Plan", "price": "80.00", "priceCurrency": "USD", "description": "1000 requests/day, all production-ready models, high priority queue, 24hr free trial", "eligibleQuantity": { "@type": "QuantitativeValue", "value": 1000, "unitText": "requests per day" } },
-    { "@type": "Offer", "name": "Premium Plan", "price": "300.00", "priceCurrency": "USD", "description": "5000 requests/day, all models, priority access + beta models, 24hr free trial", "eligibleQuantity": { "@type": "QuantitativeValue", "value": 5000, "unitText": "requests per day" } },
+    { "@type": "Offer", "name": "Premium Plan", "price": "350.00", "priceCurrency": "USD", "description": "5000 requests/day, all models, priority access + beta models, 24hr free trial", "eligibleQuantity": { "@type": "QuantitativeValue", "value": 5000, "unitText": "requests per day" } },
     { "@type": "Offer", "name": "Enterprise Plan", "description": "Custom limits, dedicated GPU routing, SLA, priority support" }
   ]
 };
@@ -61,7 +61,7 @@ const pricingFaqSchema = {
 
 const PRICING_FAQ_ITEMS = [
   { question: "How does request-based pricing work?", answer: "With Oxlo.ai's request-based pricing, you pay a flat monthly subscription that includes a set number of API requests per day. Each request costs the same regardless of how many tokens are in your prompt or response. A 100-token prompt costs the same as a 50,000-token prompt. This is fundamentally different from token-based pricing used by OpenAI, Together AI, Fireworks AI, OpenRouter, and Replicate." },
-  { question: "Is Oxlo.ai cheaper than Together AI, Fireworks AI, and OpenRouter?", answer: "For teams running long-context or reasoning model workloads, yes. Together AI, Fireworks AI, and OpenRouter all charge per token, so costs scale linearly with prompt length. Running 500 API calls per day with 3,000-token prompts costs approximately $40-60/month on these providers vs $300/month on Oxlo.ai Premium with 5,000 requests/day. But as prompt length increases beyond 10,000 tokens, Oxlo.ai can be 10-100x cheaper since every request costs the same flat rate." },
+  { question: "Is Oxlo.ai cheaper than Together AI, Fireworks AI, and OpenRouter?", answer: "For teams running long-context or reasoning model workloads, yes. Together AI, Fireworks AI, and OpenRouter all charge per token, so costs scale linearly with prompt length. Running 500 API calls per day with 3,000-token prompts costs approximately $40-60/month on these providers vs $350/month on Oxlo.ai Premium with 5,000 requests/day. But as prompt length increases beyond 10,000 tokens, Oxlo.ai can be 10-100x cheaper since every request costs the same flat rate." },
   { question: "Does Oxlo.ai offer a free trial?", answer: "Yes. Pro and Premium plans include a 24-hour free trial. The Free tier (60 requests/day, 16+ models) is available permanently with no credit card required." },
   { question: "What happens if I exceed my daily request limit?", answer: "When you reach your daily request limit, additional requests are queued until the next day or you can upgrade your plan for higher limits. There are no overage charges - your costs are always predictable and fixed. This is unlike token-based providers where a single runaway prompt can spike your bill." },
   { question: "Can I switch plans at any time?", answer: "Yes, you can upgrade or downgrade your plan at any time. When upgrading, you get immediate access to the higher plan's limits. All plans are billed monthly with no long-term contracts required." },
@@ -76,7 +76,7 @@ export default function Pricing() {
         <title>Pricing - Request-Based AI API Pricing | Oxlo.ai</title>
         <meta
           name="description"
-          content="Oxlo.ai pricing: pay per API request, not per token. Free tier ($0, 60 req/day), Pro ($80/mo, 1,000 req/day), Premium ($300/mo, 5,000 req/day). 40+ AI models, OpenAI SDK compatible. 24hr free trial."
+          content="Oxlo.ai pricing: pay per API request, not per token. Free tier ($0, 60 req/day), Pro ($80/mo, 1,000 req/day), Premium ($350/mo, 5,000 req/day). 40+ AI models, OpenAI SDK compatible. 24hr free trial."
         />
         <meta
           name="keywords"
@@ -241,7 +241,7 @@ export default function Pricing() {
                   <p className="subtitle">For teams running production workloads.</p>
                 </div>
                 <div className="price">
-                  $300<span>/month</span>
+                  $350<span>/month</span>
                 </div>
                 <div className="limit-title">Limit:</div>
                 <ul>
@@ -372,7 +372,7 @@ export default function Pricing() {
                     <div className="plan-header-card pro">
                       <h4>Premium</h4>
                       <div className="price">
-                        $300<span>/month</span>
+                        $350<span>/month</span>
                       </div>
                       <Button
                         title="24hr free trial"
