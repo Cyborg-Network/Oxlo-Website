@@ -123,6 +123,20 @@ const howToSchema = {
   ]
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Oxlo.ai",
+  "url": "https://oxlo.ai",
+  "logo": "https://oxlo.ai/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-dark.cc7a6d8d.svg&w=256&q=75",
+  "description": "Developer-first AI inference platform with request-based pricing.",
+  "sameAs": [
+    "https://github.com/Cyborg-Network",
+    "https://www.linkedin.com/company/cyborg-network",
+    "https://www.f6s.com/company/cyborg-network"
+  ]
+};
+
 // Fallback stats in case API is unavailable
 const FALLBACK_STATS = { users: 700, models_available: 30, countries: 100, tokens_display: "388M" };
 
@@ -191,6 +205,10 @@ export default function Home() {
         <meta name="robots" content="index, follow" />
 
         {/* Page-specific JSON-LD: FAQ and HowTo schemas */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }}
@@ -293,7 +311,7 @@ export default function Home() {
       </section>
 
       {/* Cost Calculator - positioned after hero */}
-      <section className="common-section" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
+      <section className="common-section" id="cost-calculator" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
         <div className="container">
           <CostCalculator />
         </div>

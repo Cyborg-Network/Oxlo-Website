@@ -8012,3 +8012,448 @@ textarea:-webkit-autofill:focus {
   margin-bottom: 32px !important;
 }
 
+/* ══════════════════════════════════════════════════════════════════════
+   OXLO CHATBOT WIDGET
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Floating Bubble ─── */
+.oxchat-bubble {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9998;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #03F7B5 0%, #02c792 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(3, 247, 181, 0.35), 0 0 0 0 rgba(3, 247, 181, 0.4);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: #04050E;
+}
+
+.oxchat-bubble:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 32px rgba(3, 247, 181, 0.5);
+}
+
+.oxchat-bubble-hidden {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.oxchat-bubble-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(3, 247, 181, 0.25);
+  animation: oxchat-pulse 2.5s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes oxchat-pulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* ─── Chat Panel ─── */
+.oxchat-panel {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  width: 400px;
+  max-width: calc(100vw - 32px);
+  height: 580px;
+  max-height: calc(100vh - 100px);
+  background: rgba(8, 12, 18, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(3, 247, 181, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(3, 247, 181, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0) translateY(20px);
+  transform-origin: bottom right;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+}
+
+.oxchat-panel-open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ─── Header ─── */
+.oxchat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(3, 247, 181, 0.03);
+  flex-shrink: 0;
+}
+
+.oxchat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.oxchat-header-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(3, 247, 181, 0.08);
+  border: 1px solid rgba(3, 247, 181, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oxchat-header-title {
+  font-family: var(--Unbounded);
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.oxchat-header-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  font-family: var(--Inter);
+}
+
+.oxchat-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #03F7B5;
+  box-shadow: 0 0 6px rgba(3, 247, 181, 0.6);
+}
+
+.oxchat-close-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.2s;
+}
+
+.oxchat-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* ─── Messages Area ─── */
+.oxchat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-behavior: smooth;
+}
+
+.oxchat-messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.oxchat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.oxchat-messages::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+/* ─── Message Bubbles ─── */
+.oxchat-msg {
+  display: flex;
+  gap: 10px;
+  max-width: 88%;
+  animation: oxchat-fadeIn 0.3s ease;
+}
+
+@keyframes oxchat-fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.oxchat-msg-user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.oxchat-msg-bot {
+  align-self: flex-start;
+}
+
+.oxchat-avatar {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 8px;
+  background: rgba(3, 247, 181, 0.08);
+  border: 1px solid rgba(3, 247, 181, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.oxchat-bubble-content {
+  font-family: var(--Inter);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 12px 16px;
+  border-radius: 16px;
+  word-break: break-word;
+}
+
+.oxchat-bubble-content br {
+  content: "";
+  display: block;
+  margin-top: 4px;
+}
+
+.oxchat-bubble-content strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.oxchat-heading {
+  display: block;
+  font-family: var(--Unbounded);
+  font-size: 12px;
+  color: #03F7B5 !important;
+  margin-top: 12px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.oxchat-li {
+  display: block;
+  padding-left: 4px;
+  margin-bottom: 2px;
+}
+
+.oxchat-code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.oxchat-link {
+  color: #03F7B5;
+  text-decoration: underline;
+}
+
+.oxchat-link:hover {
+  color: #fff;
+}
+
+.oxchat-msg-bot .oxchat-bubble-content {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-top-left-radius: 4px;
+}
+
+.oxchat-msg-user .oxchat-bubble-content {
+  background: linear-gradient(135deg, rgba(3, 247, 181, 0.15) 0%, rgba(3, 247, 181, 0.08) 100%);
+  border: 1px solid rgba(3, 247, 181, 0.2);
+  border-top-right-radius: 4px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ─── Action Buttons in Messages ─── */
+.oxchat-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  margin-right: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: rgba(3, 247, 181, 0.1);
+  border: 1px solid rgba(3, 247, 181, 0.3);
+  color: #03F7B5;
+  font-family: var(--Unbounded);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.oxchat-action-btn:hover {
+  background: rgba(3, 247, 181, 0.2);
+  border-color: rgba(3, 247, 181, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(3, 247, 181, 0.15);
+  color: #03F7B5;
+}
+
+.oxchat-calc-btn {
+  background: linear-gradient(135deg, rgba(3, 247, 181, 0.15) 0%, rgba(3, 247, 181, 0.08) 100%);
+}
+
+/* ─── Typing Indicator ─── */
+.oxchat-typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.oxchat-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(3, 247, 181, 0.5);
+  animation: oxchat-dotPulse 1.4s ease-in-out infinite;
+}
+
+.oxchat-typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.oxchat-typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes oxchat-dotPulse {
+  0%, 60%, 100% { transform: scale(0.6); opacity: 0.4; }
+  30% { transform: scale(1); opacity: 1; }
+}
+
+/* ─── Input Area ─── */
+.oxchat-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.oxchat-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: #fff;
+  font-family: var(--Inter);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.oxchat-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.oxchat-input:focus {
+  border-color: rgba(3, 247, 181, 0.3);
+}
+
+.oxchat-input:disabled {
+  opacity: 0.5;
+}
+
+.oxchat-send-btn {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  border-radius: 10px;
+  background: #03F7B5;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #04050E;
+  transition: all 0.2s;
+}
+
+.oxchat-send-btn:hover:not(:disabled) {
+  background: #2effc7;
+  transform: scale(1.05);
+}
+
+.oxchat-send-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ─── Footer ─── */
+.oxchat-footer {
+  text-align: center;
+  padding: 8px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.2);
+  font-family: var(--Inter);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  flex-shrink: 0;
+}
+
+.oxchat-footer a {
+  color: rgba(3, 247, 181, 0.5);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.oxchat-footer a:hover {
+  color: #03F7B5;
+}
+
+/* ─── Mobile Responsive ─── */
+@media (max-width: 480px) {
+  .oxchat-panel {
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+
+  .oxchat-bubble {
+    bottom: 20px;
+    right: 20px;
+    width: 54px;
+    height: 54px;
+  }
+}
+

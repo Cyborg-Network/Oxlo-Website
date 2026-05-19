@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Headline from '@/components/Headline';
+import OxloChatbot from '@/components/OxloChatbot';
 import { Analytics } from '@/components/GoogleAnalytics';
 import '@/styles/globals.css';
 import Head from 'next/head';
@@ -18,6 +19,7 @@ export default function App({ Component, pageProps }) {
       <Header/>
       <Component {...pageProps} />
       <Footer/>
+      <OxloChatbot />
     </>
   )
 }
