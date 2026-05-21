@@ -110,7 +110,7 @@ ENTERPRISE — Custom pricing
 - SLA guarantees
 - Dedicated support
 - Tailored deployment options
-- GUARANTEED 30% cost reduction vs current AI bill (for teams spending $200+/mo)
+- GUARANTEED 30% cost reduction vs current AI bill (for teams spending $500+/mo)
 - Book a call: https://calendly.com/oxlo_ai/enterprise
 
 IMPORTANT PRICING LOGIC FOR RECOMMENDATIONS:

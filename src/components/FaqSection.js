@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import TextReveal from "@/components/TextReveal";
 
 const FAQ_ITEMS = [
   {
@@ -73,15 +74,7 @@ export default function FaqSection() {
     <section className="common-section faq-section" id="faq">
       <div className="container">
         <div className="text-center">
-          <motion.h2
-            className="section-heading"
-            viewport={{ once: true }}
-            transition={{ ease: "easeInOut", duration: 0.5 }}
-            initial={{ opacity: 0, translateY: 50 }}
-            whileInView={{ opacity: 1, translateY: 0 }}
-          >
-            Frequently Asked <span className="text-gradient">Questions</span>
-          </motion.h2>
+          <TextReveal text="Frequently Asked Questions" highlights={["Questions"]} className="section-heading" tag="h2" />
           <motion.p
             className="section-desc"
             viewport={{ once: true }}

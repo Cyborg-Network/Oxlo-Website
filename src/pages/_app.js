@@ -5,6 +5,11 @@ import OxloChatbot from '@/components/OxloChatbot';
 import { Analytics } from '@/components/GoogleAnalytics';
 import '@/styles/globals.css';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
+
+const HexBackground = dynamic(() => import('@/components/HexBackground'), { ssr: false });
+const SmoothScroll = dynamic(() => import('@/components/SmoothScroll'), { ssr: false });
+const ScrollProgress = dynamic(() => import('@/components/ScrollProgress'), { ssr: false });
 
 export default function App({ Component, pageProps }) {
   const noLayout = Component.noLayout;
@@ -15,6 +20,9 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Analytics />
+      <SmoothScroll />
+      <ScrollProgress />
+      <HexBackground />
       <Headline />
       <Header/>
       <Component {...pageProps} />

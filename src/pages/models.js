@@ -4,6 +4,7 @@ import { useState, useMemo } from "react"
 import { Search, X, Star, Zap, Flame, MoveRight } from "lucide-react"
 import Head from "next/head";
 import { motion } from "framer-motion";
+import TextReveal from "@/components/TextReveal";
 
 export default function Models() {
 
@@ -501,7 +502,7 @@ const [searchQuery, setSearchQuery] = useState("")
               initial={{ opacity: 0, translateY: 100 }}
               whileInView={{ opacity: 1, translateY: 0 }}
             >
-              <h1 className="hero-heading">Model Registry</h1>
+              <TextReveal text="Model Registry" className="hero-heading" tag="h1" />
               <motion.div
                 viewport={{ once: true }}
                 transition={{
