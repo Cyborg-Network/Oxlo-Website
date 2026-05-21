@@ -576,7 +576,9 @@ button.btn {
 
 .common-section {
   padding: 100px 0;
-  background-color: var(--bg-body);
+  background-color: transparent;
+  position: relative;
+  z-index: 1;
 }
 
 .home-hero-section {
@@ -1440,9 +1442,10 @@ p span.break {
 .hw-right {
   position: relative;
   text-align: right;
-  background: var(--bg-body);
   max-width: 470px;
   margin-left: auto;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 40%, transparent 72%);
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 40%, transparent 72%);
 }
 
 .animated-emblem {
@@ -1494,7 +1497,7 @@ p span.break {
   width: 100%;
   height: auto;
   mix-blend-mode: screen;
-  filter: sepia(1) saturate(3) hue-rotate(115deg) brightness(0.85)
+  filter: sepia(1) saturate(3) hue-rotate(115deg) brightness(0.85);
 }
 
 .box-wrap {
@@ -1622,6 +1625,16 @@ p span.break {
 .nine-section .box-items {
   flex-direction: column;
   padding: 30px;
+  background: rgba(4, 5, 14, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.nine-section .box-items:hover {
+  border-color: rgba(3, 247, 181, 0.12);
 }
 
 .nine-section .box-icon {
@@ -2189,7 +2202,9 @@ p span.break {
 }
 
 .comparison-container {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(4, 5, 14, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--text-light);
   border-radius: 36px;
   border: 1px solid rgba(3, 247, 182, 0.10);
@@ -3758,8 +3773,8 @@ textarea:-webkit-autofill:focus {
 
 .model-library {
   margin-top: 15px;
-  --card-bg: #0d1117;
-  --card-border: #1f2937;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.06);
 }
 
 /* Search Section */
@@ -3930,11 +3945,31 @@ textarea:-webkit-autofill:focus {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  transition: transform 0.2s, border-color 0.2s;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+}
+
+.model-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(3, 247, 181, 0.08) 0%, transparent 50%, rgba(3, 247, 181, 0.04) 100%);
 }
 
 .model-card:hover {
-  border-color: var(--bg-btn);
+  border-color: rgba(3, 247, 181, 0.2);
+  box-shadow: 0 8px 32px -8px rgba(3, 247, 181, 0.12), 0 0 0 1px rgba(3, 247, 181, 0.06);
+}
+
+.model-card:hover::before {
+  opacity: 1;
 }
 
 /* Updated card-top and logo styles to match image layout better */
@@ -4127,13 +4162,20 @@ textarea:-webkit-autofill:focus {
 }
 
 .card {
-  background-color: #0d0d0d;
-  border: 1px solid #1a1a1a;
+  background-color: rgba(10, 10, 16, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 20px;
   padding: 25px;
   display: flex;
   flex-direction: column;
   position: relative;
+  transition: border-color 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .card.pro {
@@ -4143,7 +4185,7 @@ textarea:-webkit-autofill:focus {
 
 .card.enterprise {
   border-color: rgba(3, 247, 182, 0.25);
-  background: linear-gradient(160deg, rgba(3, 247, 182, 0.06) 0%, rgba(3, 200, 220, 0.04) 50%, rgba(13, 13, 13, 1) 100%);
+  background: linear-gradient(160deg, rgba(3, 247, 182, 0.06) 0%, rgba(3, 200, 220, 0.04) 50%, rgba(10, 10, 16, 0.8) 100%);
 }
 
 /* Enterprise 30% highlight — Animated gradient text */
@@ -7052,7 +7094,9 @@ textarea:-webkit-autofill:focus {
   border: 1px solid rgba(3, 247, 182, 0.1);
   border-radius: 14px;
   margin-bottom: 12px;
-  background: rgba(3, 247, 182, 0.03);
+  background: rgba(4, 5, 14, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   overflow: hidden;
   transition: border-color 0.3s ease, background 0.3s ease;
 }
@@ -7587,11 +7631,21 @@ textarea:-webkit-autofill:focus {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  transition: transform 0.2s ease;
+  padding: 16px;
+  border-radius: 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+              background 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
 }
 
 .blog-card-new:hover {
   transform: translateY(-4px);
+  background: rgba(3, 247, 181, 0.04);
+  border-color: rgba(3, 247, 181, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(3, 247, 181, 0.06);
 }
 
 .blog-card-image-new {
@@ -8013,6 +8067,173 @@ textarea:-webkit-autofill:focus {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
+   HEX BACKGROUND CANVAS
+   ══════════════════════════════════════════════════════════════════════ */
+
+.hex-bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .hex-bg-canvas {
+    opacity: 0.45;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   OXBOT TOOLTIP / CTA BUBBLE
+   ══════════════════════════════════════════════════════════════════════ */
+
+.oxbot-tooltip {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  z-index: 9997;
+  width: 300px;
+  background: rgba(8, 14, 22, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(3, 247, 181, 0.18);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(3, 247, 181, 0.06),
+    0 0 30px -8px rgba(3, 247, 181, 0.12);
+  transform: translateY(12px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.oxbot-tooltip.oxbot-tooltip-visible {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.oxbot-tooltip-arrow {
+  position: absolute;
+  bottom: -7px;
+  right: 22px;
+  width: 14px;
+  height: 14px;
+  background: rgba(8, 14, 22, 0.95);
+  border-right: 1px solid rgba(3, 247, 181, 0.18);
+  border-bottom: 1px solid rgba(3, 247, 181, 0.18);
+  transform: rotate(45deg);
+}
+
+.oxbot-tooltip-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.oxbot-tooltip-close:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.oxbot-tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.oxbot-tooltip-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(4, 5, 14, 0.8);
+  border: 1px solid rgba(3, 247, 181, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.oxbot-tooltip-avatar img {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+}
+
+.oxbot-tooltip-name {
+  font-family: var(--Unbounded);
+  font-size: 12px;
+  font-weight: 500;
+  color: #03F7B5;
+  letter-spacing: 0.02em;
+}
+
+.oxbot-tooltip-text {
+  font-family: var(--Inter);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 14px;
+  padding-right: 12px;
+}
+
+.oxbot-tooltip-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--Unbounded);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #04050E;
+  background: linear-gradient(135deg, #03F7B5 0%, #02d69e 100%);
+  border: none;
+  border-radius: 100px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.oxbot-tooltip-cta:hover {
+  box-shadow: 0 4px 20px rgba(3, 247, 181, 0.35);
+  transform: translateY(-1px);
+}
+
+.oxbot-tooltip-cta svg {
+  transition: transform 0.2s ease;
+}
+
+.oxbot-tooltip-cta:hover svg {
+  transform: translateX(2px);
+}
+
+@media (max-width: 768px) {
+  .oxbot-tooltip {
+    width: 260px;
+    right: 16px;
+    bottom: 90px;
+    padding: 14px 16px;
+  }
+
+  .oxbot-tooltip-text {
+    font-size: 12.5px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
    OXLO CHATBOT WIDGET
    ══════════════════════════════════════════════════════════════════════ */
 
@@ -8022,23 +8243,30 @@ textarea:-webkit-autofill:focus {
   bottom: 28px;
   right: 28px;
   z-index: 9998;
-  width: 60px;
-  height: 60px;
+  width: 62px;
+  height: 62px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #03F7B5 0%, #02c792 100%);
-  border: none;
+  background: linear-gradient(135deg, #03F7B5 0%, #01d499 50%, #02b882 100%);
+  border: 2px solid rgba(3, 247, 181, 0.6);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 24px rgba(3, 247, 181, 0.35), 0 0 0 0 rgba(3, 247, 181, 0.4);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow:
+    0 6px 28px rgba(3, 247, 181, 0.4),
+    0 0 60px -10px rgba(3, 247, 181, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   color: #04050E;
 }
 
 .oxchat-bubble:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 32px rgba(3, 247, 181, 0.5);
+  transform: scale(1.12);
+  box-shadow:
+    0 8px 36px rgba(3, 247, 181, 0.55),
+    0 0 80px -10px rgba(3, 247, 181, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-color: rgba(3, 247, 181, 0.9);
 }
 
 .oxchat-bubble-hidden {
@@ -8052,14 +8280,15 @@ textarea:-webkit-autofill:focus {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: rgba(3, 247, 181, 0.25);
-  animation: oxchat-pulse 2.5s ease-out infinite;
+  border: 2px solid rgba(3, 247, 181, 0.5);
+  background: transparent;
+  animation: oxchat-pulse 2.8s ease-out infinite;
   pointer-events: none;
 }
 
 @keyframes oxchat-pulse {
-  0% { transform: scale(1); opacity: 0.6; }
-  100% { transform: scale(1.8); opacity: 0; }
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(2); opacity: 0; }
 }
 
 /* ─── Chat Panel ─── */
@@ -8072,12 +8301,16 @@ textarea:-webkit-autofill:focus {
   max-width: calc(100vw - 32px);
   height: 580px;
   max-height: calc(100vh - 100px);
-  background: rgba(8, 12, 18, 0.96);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(3, 247, 181, 0.15);
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(3, 247, 181, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  background: rgba(6, 10, 16, 0.97);
+  backdrop-filter: blur(32px) saturate(1.3);
+  -webkit-backdrop-filter: blur(32px) saturate(1.3);
+  border: 1px solid rgba(3, 247, 181, 0.12);
+  border-radius: 24px;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(3, 247, 181, 0.06),
+    0 0 60px -20px rgba(3, 247, 181, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -8085,7 +8318,7 @@ textarea:-webkit-autofill:focus {
   transform-origin: bottom right;
   opacity: 0;
   pointer-events: none;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
 }
 
 .oxchat-panel-open {
@@ -8099,10 +8332,22 @@ textarea:-webkit-autofill:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(3, 247, 181, 0.03);
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(3, 247, 181, 0.08);
+  background: linear-gradient(180deg, rgba(3, 247, 181, 0.06) 0%, rgba(3, 247, 181, 0.01) 100%);
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.oxchat-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(3, 247, 181, 0.3), transparent);
 }
 
 .oxchat-header-left {
@@ -8112,14 +8357,15 @@ textarea:-webkit-autofill:focus {
 }
 
 .oxchat-header-logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: rgba(3, 247, 181, 0.08);
-  border: 1px solid rgba(3, 247, 181, 0.2);
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(3, 247, 181, 0.12) 0%, rgba(3, 247, 181, 0.04) 100%);
+  border: 1px solid rgba(3, 247, 181, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 12px rgba(3, 247, 181, 0.1);
 }
 
 .oxchat-header-title {
@@ -8127,6 +8373,7 @@ textarea:-webkit-autofill:focus {
   font-size: 14px;
   font-weight: 600;
   color: #fff;
+  letter-spacing: 0.01em;
 }
 
 .oxchat-header-status {
@@ -8143,25 +8390,32 @@ textarea:-webkit-autofill:focus {
   height: 6px;
   border-radius: 50%;
   background: #03F7B5;
-  box-shadow: 0 0 6px rgba(3, 247, 181, 0.6);
+  box-shadow: 0 0 8px rgba(3, 247, 181, 0.7);
+  animation: oxchat-statusPulse 3s ease-in-out infinite;
+}
+
+@keyframes oxchat-statusPulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(3, 247, 181, 0.5); }
+  50% { box-shadow: 0 0 12px rgba(3, 247, 181, 0.9); }
 }
 
 .oxchat-close-btn {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  width: 32px;
-  height: 32px;
+  border-radius: 10px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.5);
-  transition: all 0.2s;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.25s;
 }
 
 .oxchat-close-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
   color: #fff;
 }
 
@@ -8177,7 +8431,7 @@ textarea:-webkit-autofill:focus {
 }
 
 .oxchat-messages::-webkit-scrollbar {
-  width: 4px;
+  width: 3px;
 }
 
 .oxchat-messages::-webkit-scrollbar-track {
@@ -8185,7 +8439,7 @@ textarea:-webkit-autofill:focus {
 }
 
 .oxchat-messages::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(3, 247, 181, 0.12);
   border-radius: 4px;
 }
 
@@ -8194,12 +8448,12 @@ textarea:-webkit-autofill:focus {
   display: flex;
   gap: 10px;
   max-width: 88%;
-  animation: oxchat-fadeIn 0.3s ease;
+  animation: oxchat-fadeIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes oxchat-fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .oxchat-msg-user {
@@ -8212,12 +8466,12 @@ textarea:-webkit-autofill:focus {
 }
 
 .oxchat-avatar {
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  border-radius: 8px;
-  background: rgba(3, 247, 181, 0.08);
-  border: 1px solid rgba(3, 247, 181, 0.15);
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(3, 247, 181, 0.1) 0%, rgba(3, 247, 181, 0.04) 100%);
+  border: 1px solid rgba(3, 247, 181, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8228,9 +8482,9 @@ textarea:-webkit-autofill:focus {
   font-family: var(--Inter);
   font-size: 13.5px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.88);
   padding: 12px 16px;
-  border-radius: 16px;
+  border-radius: 18px;
   word-break: break-word;
 }
 
@@ -8263,33 +8517,38 @@ textarea:-webkit-autofill:focus {
 }
 
 .oxchat-code {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 2px 4px;
+  background: rgba(3, 247, 181, 0.08);
+  border: 1px solid rgba(3, 247, 181, 0.12);
+  padding: 2px 6px;
   border-radius: 4px;
   font-family: monospace;
   font-size: 12px;
+  color: #03F7B5;
 }
 
 .oxchat-link {
   color: #03F7B5;
-  text-decoration: underline;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(3, 247, 181, 0.3);
+  transition: border-color 0.2s;
 }
 
 .oxchat-link:hover {
   color: #fff;
+  border-color: #fff;
 }
 
 .oxchat-msg-bot .oxchat-bubble-content {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-top-left-radius: 4px;
 }
 
 .oxchat-msg-user .oxchat-bubble-content {
-  background: linear-gradient(135deg, rgba(3, 247, 181, 0.15) 0%, rgba(3, 247, 181, 0.08) 100%);
-  border: 1px solid rgba(3, 247, 181, 0.2);
+  background: linear-gradient(135deg, rgba(3, 247, 181, 0.14) 0%, rgba(3, 247, 181, 0.06) 100%);
+  border: 1px solid rgba(3, 247, 181, 0.22);
   border-top-right-radius: 4px;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255, 255, 255, 0.94);
 }
 
 /* ─── Action Buttons in Messages ─── */
@@ -8299,45 +8558,45 @@ textarea:-webkit-autofill:focus {
   gap: 6px;
   margin-top: 10px;
   margin-right: 6px;
-  padding: 8px 16px;
+  padding: 9px 18px;
   border-radius: 100px;
-  background: rgba(3, 247, 181, 0.1);
-  border: 1px solid rgba(3, 247, 181, 0.3);
+  background: linear-gradient(135deg, rgba(3, 247, 181, 0.12) 0%, rgba(3, 247, 181, 0.06) 100%);
+  border: 1px solid rgba(3, 247, 181, 0.25);
   color: #03F7B5;
   font-family: var(--Unbounded);
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.2s;
+  transition: all 0.25s;
   white-space: nowrap;
 }
 
 .oxchat-action-btn:hover {
-  background: rgba(3, 247, 181, 0.2);
+  background: linear-gradient(135deg, rgba(3, 247, 181, 0.22) 0%, rgba(3, 247, 181, 0.1) 100%);
   border-color: rgba(3, 247, 181, 0.5);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(3, 247, 181, 0.15);
+  box-shadow: 0 6px 20px rgba(3, 247, 181, 0.18);
   color: #03F7B5;
 }
 
 .oxchat-calc-btn {
-  background: linear-gradient(135deg, rgba(3, 247, 181, 0.15) 0%, rgba(3, 247, 181, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(3, 247, 181, 0.18) 0%, rgba(3, 247, 181, 0.08) 100%);
 }
 
 /* ─── Typing Indicator ─── */
 .oxchat-typing {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   padding: 4px 0;
 }
 
 .oxchat-typing span {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: rgba(3, 247, 181, 0.5);
+  background: #03F7B5;
   animation: oxchat-dotPulse 1.4s ease-in-out infinite;
 }
 
@@ -8350,7 +8609,7 @@ textarea:-webkit-autofill:focus {
 }
 
 @keyframes oxchat-dotPulse {
-  0%, 60%, 100% { transform: scale(0.6); opacity: 0.4; }
+  0%, 60%, 100% { transform: scale(0.5); opacity: 0.3; }
   30% { transform: scale(1); opacity: 1; }
 }
 
@@ -8359,9 +8618,9 @@ textarea:-webkit-autofill:focus {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(0, 0, 0, 0.2);
+  padding: 14px 16px;
+  border-top: 1px solid rgba(3, 247, 181, 0.06);
+  background: rgba(0, 0, 0, 0.25);
   flex-shrink: 0;
 }
 
@@ -8369,21 +8628,23 @@ textarea:-webkit-autofill:focus {
   flex: 1;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 10px 14px;
+  border-radius: 14px;
+  padding: 11px 16px;
   color: #fff;
   font-family: var(--Inter);
   font-size: 13px;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.25s;
 }
 
 .oxchat-input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.28);
 }
 
 .oxchat-input:focus {
-  border-color: rgba(3, 247, 181, 0.3);
+  border-color: rgba(3, 247, 181, 0.35);
+  background: rgba(3, 247, 181, 0.03);
+  box-shadow: 0 0 0 3px rgba(3, 247, 181, 0.06);
 }
 
 .oxchat-input:disabled {
@@ -8391,28 +8652,31 @@ textarea:-webkit-autofill:focus {
 }
 
 .oxchat-send-btn {
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
-  border-radius: 10px;
-  background: #03F7B5;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #03F7B5 0%, #02d69e 100%);
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #04050E;
-  transition: all 0.2s;
+  transition: all 0.25s;
+  box-shadow: 0 2px 10px rgba(3, 247, 181, 0.2);
 }
 
 .oxchat-send-btn:hover:not(:disabled) {
-  background: #2effc7;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, #2effc7 0%, #03F7B5 100%);
+  transform: scale(1.06);
+  box-shadow: 0 4px 16px rgba(3, 247, 181, 0.35);
 }
 
 .oxchat-send-btn:disabled {
-  opacity: 0.3;
+  opacity: 0.25;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 /* ─── Footer ─── */
@@ -8420,14 +8684,14 @@ textarea:-webkit-autofill:focus {
   text-align: center;
   padding: 8px;
   font-size: 10px;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.18);
   font-family: var(--Inter);
   border-top: 1px solid rgba(255, 255, 255, 0.03);
   flex-shrink: 0;
 }
 
 .oxchat-footer a {
-  color: rgba(3, 247, 181, 0.5);
+  color: rgba(3, 247, 181, 0.45);
   text-decoration: none;
   font-weight: 600;
 }
@@ -8452,8 +8716,238 @@ textarea:-webkit-autofill:focus {
   .oxchat-bubble {
     bottom: 20px;
     right: 20px;
-    width: 54px;
-    height: 54px;
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   PREMIUM ANIMATION SYSTEM
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Lenis Smooth Scroll ─── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ─── Scroll Progress Bar ─── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #03F7B5, #00d4aa, #03F7B5);
+  z-index: 99999;
+  will-change: transform;
+}
+
+/* ─── Text Reveal ─── */
+.text-reveal {
+  overflow: visible;
+}
+
+.tr-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.15em;
+  margin-right: 0.22em;
+}
+
+.tr-word {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ─── Marquee Ticker ─── */
+.marquee {
+  overflow: hidden;
+  padding: 28px 0 8px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 28px;
+  font-family: var(--Unbounded);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.marquee-dot {
+  width: 5px;
+  height: 5px;
+  background: rgba(3, 247, 181, 0.5);
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(3, 247, 181, 0.3);
+}
+
+/* ─── Magnetic Button Wrapper ─── */
+.magnetic-wrap {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+
+/* ─── Enhanced Button Hover ─── */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.btn:hover::after {
+  opacity: 1;
+}
+
+.btn:hover {
+  box-shadow: 0 8px 30px rgba(3, 247, 181, 0.25);
+}
+
+/* ─── Enhanced Card Hover ─── */
+.box-items {
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.5s ease,
+              border-color 0.3s ease;
+}
+
+.box-items:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(3, 247, 181, 0.06),
+              0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Subtle Floating Animation for Hero Image ─── */
+.hw-right {
+  animation: gentleFloat 6s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* ─── Section Divider Glow ─── */
+.common-section {
+  position: relative;
+}
+
+.common-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  max-width: 600px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(3, 247, 181, 0.15), transparent);
+}
+
+/* ─── Grain Overlay ─── */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9997;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ─── Stats Strip Enhanced ─── */
+.stats-strip__item {
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+              background 0.3s;
+}
+
+.stats-strip__item:hover {
+  transform: translateY(-4px);
+}
+
+/* ─── Particle Logo ─── */
+.particle-logo {
+  display: block;
+  width: 100%;
+  max-width: 470px;
+}
+
+.hw-right--particles {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.hw-right--particles .particle-logo {
+  mix-blend-mode: normal;
+  filter: none;
+}
+
+/* ─── Mobile Responsive Overrides ─── */
+@media (max-width: 768px) {
+  .scroll-progress {
+    height: 1.5px;
+  }
+
+  .marquee-item {
+    font-size: 11px;
+    padding: 0 18px;
+  }
+
+  body::after {
+    display: none;
+  }
+
+  .hw-right {
+    animation: none;
+  }
+
+  .common-section::before {
+    width: 80%;
   }
 }
 

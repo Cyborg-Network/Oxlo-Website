@@ -1,19 +1,50 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from 'next/link'
 import Button from "@/components/Button";
 import FaqSection from "@/components/FaqSection";
+import TextReveal from "@/components/TextReveal";
+import CountUp from "@/components/CountUp";
+import Marquee from "@/components/Marquee";
 import rocket from "../../public/images/rocket.svg";
 import rocketColored from "../../public/images/rocketColored.svg";
-import hero from "../../public/images/hero-animation.gif";
+import heroGif from "../../public/images/hero-animation.gif";
 import shock from "../../public/images/shock.svg";
 import dollar from "../../public/images/dollar.svg";
 import shield from "../../public/images/shield.svg";
 import scale from "../../public/images/scale.svg";
 import light from "../../public/images/light.svg";
 import bulb from "../../public/images/idea.svg";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+function RevealLine({ words, startDelay = 0, className = '' }) {
+  return (
+    <span className={`break ${className}`}>
+      {words.map((word, i) => (
+        <span key={i} className="tr-mask">
+          <motion.span
+            className="tr-word"
+            variants={{
+              hidden: { y: '110%', opacity: 0 },
+              visible: {
+                y: '0%',
+                opacity: 1,
+                transition: {
+                  duration: 0.6,
+                  delay: startDelay + i * 0.07,
+                  ease: [0.22, 1, 0.36, 1],
+                },
+              },
+            }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </span>
+  );
+}
 import sixOne from '../../public/images/six/one.svg'
 import sixTwo from '../../public/images/six/two.svg'
 import sixThree from '../../public/images/six/three.svg'
@@ -142,12 +173,21 @@ const FALLBACK_STATS = { users: 700, models_available: 30, countries: 100, token
 
 export default function Home() {
   const [stats, setStats] = useState(FALLBACK_STATS);
+  const heroRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const heroImageY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
 
   useEffect(() => {
     fetch("https://api.oxlo.ai/stats")
       .then(res => res.ok ? res.json() : Promise.reject())
       .then(data => setStats(data))
-      .catch(() => {}); // Keep fallback stats on error
+      .catch(() => {});
   }, []);
 
   const pricingFeatures = [
@@ -219,83 +259,100 @@ export default function Home() {
         />
       </Head>
 
-      <section className="miner-soon-section soon-section flow-hidden">
+      <section className="miner-soon-section soon-section" ref={heroRef}>
         <div className="container">
-          <div className="home-wrap d-flex a-center">
+          <motion.div className="home-wrap d-flex a-center" style={{ y: heroY, opacity: heroOpacity }}>
             <motion.div
               className="d-left"
-              viewport={{ once: true }}
-              transition={{ type: "spring", bounce: 0.25, duration: 2 }}
-              initial={{ opacity: 0, translateX: -200 }}
-              whileInView={{ opacity: 1, translateX: 0 }}
+              initial={{ opacity: 0, x: -60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="hw-left">
-                <Link href="https://github.com/Cyborg-Network/Oxtools" target="_blank" rel="noopener">
-                  <div className="section-badge">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                    </svg>
-                    <span>Star us on GitHub</span>
-                  </div>
-                </Link>
-                <h1 className="hero-heading">
-                  <span className="break">Unpredictable AI bills?</span>
-                  <span className="break hero-highlight">We fixed that</span>
-                </h1>
-                <p className="home-desc">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <Link href="https://github.com/Cyborg-Network/Oxtools" target="_blank" rel="noopener">
+                    <div className="section-badge">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                      </svg>
+                      <span>Star us on GitHub</span>
+                    </div>
+                  </Link>
+                </motion.div>
+                <motion.h1 className="hero-heading" initial="hidden" animate="visible">
+                  <RevealLine words={["Unpredictable", "AI", "bills?"]} startDelay={0.4} />
+                  <RevealLine words={["We", "fixed", "that"]} startDelay={0.7} className="hero-highlight" />
+                </motion.h1>
+                <motion.p
+                  className="home-desc"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
+                >
                   Oxlo.ai gives you a flat monthly plan for AI inference. <span style={{ whiteSpace: 'nowrap' }}>One fixed bill.</span> Every month. Regardless of how much you build.
-                </p>
-                <Button
-                  title="Get started for free"
-                  link="https://portal.oxlo.ai/"
-                  size="btn-md"
-                  icon={rocket}
-                />
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.7, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <Button
+                    title="Get started for free"
+                    link="https://portal.oxlo.ai/"
+                    size="btn-md"
+                    icon={rocket}
+                  />
+                </motion.div>
               </div>
             </motion.div>
 
             <motion.div
               className="d-right"
-              viewport={{ once: true }}
-              transition={{ type: "spring", bounce: 0.25, duration: 2 }}
-              initial={{ opacity: 0, translateX: 200 }}
-              whileInView={{ opacity: 1, translateX: 0 }}
+              style={{ y: heroImageY }}
+              initial={{ opacity: 0, x: 80, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="hw-right">
                 <div className="animated-emblem">
                   <svg width="108" height="96" viewBox="0 0 108 96" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M54 11C79.002 11 97 28.7477 97 48C97 67.2523 79.002 85 54 85C28.998 85 11 67.2523 11 48C11 28.7477 28.998 11 54 11Z" stroke="#1F272C" strokeWidth="22" /><path d="M54 11C79.002 11 97 28.7477 97 48C97 67.2523 79.002 85 54 85C28.998 85 11 67.2523 11 48C11 28.7477 28.998 11 54 11Z" stroke="#03F7B5" strokeWidth="22" className="progress" fill="none" /><path d="M46.9873 47.4873L9.5 10L18 4.5L53.9182 40.6441L88.5 6.5L95.5 13L60.7549 47.5238L97.5 84.5L90.5 91L53.8674 54.3674L17 91L9.5 84.5L46.9873 47.4873Z" fill="#04080E" /></svg>
                 </div>
-                <Image src={hero} alt="home-cover-image" />
+                <Image src={heroGif} alt="Oxlo.ai AI inference animation" unoptimized />
               </div>
             </motion.div>
-          </div>
-          {/* Stats Strip - above achievement banners for first-look visibility */}
-          <motion.div
-            className="stats-strip"
-            viewport={{ once: true }}
-            transition={{ ease: "easeInOut", duration: 0.75 }}
-            initial={{ opacity: 0, translateY: 30 }}
-            whileInView={{ opacity: 1, translateY: 0 }}
-            style={{ marginTop: '40px', marginBottom: '20px' }}
-          >
-            <div className="stats-strip__item">
-              <div className="stats-strip__number"><span className="stats-strip__accent">{stats.users}</span>+</div>
-              <div className="stats-strip__label">Active Users</div>
-            </div>
-            <div className="stats-strip__item">
-              <div className="stats-strip__number"><span className="stats-strip__accent">{stats.models_available}</span>+</div>
-              <div className="stats-strip__label">Models Available</div>
-            </div>
-            <div className="stats-strip__item">
-              <div className="stats-strip__number"><span className="stats-strip__accent">{stats.countries}</span>+</div>
-              <div className="stats-strip__label">Countries</div>
-            </div>
-            <div className="stats-strip__item">
-              <div className="stats-strip__number"><span className="stats-strip__accent">{stats.tokens_display}</span>+</div>
-              <div className="stats-strip__label">Tokens Processed</div>
-            </div>
           </motion.div>
-          <div className="achievement-wrap">
+          {/* Stats Strip */}
+          <div className="stats-strip" style={{ marginTop: '40px', marginBottom: '20px' }}>
+            {[
+              { value: stats.users, label: "Active Users" },
+              { value: stats.models_available, label: "Models Available" },
+              { value: stats.countries, label: "Countries" },
+              { value: stats.tokens_display, label: "Tokens Processed" },
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                className="stats-strip__item"
+                viewport={{ once: true }}
+                initial={{ opacity: 0, y: 30, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.7, delay: i * 0.1 }}
+              >
+                <div className="stats-strip__number"><span className="stats-strip__accent"><CountUp end={stat.value} /></span></div>
+                <div className="stats-strip__label">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+          <motion.div
+            className="achievement-wrap"
+            viewport={{ once: true }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.8, delay: 0.3 }}
+          >
             <Link href="https://stlpartners.com/articles/edge-computing/50-edge-computing-companies-to-watch-in-2026/"
               target="_blank" rel="noopener">
               <Image src={STL} alt="STL Partners — Top edge companies for 2026" />
@@ -306,7 +363,8 @@ export default function Home() {
             <Link href="https://peerpush.net/p/oxloai-uosi" target="_blank" rel="noopener">
               <Image src={TopProd} alt="AI" />
             </Link>
-          </div>
+          </motion.div>
+          <Marquee />
         </div>
       </section>
 
@@ -322,15 +380,11 @@ export default function Home() {
           <div className="fiveg-wrap flow-hidden">
             <div className="d-flex">
               <div className="d-left">
-                <motion.h1
+                <TextReveal
+                  text="Ready to build? Create a free account and start shipping without worrying about your AI bill."
                   className="hero-heading"
-                  viewport={{ once: true }}
-                  transition={{ ease: "easeInOut", duration: 1 }}
-                  initial={{ opacity: 0, translateX: -75 }}
-                  whileInView={{ opacity: 1, translateX: 0 }}
-                >
-                  Ready to build? Create a free account and start shipping without worrying about your <span style={{ whiteSpace: 'nowrap' }}>AI bill.</span>
-                </motion.h1>
+                  tag="h1"
+                />
                 <motion.div
                   viewport={{ once: true }}
                   transition={{ ease: "easeInOut", duration: 1.25 }}
@@ -379,7 +433,7 @@ export default function Home() {
       <section className='common-section nine-section bottom-blur'>
         <div className='container'>
           <div className='text-center'>
-            <motion.h2 className="section-heading" viewport={{ once: true }} transition={{ ease: "easeInOut", duration: 0.5 }} initial={{ opacity: 0, translateY: 100 }} whileInView={{ opacity: 1, translateY: 0 }}>What teams build on Oxlo.ai</motion.h2>
+            <TextReveal text="What teams build on Oxlo.ai" className="section-heading" tag="h2" />
           </div>
           <div className='box-wrap'>
             <div className='box-border'></div>
@@ -387,10 +441,10 @@ export default function Home() {
               <motion.div
                 key={index}
                 className="box-content"
-                viewport={{ once: true }}
-                transition={{ ease: "easeInOut", duration: 0.5, delay: item.delay }}
-                initial={{ opacity: 0, translateY: 50 }}
-                whileInView={{ opacity: 1, translateY: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.8, delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 60, scale: 0.92 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
               >
                 <div className="box-items">
                   <div className="box-icon">
@@ -412,17 +466,17 @@ export default function Home() {
       <section className='common-section pill-section'>
         <div className='container'>
           <div className='text-center'>
-            <motion.div className='section-badge' viewport={{ once: true }} transition={{ ease: "easeInOut", duration: 0.5 }} initial={{ opacity: 0, translateY: 50 }} whileInView={{ opacity: 1, translateY: 0 }}>
+            <motion.div className='section-badge' viewport={{ once: true }} transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.7 }} initial={{ opacity: 0, y: 30, scale: 0.9 }} whileInView={{ opacity: 1, y: 0, scale: 1 }}>
               <Image src={bulb} alt='bulb-icon' />
               <span>Why teams switch to Oxlo.ai</span>
             </motion.div>
-            <motion.h2 className="section-heading" viewport={{ once: true }} transition={{ ease: "easeInOut", duration: 0.5, delay: 0.25 }} initial={{ opacity: 0, translateY: 50 }} whileInView={{ opacity: 1, translateY: 0 }}>How <span class="text-gradient">Oxlo.ai</span> Stands Out</motion.h2>
+            <TextReveal text="How Oxlo.ai Stands Out" highlights={["Oxlo.ai"]} className="section-heading" tag="h2" delay={0.15} />
             <motion.p
               className="section-desc"
               viewport={{ once: true }}
-              transition={{ ease: "easeInOut", duration: 0.5, delay: 0.5 }}
-              initial={{ opacity: 0, translateY: 50 }}
-              whileInView={{ opacity: 1, translateY: 0 }}
+              transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.8, delay: 0.3 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
             >
               Token billing makes your AI infrastructure costs unpredictable. Oxlo.ai is your go-to inference platform for flat monthly pricing.<br/>Here is how we compare.
             </motion.p>
@@ -430,7 +484,13 @@ export default function Home() {
 
 
 
-          <div className="comparison-container">
+          <motion.div
+            className="comparison-container"
+            viewport={{ once: true, margin: "-80px" }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.9, delay: 0.2 }}
+          >
             <div className="table-row header-row">
               <div className="cell">Features</div>
               <div className="cell"><Image src={oxlo} alt="Oxlo.ai" /></div>
@@ -484,7 +544,7 @@ export default function Home() {
                 ))}
               </div>
             ))}
-          </div>
+          </motion.div>
           <motion.div
             className="text-center"
             viewport={{ once: true }}
@@ -509,15 +569,7 @@ export default function Home() {
         <div className="container">
           <div className="ns-wrap">
             <div className="ns-content">
-              <motion.h2
-                className="section-heading"
-                viewport={{ once: true }}
-                transition={{ ease: "easeInOut", duration: 0.75 }}
-                initial={{ opacity: 0, translateY: 75 }}
-                whileInView={{ opacity: 1, translateY: 0 }}
-              >
-                Ready to build?
-              </motion.h2>
+              <TextReveal text="Ready to build?" className="section-heading" tag="h2" />
               <motion.p
                 className="section-desc"
                 viewport={{ once: true }}

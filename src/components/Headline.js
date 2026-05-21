@@ -13,7 +13,7 @@ const Headline = () => {
   return (
     <div className={`headline ${status}`}>
         <p>
-          Guaranteed <strong>30% off</strong> your current AI inference bill for teams spending $200 or more per month.
+          Guaranteed <strong>30% off</strong> your current AI inference bill for teams spending $500 or more per month.
         </p>
         <Link href="https://calendly.com/oxlo_ai/enterprise" target="_blank" rel="noopener" className="headline-cta">
           Book a call →

@@ -5,6 +5,7 @@ import { CircleCheckBig, Info, ChevronDown } from "lucide-react"
 import Head from "next/head";
 import { motion } from "framer-motion";
 import Button from "@/components/Button";
+import TextReveal from "@/components/TextReveal";
 
 // Pricing page Product schema
 const pricingProductSchema = {
@@ -54,7 +55,7 @@ const pricingFaqSchema = {
     {
       "@type": "Question",
       "name": "Does Oxlo.ai offer guaranteed savings for enterprise teams?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Teams currently spending $200 or more per month on AI inference with providers like Together AI, Fireworks AI or OpenRouter are eligible for our Enterprise plan which guarantees a minimum 30 percent reduction on their current monthly bill. Contact us at hello@oxlo.ai to discuss your current usage." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Teams currently spending $500 or more per month on AI inference with providers like Together AI, Fireworks AI or OpenRouter are eligible for our Enterprise plan which guarantees a minimum 30 percent reduction on their current monthly bill. Contact us at hello@oxlo.ai to discuss your current usage." }
     }
   ]
 };
@@ -65,7 +66,7 @@ const PRICING_FAQ_ITEMS = [
   { question: "Does Oxlo.ai offer a free trial?", answer: "Yes. Pro and Premium plans include a 24-hour free trial. The Free tier (60 requests/day, 16+ models) is available permanently with no credit card required." },
   { question: "What happens if I exceed my daily request limit?", answer: "When you reach your daily request limit, additional requests are queued until the next day or you can upgrade your plan for higher limits. There are no overage charges - your costs are always predictable and fixed. This is unlike token-based providers where a single runaway prompt can spike your bill." },
   { question: "Can I switch plans at any time?", answer: "Yes, you can upgrade or downgrade your plan at any time. When upgrading, you get immediate access to the higher plan's limits. All plans are billed monthly with no long-term contracts required." },
-  { question: "Does Oxlo.ai offer guaranteed savings for enterprise teams?", answer: "Yes. Teams currently spending $200 or more per month on AI inference with providers like Together AI, Fireworks AI or OpenRouter are eligible for our Enterprise plan which guarantees a minimum 30 percent reduction on their current monthly bill. Contact us at hello@oxlo.ai to discuss your current usage." },
+  { question: "Does Oxlo.ai offer guaranteed savings for enterprise teams?", answer: "Yes. Teams currently spending $500 or more per month on AI inference with providers like Together AI, Fireworks AI or OpenRouter are eligible for our Enterprise plan which guarantees a minimum 30 percent reduction on their current monthly bill. Contact us at hello@oxlo.ai to discuss your current usage." },
 ];
 
 export default function Pricing() {
@@ -108,7 +109,7 @@ export default function Pricing() {
               initial={{ opacity: 0, translateY: 100 }}
               whileInView={{ opacity: 1, translateY: 0 }}
             >
-              <h1 className="hero-heading">Flat monthly pricing for AI inference</h1>
+              <TextReveal text="Flat monthly pricing for AI inference" className="hero-heading" tag="h1" />
               <motion.div
                 viewport={{ once: true }}
                 transition={{
@@ -285,7 +286,7 @@ export default function Pricing() {
                 <div className="enterprise-commitment-box">
                   <p className="commitment-label">OUR COMMITMENT</p>
                   <p className="commitment-heading">30% off your current AI&nbsp;bill.</p>
-                  <p className="commitment-subtext"><strong>Guaranteed.</strong> For teams spending $200 or more per month on AI inference with any provider.</p>
+                  <p className="commitment-subtext"><strong>Guaranteed.</strong> For teams spending $500 or more per month on AI inference with any provider.</p>
                 </div>
                 <Button
                   title="Book a Call →"
@@ -316,7 +317,7 @@ export default function Pricing() {
       <section className="common-section compare-section">
         <div className="container">
           <div className='text-center'>
-            <motion.h2 className="section-heading" viewport={{ once: true }} transition={{ ease: "easeInOut", duration: 0.5, delay: 0.25 }} initial={{ opacity: 0, translateY: 50 }} whileInView={{ opacity: 1, translateY: 0 }}>Compare the <span class="text-gradient">plans</span></motion.h2>
+            <TextReveal text="Compare the plans" highlights={["plans"]} className="section-heading" tag="h2" delay={0.25} />
             <motion.p
               className="section-desc"
               viewport={{ once: true }}
@@ -621,15 +622,7 @@ function PricingFaqSection() {
     <section className="common-section pricing-faq-section" id="pricing-faq">
       <div className="container">
         <div className="text-center">
-          <motion.h2
-            className="section-heading"
-            viewport={{ once: true }}
-            transition={{ ease: "easeInOut", duration: 0.5 }}
-            initial={{ opacity: 0, translateY: 50 }}
-            whileInView={{ opacity: 1, translateY: 0 }}
-          >
-            Pricing <span className="text-gradient">FAQ</span>
-          </motion.h2>
+          <TextReveal text="Pricing FAQ" highlights={["FAQ"]} className="section-heading" tag="h2" />
         </div>
         <motion.div
           className="faq-container"

@@ -391,12 +391,12 @@ export default function CostCalculator() {
   const maxCompCost = Math.max(...compCostValues);
 
   // ─── OXLO PRICING (plan recommendation based on cheapest competitor) ───
-  // ≤ $80 cheapest competitor → Pro ($80/mo)
-  // > $80 and ≤ $500 → Premium ($350/mo) — self-serve, instant signup
-  // > $500 → Enterprise (30% off cheapest competitor) — custom contract
+  // < $350 cheapest competitor → Pro ($80/mo)
+  // ≥ $350 and < $500 → Premium ($350/mo) — self-serve, instant signup
+  // ≥ $500 → Enterprise (30% off cheapest competitor) — custom contract
   let tierKey = 'pro';
-  if (minCompCost > 500) tierKey = 'enterprise';
-  else if (minCompCost > 80) tierKey = 'premium';
+  if (minCompCost >= 500) tierKey = 'enterprise';
+  else if (minCompCost >= 350) tierKey = 'premium';
 
   let oxloCost = 0;
   let tierLabel = '';

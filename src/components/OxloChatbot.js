@@ -142,19 +142,17 @@ export default function OxloChatbot() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hasGreeted, setHasGreeted] = useState(false);
-  const [autoOpened, setAutoOpened] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipDismissed, setTooltipDismissed] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const router = useRouter();
 
-  // No sessionStorage — every page load starts a fresh conversation.
-  // Only localStorage is used for the auto-open flag (oxchat_visited).
   useEffect(() => {
     setHydrated(true);
   }, []);
 
-  // Scroll to bottom of messages
   const scrollToBottom = useCallback(() => {
     setTimeout(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -165,29 +163,41 @@ export default function OxloChatbot() {
     scrollToBottom();
   }, [messages, isLoading, scrollToBottom]);
 
-  // Auto-focus input when chat opens
   useEffect(() => {
     if (isOpen && inputRef.current) {
       setTimeout(() => inputRef.current?.focus(), 300);
     }
   }, [isOpen]);
 
-  // Auto-open for new visitors (first visit only)
+  // Show tooltip after short delay (always, unless dismissed this session)
   useEffect(() => {
-    if (!hydrated || autoOpened) return;
-    const hasVisited = localStorage.getItem("oxchat_visited");
-    if (!hasVisited) {
-      const timer = setTimeout(() => {
-        localStorage.setItem("oxchat_visited", "true");
-        setAutoOpened(true);
-        handleOpen();
-      }, 2500);
-      return () => clearTimeout(timer);
-    }
-  }, [hydrated, autoOpened]);
+    if (!hydrated || isOpen || tooltipDismissed) return;
+    const timer = setTimeout(() => setShowTooltip(true), 2000);
+    return () => clearTimeout(timer);
+  }, [hydrated, isOpen, tooltipDismissed]);
 
-  // Send greeting when chat first opens
+  // Hide tooltip when chat opens
+  useEffect(() => {
+    if (isOpen) setShowTooltip(false);
+  }, [isOpen]);
+
+  const dismissTooltip = useCallback(() => {
+    setShowTooltip(false);
+    setTooltipDismissed(true);
+  }, []);
+
+  const handleTooltipCalcClick = useCallback(() => {
+    dismissTooltip();
+    if (router.pathname === "/") {
+      const el = document.getElementById("cost-calculator");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    } else {
+      router.push("/#cost-calculator");
+    }
+  }, [router, dismissTooltip]);
+
   const handleOpen = useCallback(async () => {
+    dismissTooltip();
     setIsOpen(true);
     if (!hasGreeted) {
       setHasGreeted(true);
@@ -218,7 +228,7 @@ export default function OxloChatbot() {
         setIsLoading(false);
       }
     }
-  }, [hasGreeted]);
+  }, [hasGreeted, dismissTooltip]);
 
   // Navigate to calculator
   const handleCalcClick = useCallback(() => {
@@ -352,6 +362,31 @@ export default function OxloChatbot() {
         <div className="oxchat-footer">
           Powered by <a href="https://oxlo.ai" target="_blank" rel="noopener noreferrer">Oxlo.ai</a>
         </div>
+      </div>
+
+      {/* ─── Tooltip CTA ─── */}
+      <div className={`oxbot-tooltip ${showTooltip && !isOpen ? "oxbot-tooltip-visible" : ""}`}>
+        <button className="oxbot-tooltip-close" onClick={dismissTooltip} aria-label="Dismiss">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+        <div className="oxbot-tooltip-header">
+          <div className="oxbot-tooltip-avatar">
+            <img src="/images/oxlo-icon.png" alt="OxBot" width="18" height="18" />
+          </div>
+          <span className="oxbot-tooltip-name">OxBot</span>
+        </div>
+        <p className="oxbot-tooltip-text">
+          Hi there! Try our cost calculator to see what you&apos;d save with Oxlo.ai.
+        </p>
+        <button className="oxbot-tooltip-cta" onClick={handleTooltipCalcClick}>
+          Open calculator
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </button>
+        <div className="oxbot-tooltip-arrow" />
       </div>
 
       {/* ─── Floating Bubble ─── */}
