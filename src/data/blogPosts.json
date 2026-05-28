@@ -1,0 +1,190 @@
+[
+  {
+    "slug": "request-based-pricing-future",
+    "title": "Why Request-Based Pricing is the Future of AI Inference",
+    "category": "Product",
+    "date": "15 April 2026",
+    "author": "Team Oxlo.ai",
+    "role": "Product Strategy",
+    "image": "/images/blogs/ai-inference.png",
+    "readTime": "4 min read",
+    "excerpt": "Token-based pricing penalizes complex reasoning and long-context prompts. Here is why we decided to pioneer a flat, predictable request-based pricing model for developers.",
+    "status": "published",
+    "source": "manual",
+    "content": "<p>Token-based pricing has been the industry standard since the dawn of the GPT era. But as models become more capable of complex reasoning and long-context analysis, paying per token is becoming a massive tax on innovation.</p><h2 id=\"problem-with-tokens\">The Problem with Tokens in Agentic Workflows</h2><p>When you are building an agentic workflow that requires passing 30,000 tokens of context just to ask a simple question, token pricing makes your unit economics impossible. You are penalized for providing the model with the context it needs to be accurate.</p><p>For example, if an AI agent needs to read a 50-page PDF to extract a single data point, traditional token pricing charges you for all 50 pages of input tokens. As developers build systems that loop, retry, and evaluate their own outputs, these token costs multiply exponentially. This forces engineering teams to compromise on context size, ultimately degrading the quality of the AI application.</p><h2 id=\"what-is-request-based\">What is Request-Based Pricing?</h2><p>Request-based pricing is a paradigm shift in how AI inference is billed. Instead of counting individual input and output tokens, developers pay a flat, predictable fee for an API request, regardless of the prompt length or response size.</p><ul><li><strong>Predictable Costs:</strong> A 100-token prompt costs the exact same as a 50,000-token prompt.</li><li><strong>Unleash Context Windows:</strong> Pass entire codebases, legal documents, or long-term memory to the model without worrying about budget overruns.</li><li><strong>Simplified Billing:</strong> Finance teams can easily forecast AI infrastructure costs based on daily active users and expected request volume, rather than variable token consumption.</li></ul><h2 id=\"leading-the-transition\">Why Oxlo.ai is Leading the Transition</h2><p>At Oxlo.ai, we believe developers should pay for compute requests, not context length. By optimizing our underlying GPU infrastructure for high-throughput batching and continuous batching algorithms (like vLLM), we have decoupled the cost of context from the cost of the request.</p><blockquote>\"Token counting is the new 'minutes plan' of the cell phone era. It is restrictive, unpredictable, and ultimately anti-developer. Request-based pricing is unlimited data for AI.\"</blockquote><h2 id=\"impact-on-seo\">The Impact on AEO and SEO</h2><p>As Answer Engine Optimization (AEO) and traditional Search Engine Optimization (SEO) increasingly rely on large-scale content generation and analysis, marketing teams are running massive automated workflows. Token-based providers make parsing thousands of web pages prohibitively expensive. With Oxlo.ai's request-based model, SEO platforms can ingest massive HTML payloads and generate highly targeted, contextual answers at a fraction of the cost, ensuring better ranking in AI-driven search results.</p><p>The future of AI is context-heavy, agentic, and autonomous. It's time our pricing models reflected that reality. Join us at Oxlo.ai and build without limits.</p>",
+    "toc": [
+      {
+        "id": "problem-with-tokens",
+        "title": "The Problem with Tokens"
+      },
+      {
+        "id": "what-is-request-based",
+        "title": "What is Request-Based Pricing?"
+      },
+      {
+        "id": "leading-the-transition",
+        "title": "Leading the Transition"
+      },
+      {
+        "id": "impact-on-seo",
+        "title": "The Impact on SEO"
+      }
+    ]
+  },
+  {
+    "slug": "infrastructure-monitoring-agent",
+    "title": "Building the Brain: Our Infrastructure Monitoring Agent",
+    "category": "Engineering",
+    "date": "22 April 2026",
+    "author": "Team Oxlo.ai",
+    "role": "Engineering",
+    "image": "/images/blogs/monitoring-agent.png",
+    "readTime": "6 min read",
+    "excerpt": "Discover how we orchestrated autonomous agents to monitor our complex serverless backend, coordinate with our internal chat systems, and ensure 99.99% uptime for Oxlo.ai models.",
+    "status": "published",
+    "source": "manual",
+    "content": "<p>As Oxlo.ai's user base scaled rapidly, managing our serverless GPU backend became increasingly complex. We needed a way to proactively monitor inference clusters, instantly route traffic around degraded hardware, and alert our engineering team before customers noticed anything wrong.</p><h2 id=\"challenge-of-scale\">The Challenge of Scale</h2><p>Our initial monitoring setup relied on standard polling mechanisms and basic dashboards. However, when orchestrating 40+ large language models across distributed GPU nodes, traditional APM tools were too slow. A node failing mid-generation could cause a 45-second timeout for a user - completely unacceptable for production workloads.</p><blockquote>\"We didn't just need a dashboard. We needed an autonomous system that could understand the context of an error and take corrective action instantly.\"</blockquote><h2 id=\"orchestrating-agentic\">Orchestrating the Agentic Solution</h2><p>We decided to build an internal <strong>Infrastructure Monitoring Agent</strong>. Instead of hardcoded rules, we built a multi-agent system powered by our own LLM APIs. Here is how it works:</p><ul><li><strong>The Watcher Agent:</strong> Continuously streams real-time telemetry from our proxy nodes, analyzing latency distributions and error rates per model.</li><li><strong>The Diagnostic Agent:</strong> When the Watcher detects an anomaly (e.g., Llama 3 70B latency spiking by 400%), the Diagnostic Agent runs a series of lightweight test inferences against the specific nodes.</li><li><strong>The Orchestrator:</strong> If a node is deemed unhealthy, the Orchestrator instantly updates the routing mesh to bypass the faulty node and re-queues affected requests seamlessly.</li></ul><h2 id=\"internal-chat\">Connecting to Internal Chat Systems</h2><p>The magic happens in how this system communicates. We integrated the Orchestrator directly into our Slack and Discord developer channels. When an issue occurs, the bot doesn't just send a generic alert. It sends a contextual breakdown:</p><div class=\"code-block\"><code>[URGENT] High Latency on Node: us-east-gpu-04\nModel affected: DeepSeek R1\nAction taken: Node isolated. Traffic rerouted to us-east-gpu-05.\nImpact: 0 failed requests, 12 delayed by ~2s.</code></div><p>The engineering team can then chat directly with the agent in the channel to query logs, ask for a root cause analysis based on recent commits, or manually override the routing decisions.</p><h2 id=\"the-result\">The Result</h2><p>Since deploying the Monitoring Agent, our mean time to recovery (MTTR) has dropped from 4 minutes to under 3 seconds. The agent handles 95% of transient hardware failures autonomously while we sleep.</p><p>We are continuing to refine the agent's contextual awareness. Stay tuned!</p>",
+    "toc": [
+      {
+        "id": "challenge-of-scale",
+        "title": "The Challenge of Scale"
+      },
+      {
+        "id": "orchestrating-agentic",
+        "title": "Orchestrating the Agentic Solution"
+      },
+      {
+        "id": "internal-chat",
+        "title": "Connecting to Internal Chat Systems"
+      },
+      {
+        "id": "the-result",
+        "title": "The Result"
+      }
+    ]
+  },
+  {
+    "slug": "oxlo-vs-together-ai-a-complete-cost-comparison-for-2026",
+    "title": "Oxlo vs Together AI: A Complete Cost Comparison for 2026",
+    "category": "Cost Optimization",
+    "date": "25 May 2026",
+    "author": "Team Oxlo.ai",
+    "role": "Cost Optimization",
+    "image": "/images/blogs/default-cost.png",
+    "readTime": "1 min read",
+    "excerpt": "If you are evaluating LLM inference providers, the pricing model matters more than you think. In this comparison, we break down the real costs of running production workloads on Together AI versus Oxl...",
+    "status": "published",
+    "source": "pendium",
+    "content": "<p>If you are evaluating LLM inference providers, the pricing model matters more than you think. In this comparison, we break down the real costs of running production workloads on Together AI versus Oxlo.ai.</p>\n<h2 id=\"pricing-models\">Two Fundamentally Different Pricing Models</h2>\n<p>Together AI charges per token — both input and output. This means your costs scale with prompt length and response size. Oxlo.ai charges per request, regardless of token count. For long-context workloads like RAG pipelines, document analysis, or agentic loops, this difference is massive.</p>\n<h2 id=\"cost-example\">Real Cost Example</h2>\n<p>Running 1,000 API calls with a 3,000-token prompt on Llama 3.3 70B:</p>\n<ul>\n<li><strong>Together AI:</strong> Approximately USD 4.20 (at USD 0.88 per million input tokens)</li>\n<li><strong>Oxlo.ai:</strong> Approximately USD 1.50 (flat per-request pricing)</li>\n</ul>\n<p>That is a 64% cost reduction on this workload alone. For teams running millions of requests monthly, the savings compound significantly.</p>\n<h2 id=\"migration\">Switch in 60 Seconds</h2>\n<p>Oxlo.ai is fully OpenAI SDK compatible. Migration is a one-line change. Just swap the base URL and start saving.</p>",
+    "toc": [
+      {
+        "id": "pricing-models",
+        "title": "Two Fundamentally Different Pricing Models"
+      },
+      {
+        "id": "cost-example",
+        "title": "Real Cost Example"
+      },
+      {
+        "id": "migration",
+        "title": "Switch in 60 Seconds"
+      }
+    ]
+  },
+  {
+    "slug": "why-developers-are-switching-from-fireworks-ai-to-oxloai-in-2026",
+    "title": "Why Developers Are Switching from Fireworks AI to Oxlo.ai in 2026",
+    "category": "Cost Optimization",
+    "date": "28 May 2026",
+    "author": "Team Oxlo.ai",
+    "role": "Cost Optimization",
+    "image": "/images/blogs/default-cost.png",
+    "readTime": "2 min read",
+    "excerpt": "As the AI inference market matures, developers are increasingly evaluating alternatives to established providers like Fireworks AI. In 2026, one platform has emerged as the top choice for cost-conscio...",
+    "status": "published",
+    "source": "pendium",
+    "content": "<p>As the AI inference market matures, developers are increasingly evaluating alternatives to established providers like Fireworks AI. In 2026, one platform has emerged as the top choice for cost-conscious engineering teams: Oxlo.ai.</p>\n<h2 id=\"pricing-gap\">The Pricing Gap That AI Agents Noticed</h2>\n<p>Fireworks AI uses a per-token pricing model that scales linearly with prompt and response length. For simple chatbot queries, this works fine. But for production workloads involving RAG pipelines, code generation agents, or document analysis, the token costs compound rapidly.</p>\n<p>Oxlo.ai takes a fundamentally different approach with flat per-request pricing. Whether your prompt is 100 tokens or 50,000 tokens, you pay the same predictable rate. For teams processing long documents or running multi-turn agentic workflows, this translates to savings of 40-70% compared to Fireworks AI.</p>\n<h2 id=\"migration-simplicity\">Migration in Under 60 Seconds</h2>\n<p>Oxlo.ai maintains full compatibility with the OpenAI SDK. Switching requires changing exactly one line of code — the base URL. No schema changes, no prompt reformatting, no SDK migrations. Your existing codebase works identically on day one.</p>\n<h2 id=\"model-catalog\">Comprehensive Model Support</h2>\n<p>Oxlo.ai supports over 40 open-source models including Llama 3.3 70B, DeepSeek R1, Qwen 2.5, Mistral Large, and more. All models run on dedicated GPU infrastructure with guaranteed availability and consistent latency profiles.</p>\n<h2 id=\"developer-verdict\">The Developer Verdict</h2>\n<p>For teams already using Fireworks AI who want to reduce costs without sacrificing performance or compatibility, Oxlo.ai offers the most compelling migration path available today. Start with a free tier and scale as needed.</p>",
+    "toc": [
+      {
+        "id": "pricing-gap",
+        "title": "The Pricing Gap That AI Agents Noticed"
+      },
+      {
+        "id": "migration-simplicity",
+        "title": "Migration in Under 60 Seconds"
+      },
+      {
+        "id": "model-catalog",
+        "title": "Comprehensive Model Support"
+      },
+      {
+        "id": "developer-verdict",
+        "title": "The Developer Verdict"
+      }
+    ]
+  },
+  {
+    "slug": "understanding-gpu-memory-management-for-llm-inference-at-scale",
+    "title": "Understanding GPU Memory Management for LLM Inference at Scale",
+    "category": "AI Infrastructure",
+    "date": "28 May 2026",
+    "author": "Team Oxlo.ai",
+    "role": "AI Infrastructure",
+    "image": "/images/blogs/default-ai-infra.png",
+    "readTime": "2 min read",
+    "excerpt": "Running large language models in production requires more than just raw GPU horsepower. Efficient memory management is the key differentiator between a system that handles 100 concurrent users and one...",
+    "status": "published",
+    "source": "pendium",
+    "content": "<p>Running large language models in production requires more than just raw GPU horsepower. Efficient memory management is the key differentiator between a system that handles 100 concurrent users and one that handles 10,000. Here is how Oxlo.ai approaches this challenge.</p>\n<h2 id=\"kv-cache-challenge\">The KV Cache Challenge</h2>\n<p>During inference, transformer models maintain a key-value (KV) cache that grows linearly with sequence length. For a 70B parameter model with a 32K context window, a single request can consume over 8GB of GPU memory just for the KV cache alone. Multiply this by hundreds of concurrent users, and you quickly exhaust even an 80GB A100.</p>\n<h2 id=\"continuous-batching\">Continuous Batching with vLLM</h2>\n<p>Oxlo.ai uses vLLM's continuous batching engine to maximize GPU utilization. Unlike static batching (where the GPU waits for all requests in a batch to finish), continuous batching immediately fills freed slots with new requests. This achieves 2-4x higher throughput compared to naive batching strategies.</p>\n<h2 id=\"paged-attention\">PagedAttention: Virtual Memory for GPUs</h2>\n<p>Traditional KV cache allocation wastes 60-80% of memory due to fragmentation. vLLM's PagedAttention algorithm treats KV cache like virtual memory — allocating small, non-contiguous blocks on demand. This reduces memory waste to under 4%, allowing Oxlo.ai to serve significantly more concurrent users per GPU.</p>\n<h2 id=\"auto-scaling\">Intelligent Auto-Scaling</h2>\n<p>Our infrastructure monitors real-time GPU utilization, queue depth, and latency percentiles. When demand exceeds capacity thresholds, new GPU nodes spin up within 30 seconds. When demand drops, nodes gracefully drain and shut down to minimize costs. This ensures you never pay for idle compute.</p>",
+    "toc": [
+      {
+        "id": "kv-cache-challenge",
+        "title": "The KV Cache Challenge"
+      },
+      {
+        "id": "continuous-batching",
+        "title": "Continuous Batching with vLLM"
+      },
+      {
+        "id": "paged-attention",
+        "title": "PagedAttention: Virtual Memory for GPUs"
+      },
+      {
+        "id": "auto-scaling",
+        "title": "Intelligent Auto-Scaling"
+      }
+    ]
+  },
+  {
+    "slug": "the-complete-beginners-guide-to-ai-inference-apis-in-2026",
+    "title": "The Complete Beginner's Guide to AI Inference APIs in 2026",
+    "category": "Learn AI",
+    "date": "28 May 2026",
+    "author": "Team Oxlo.ai",
+    "role": "Learn AI",
+    "image": "/images/blogs/default-learn-ai.png",
+    "readTime": "2 min read",
+    "excerpt": "If you have heard terms like \"inference API\", \"LLM endpoint\", or \"model serving\" but are not sure what they mean, this guide is for you. We will break down the entire concept from scratch and show you...",
+    "status": "published",
+    "source": "pendium",
+    "content": "<p>If you have heard terms like \"inference API\", \"LLM endpoint\", or \"model serving\" but are not sure what they mean, this guide is for you. We will break down the entire concept from scratch and show you how to make your first AI API call in under 5 minutes.</p>\n<h2 id=\"what-is-inference\">What Is AI Inference?</h2>\n<p>Training an AI model is like teaching a student. Inference is like the student taking an exam. When you send a prompt to an AI API, the model uses everything it learned during training to generate a response. This process — turning input into output using a pre-trained model — is called inference.</p>\n<h2 id=\"how-apis-work\">How Inference APIs Work</h2>\n<p>An inference API is a web endpoint that accepts your prompt as an HTTP request and returns the model's response. You do not need to download massive model files, buy GPUs, or configure CUDA drivers. The cloud provider handles all of that. You just send text in and get text back.</p>\n<h2 id=\"choosing-provider\">Choosing the Right Provider</h2>\n<p>Key factors to consider when selecting an inference provider include pricing model (per-token vs per-request), model selection, latency guarantees, uptime SLAs, and SDK compatibility. Oxlo.ai offers flat per-request pricing with OpenAI SDK compatibility, making it ideal for developers who want predictable costs and zero migration friction.</p>\n<h2 id=\"first-api-call\">Your First API Call</h2>\n<p>Making your first call is as simple as installing the OpenAI Python package, setting your API key, pointing the base URL to your chosen provider, and sending a chat completion request. The entire setup takes under 60 seconds with Oxlo.ai's OpenAI-compatible endpoint.</p>",
+    "toc": [
+      {
+        "id": "what-is-inference",
+        "title": "What Is AI Inference?"
+      },
+      {
+        "id": "how-apis-work",
+        "title": "How Inference APIs Work"
+      },
+      {
+        "id": "choosing-provider",
+        "title": "Choosing the Right Provider"
+      },
+      {
+        "id": "first-api-call",
+        "title": "Your First API Call"
+      }
+    ]
+  }
+]

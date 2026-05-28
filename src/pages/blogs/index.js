@@ -3,30 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cpu, Box, Database, Zap, HardDrive, DollarSign, ArrowRight } from "lucide-react";
-
-// Reordered: April 15th then April 22nd
-const BLOG_POSTS = [
-  {
-    slug: "request-based-pricing-future",
-    title: "Why Request-Based Pricing is the Future of AI Inference",
-    category: "Product",
-    date: "15 April 2026",
-    author: "Team Oxlo.ai",
-    image: "/images/blogs/ai-inference.png",
-    excerpt: "Token-based pricing penalizes complex reasoning and long-context prompts. Here is why we decided to pioneer a flat, predictable request-based pricing model for developers.",
-    readTime: "4 min read"
-  },
-  {
-    slug: "infrastructure-monitoring-agent",
-    title: "Building the Brain: Our Infrastructure Monitoring Agent",
-    category: "Engineering",
-    date: "22 April 2026",
-    author: "Team Oxlo.ai",
-    image: "/images/blogs/monitoring-agent.png",
-    excerpt: "Discover how we orchestrated autonomous agents to monitor our complex serverless backend, coordinate with our internal chat systems, and ensure 99.99% uptime for Oxlo.ai models.",
-    readTime: "6 min read"
-  }
-];
+import { getBlogImage } from "@/lib/blogUtils";
 
 const CATEGORIES = [
   { name: "All", icon: null },
@@ -38,10 +15,43 @@ const CATEGORIES = [
   { name: "Cost Optimization", icon: <DollarSign size={14} /> }
 ];
 
-export default function Blogs() {
+export async function getServerSideProps() {
+  // Read blog posts fresh on every request — picks up new API-posted content instantly
+  const fs = require("fs");
+  const path = require("path");
+  const BLOG_DATA_PATH = path.join(process.cwd(), "src", "data", "blogPosts.json");
+  
+  let allPosts = [];
+  try {
+    const raw = fs.readFileSync(BLOG_DATA_PATH, "utf-8");
+    allPosts = JSON.parse(raw);
+  } catch { allPosts = []; }
+
+
+  // Only show published posts, sorted newest first
+  const posts = allPosts
+    .filter(post => post.status === "published")
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .map(({ slug, title, category, date, author, image, excerpt, readTime }) => ({
+      slug,
+      title,
+      category,
+      date,
+      author,
+      image: image || "",
+      excerpt,
+      readTime
+    }));
+
+  return {
+    props: { posts }
+  };
+}
+
+export default function Blogs({ posts }) {
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const filteredPosts = BLOG_POSTS.filter(post => 
+  const filteredPosts = posts.filter(post => 
     activeCategory === "All" || post.category === activeCategory
   );
 
@@ -120,7 +130,7 @@ export default function Blogs() {
                   <Link href={`/blogs/${post.slug}`} className="blog-card-link-new">
                     <div className="blog-card-new">
                       <div className="blog-card-image-new">
-                        <img src={post.image} alt={post.title} loading="lazy" />
+                        <img src={getBlogImage(post)} alt={post.title} loading="lazy" />
                       </div>
                       <div className="blog-card-content-new">
                         <div className="blog-meta-new">
