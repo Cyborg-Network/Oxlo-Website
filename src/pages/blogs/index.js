@@ -16,23 +16,13 @@ const CATEGORIES = [
 ];
 
 export async function getServerSideProps() {
-  // Read blog posts fresh on every request — picks up new API-posted content instantly
-  const fs = require("fs");
-  const path = require("path");
-  const BLOG_DATA_PATH = path.join(process.cwd(), "src", "data", "blogPosts.json");
-  
-  let allPosts = [];
+  // Read fresh from Neon on every request — picks up new API-posted content instantly
+  const { getPublishedPosts } = await import("@/lib/blogStore");
+
+  let posts = [];
   try {
-    const raw = fs.readFileSync(BLOG_DATA_PATH, "utf-8");
-    allPosts = JSON.parse(raw);
-  } catch { allPosts = []; }
-
-
-  // Only show published posts, sorted newest first
-  const posts = allPosts
-    .filter(post => post.status === "published")
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .map(({ slug, title, category, date, author, image, excerpt, readTime }) => ({
+    const published = await getPublishedPosts(); // already newest-first
+    posts = published.map(({ slug, title, category, date, author, image, excerpt, readTime }) => ({
       slug,
       title,
       category,
@@ -40,11 +30,15 @@ export async function getServerSideProps() {
       author,
       image: image || "",
       excerpt,
-      readTime
+      readTime,
     }));
+  } catch (err) {
+    console.error("blogs/index getServerSideProps error:", err);
+    posts = [];
+  }
 
   return {
-    props: { posts }
+    props: { posts },
   };
 }
 

@@ -13,27 +13,17 @@ const XLogo = ({ size = 18 }) => (
 );
 
 export async function getServerSideProps({ params }) {
-  // Read fresh data on every request — new API-posted content appears instantly
-  const fs = require("fs");
-  const path = require("path");
-  const BLOG_DATA_PATH = path.join(process.cwd(), "src", "data", "blogPosts.json");
-  
-  let allPosts = [];
-  try {
-    const raw = fs.readFileSync(BLOG_DATA_PATH, "utf-8");
-    allPosts = JSON.parse(raw);
-  } catch { allPosts = []; }
+  // Read fresh from Neon on every request — new API-posted content appears instantly
+  const { getPostBySlug, getPublishedPosts } = await import("@/lib/blogStore");
 
-  
-  const post = allPosts.find(p => p.slug === params.slug && p.status === "published");
-
+  const post = await getPostBySlug(params.slug);
   if (!post) {
     return { notFound: true };
   }
 
   // Get related posts (other published posts)
-  const relatedPosts = allPosts
-    .filter(p => p.slug !== params.slug && p.status === "published")
+  const relatedPosts = (await getPublishedPosts())
+    .filter(p => p.slug !== params.slug)
     .map(({ slug, title, category, date, author, image, excerpt, readTime }) => ({
       slug,
       title,
