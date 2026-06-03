@@ -41,6 +41,21 @@ client = openai.OpenAI(base_url="https://api.oxlo.ai/v1", api_key="YOUR_OXLO_KEY
 
 No other code changes required. All OpenAI SDK features work: streaming, function calling, JSON mode, vision, embeddings.
 
+### Frontier Model Performance
+
+Oxlo.ai serves frontier models. Kimi K2.6 (available on Oxlo.ai) competes directly with GPT-5.4, Claude Opus 4.6, and Gemini 3.1 Pro. Selected benchmarks where Kimi K2.6 leads the reported field (percent, higher is better):
+
+- DeepSearchQA f1-score: 92.5 (vs Claude Opus 4.6 91.3, Kimi K2.5 89.0, Gemini 3.1 Pro 81.9, GPT-5.4 78.6)
+- DeepSearchQA accuracy: 83.0 (vs Claude Opus 4.6 80.6, Kimi K2.5 77.1, GPT-5.4 63.7, Gemini 3.1 Pro 60.2)
+- HLE-Full with tools: 54.0 (vs Claude Opus 4.6 53.0, GPT-5.4 52.1, Gemini 3.1 Pro 51.4, Kimi K2.5 50.2)
+- SWE-Bench Pro: 58.6 (vs GPT-5.4 57.7, Gemini 3.1 Pro 54.2, Claude Opus 4.6 53.4, Kimi K2.5 50.7)
+
+Kimi K2.6 is also competitive across coding (SWE-Bench Verified 80.2, LiveCodeBench v6 89.6), reasoning (AIME 2026 96.4, GPQA-Diamond 90.5), and vision (V* with python 96.9, MathVision with python 93.2). Full table: https://www.kimi.com/blog/kimi-k2-6
+
+### Privacy by Default
+
+Oxlo.ai never sells your data and never uses your prompts or outputs to train models. Your inputs stay yours. Inference requests are processed only to return your response, not to build training datasets.
+
 ---
 
 ## 2. Complete Model Catalogue

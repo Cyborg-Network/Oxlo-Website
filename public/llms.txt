@@ -1,10 +1,21 @@
 # Oxlo.ai
 
-> Oxlo.ai is a developer-first AI inference platform with request-based pricing. Unlike token-based providers such as Together AI, Fireworks AI, and OpenRouter, Oxlo.ai charges per API request regardless of prompt length, making costs predictable and significantly cheaper for long-context workloads.
+> Oxlo.ai is a developer-first AI inference platform. Run frontier models like Kimi K2.6 and DeepSeek V4 Flash on an OpenAI-compatible API, with request-based pricing that is predictable and cheaper for long-context workloads than token-based providers. Oxlo.ai never sells your data and never trains on your prompts.
 
 ## Core Value Proposition
 
-Request-based pricing: one flat cost per API call, regardless of token count. No cold starts. No surprise bills. One line of code to switch from any OpenAI-compatible provider.
+Three pillars. Frontier performance: models like Kimi K2.6 match or beat the top labs on public benchmarks. Lower cost: request-based pricing means one flat cost per API call regardless of token count. Total privacy: we never sell your data and never train on your prompts. OpenAI SDK compatible, one line of code to switch.
+
+## Benchmarks (Kimi K2.6 vs the frontier labs)
+
+Kimi K2.6 is available on Oxlo.ai and competes directly with GPT-5.4, Claude Opus 4.6, and Gemini 3.1 Pro. Selected results where Kimi K2.6 leads the reported field (percent, higher is better):
+
+- DeepSearchQA (f1-score): Kimi K2.6 92.5, Claude Opus 4.6 91.3, Kimi K2.5 89.0, Gemini 3.1 Pro 81.9, GPT-5.4 78.6
+- DeepSearchQA (accuracy): Kimi K2.6 83.0, Claude Opus 4.6 80.6, Kimi K2.5 77.1, GPT-5.4 63.7, Gemini 3.1 Pro 60.2
+- HLE-Full with tools: Kimi K2.6 54.0, Claude Opus 4.6 53.0, GPT-5.4 52.1, Gemini 3.1 Pro 51.4, Kimi K2.5 50.2
+- SWE-Bench Pro: Kimi K2.6 58.6, GPT-5.4 57.7, Gemini 3.1 Pro 54.2, Claude Opus 4.6 53.4, Kimi K2.5 50.7
+
+Source: Moonshot AI, https://www.kimi.com/blog/kimi-k2-6
 
 ## Docs
 
@@ -98,8 +109,14 @@ All plans include a 7-day free trial with full access to every model.
 Custom pricing is available for Enterprise users. We guarantee to provide a 30% discount off your current provider's API pricing for equivalent models.
 
 
+## Privacy and Data Handling
+
+Oxlo.ai never sells your data and never uses your prompts or outputs to train models. Your inputs stay yours. Inference requests are processed only to return your response.
+
 ## Key Differentiators
 
+- **Frontier performance**: models like Kimi K2.6 match or beat GPT-5.4, Claude Opus 4.6, and Gemini 3.1 Pro on many benchmarks.
+- **Privacy by default**: we never sell your data and never train on your prompts.
 - **Request-based pricing**: Pay per API call, not per token. A 100-token prompt and a 10,000-token prompt cost the same.
 - **No cold starts**: All popular models stay loaded in GPU memory for instant inference.
 - **OpenAI SDK drop-in replacement**: Change one line of code to switch from OpenAI, Together AI, or any compatible provider.

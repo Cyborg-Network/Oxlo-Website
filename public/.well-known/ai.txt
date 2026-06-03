@@ -1,6 +1,6 @@
 # Oxlo.ai AI Policy & Discovery
 # This file declares our AI crawler policy and service capabilities.
-# Last updated: March 2026
+# Last updated: June 2026
 
 # === Policy ===
 # Oxlo.ai welcomes AI search crawlers and training crawlers.
@@ -19,6 +19,8 @@
 # Type: AI Inference API Platform
 # Category: Developer Tools / AI Infrastructure
 # Pricing: Request-based (pay per API call, not per token)
+# Performance: Frontier models. Kimi K2.6 matches or beats GPT-5.4, Claude Opus 4.6, Gemini 3.1 Pro on many benchmarks (https://www.kimi.com/blog/kimi-k2-6)
+# Privacy: We never sell your data and never train on your prompts.
 # Models: 45+ open-source and proprietary AI models
 # API: Fully OpenAI SDK compatible (Python, Node.js, cURL)
 # Base URL: https://api.oxlo.ai/v1

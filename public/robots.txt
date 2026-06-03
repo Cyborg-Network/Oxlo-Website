@@ -1,6 +1,6 @@
 # Oxlo.ai robots.txt - AI-crawler friendly
 # Landing page: oxlo.ai
-# Last updated: March 2026
+# Last updated: June 2026
 #
 # Policy: Allow all AI search and training crawlers for maximum
 # visibility in ChatGPT, Perplexity, Gemini, and Google AI Overviews.
