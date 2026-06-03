@@ -59,6 +59,8 @@ import f6s from '../../public/images/f6s.png'
 import STL from '../../public/images/STL.webp'
 import TopProd from '../../public/images/badge.png'
 import CostCalculator from "@/components/CostCalculator";
+import BenchmarkSection from "@/components/BenchmarkSection";
+import PrivacyHighlight from "@/components/PrivacyHighlight";
 
 // Page-specific FAQ schema (matches visible FaqSection component content)
 const homepageFaqSchema = {
@@ -135,6 +137,22 @@ const homepageFaqSchema = {
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "For long-context workloads, Oxlo.ai is the cheapest LLM inference API thanks to its unique request-based pricing model. While providers like Together AI, Fireworks AI, OpenRouter, and Replicate charge per token ($0.0002 to $0.003 per 1K tokens depending on model size), Oxlo.ai charges a flat rate per API request regardless of prompt length. The Pro plan costs $14.90 per month for 300 requests per day across all models, and Premium costs $49.90 per month for 2,000 requests per day."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Oxlo.ai train on my data or sell it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Oxlo.ai never sells your data and never uses your prompts or outputs to train models. Your inputs stay yours. Inference requests are processed to return your response, not to build training datasets."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Kimi K2.6 on Oxlo.ai compare to GPT-5.4, Claude Opus 4.6, and Gemini 3.1 Pro?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kimi K2.6, available on Oxlo.ai, matches or beats the frontier labs on many agentic, coding, reasoning, and vision benchmarks. It leads on DeepSearchQA (92.5 f1), DeepSearchQA accuracy (83.0), HLE-Full with tools (54.0), and SWE-Bench Pro (58.6), based on the Kimi K2.6 report at kimi.com."
       }
     }
   ]
@@ -218,10 +236,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Oxlo.ai | Flat Monthly Pricing for AI Inference.</title>
+        <title>Oxlo.ai | Frontier AI Models, Lower Cost, Total Privacy</title>
         <meta
           name="description"
-          content="Developer-first AI inference platform with request-based pricing. Run 40+ open-source models (Qwen 3 32B, Llama 3.3 70B, DeepSeek R1, Mistral, Whisper, SDXL) via OpenAI-compatible API. Pay per request, not per token. Free tier available."
+          content="Run Kimi K2.6, DeepSeek V4 Flash, and 45+ frontier AI models on an OpenAI-compatible API. Request-based pricing, benchmark performance that matches the top labs, and we never sell your data or train on your prompts."
         />
         <meta
           name="keywords"
@@ -231,7 +249,7 @@ export default function Home() {
 
         {/* OpenGraph */}
         <meta property="og:title" content="Oxlo.ai - AI Inference API with Request-Based Pricing" />
-        <meta property="og:description" content="Run 40+ AI models via OpenAI-compatible API. Pay per request, not per token. Free tier available." />
+        <meta property="og:description" content="Frontier AI models on an OpenAI-compatible API. Request-based pricing, top-lab benchmark performance, and we never train on your prompts." />
         <meta property="og:url" content="https://oxlo.ai" />
         <meta property="og:site_name" content="Oxlo.ai" />
         <meta property="og:type" content="website" />
@@ -239,7 +257,7 @@ export default function Home() {
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Oxlo.ai - AI Inference API with Request-Based Pricing" />
-        <meta name="twitter:description" content="Run 40+ AI models via OpenAI-compatible API. Pay per request, not per token." />
+        <meta name="twitter:description" content="Frontier AI models on an OpenAI-compatible API. Request-based pricing, top-lab performance, no training on your prompts." />
 
         {/* Robots */}
         <meta name="robots" content="index, follow" />
@@ -284,8 +302,8 @@ export default function Home() {
                   </Link>
                 </motion.div>
                 <motion.h1 className="hero-heading" initial="hidden" animate="visible">
-                  <RevealLine words={["Unpredictable", "AI", "bills?"]} startDelay={0.4} />
-                  <RevealLine words={["We", "fixed", "that"]} startDelay={0.7} className="hero-highlight" />
+                  <RevealLine words={["Frontier", "performance."]} startDelay={0.4} />
+                  <RevealLine words={["Lower", "cost.", "Total", "privacy."]} startDelay={0.7} className="hero-highlight" />
                 </motion.h1>
                 <motion.p
                   className="home-desc"
@@ -293,18 +311,26 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  Oxlo.ai gives you a flat monthly plan for AI inference. <span style={{ whiteSpace: 'nowrap' }}>One fixed bill.</span> Every month. Regardless of how much you build.
+                  Run Kimi K2.6, DeepSeek V4 Flash, and 45+ frontier models on an OpenAI-compatible API. Request-based pricing, and we never train on your prompts.
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: 20, scale: 0.95 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ duration: 0.7, delay: 1.3, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', alignItems: 'center' }}
                 >
                   <Button
                     title="Get started for free"
                     link="https://portal.oxlo.ai/"
                     size="btn-md"
                     icon={rocket}
+                  />
+                  <Button
+                    title="View benchmarks"
+                    link="#benchmarks"
+                    size="btn-md"
+                    theme="light"
+                    icon={scale}
                   />
                 </motion.div>
               </div>
@@ -367,6 +393,8 @@ export default function Home() {
           <Marquee />
         </div>
       </section>
+
+      <BenchmarkSection />
 
       {/* Cost Calculator - positioned after hero */}
       <section className="common-section" id="cost-calculator" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
@@ -478,7 +506,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
             >
-              Token billing makes your AI infrastructure costs unpredictable. Oxlo.ai is your go-to inference platform for flat monthly pricing.<br/>Here is how we compare.
+              Frontier-class performance at request-based pricing, not premium per-token rates. The same results for less.<br/>Here is how we compare.
             </motion.p>
           </div>
 
@@ -561,6 +589,8 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      <PrivacyHighlight />
 
       {/* Visible FAQ Section — matches JSON-LD FAQPage schema for GEO/AEO */}
       <FaqSection />
