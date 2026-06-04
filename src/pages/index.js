@@ -187,7 +187,7 @@ const organizationSchema = {
 };
 
 // Fallback stats in case API is unavailable
-const FALLBACK_STATS = { users: 700, models_available: 30, countries: 100, tokens_display: "388M" };
+const FALLBACK_STATS = { users: 700, models_available: 45, countries: 100, tokens_display: "556M" };
 
 export default function Home() {
   const [stats, setStats] = useState(FALLBACK_STATS);
@@ -204,7 +204,10 @@ export default function Home() {
   useEffect(() => {
     fetch("https://api.oxlo.ai/stats")
       .then(res => res.ok ? res.json() : Promise.reject())
-      .then(data => setStats(data))
+      .then(data => {
+        // Merge over the fallback so a partial or empty response never blanks the stats.
+        if (data && typeof data === "object") setStats(prev => ({ ...prev, ...data }));
+      })
       .catch(() => {});
   }, []);
 
