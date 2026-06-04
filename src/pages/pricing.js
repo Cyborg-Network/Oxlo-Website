@@ -35,7 +35,7 @@ const pricingFaqSchema = {
     {
       "@type": "Question",
       "name": "Is Oxlo.ai cheaper than Together AI, Fireworks AI, and OpenRouter?",
-      "acceptedAnswer": { "@type": "Answer", "text": "For teams running long-context or reasoning model workloads, yes. Together AI, Fireworks AI, and OpenRouter all charge per token, so costs scale linearly with prompt length. Running 500 API calls per day with 3,000-token prompts costs approximately $40-60/month on these providers vs $49.90/month on Oxlo.ai Premium. But as prompt length increases beyond 10,000 tokens, Oxlo.ai can be 10-100x cheaper since every request costs the same flat rate." }
+      "acceptedAnswer": { "@type": "Answer", "text": "For teams running high volumes of long-context or reasoning workloads, yes. Together AI, Fireworks AI, and OpenRouter all charge per token, so costs scale with both prompt length and request volume. With Oxlo.ai Premium, 5,000 requests per day cost a flat $350/month no matter how long each prompt is. As prompt length grows beyond 10,000 tokens and volume scales, per-token bills climb fast while Oxlo.ai stays flat, so it can be 10-100x cheaper for those workloads." }
     },
     {
       "@type": "Question",

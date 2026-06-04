@@ -18,13 +18,13 @@ const organizationSchema = {
   "offers": {
     "@type": "AggregateOffer",
     "lowPrice": "0",
-    "highPrice": "49.90",
+    "highPrice": "350.00",
     "priceCurrency": "USD",
     "offerCount": "4",
     "offers": [
       { "@type": "Offer", "name": "Free Plan", "price": "0", "priceCurrency": "USD", "description": "60 requests/day, 16+ models, community support" },
-      { "@type": "Offer", "name": "Pro Plan", "price": "14.90", "priceCurrency": "USD", "description": "300 requests/day, all models, high priority queue" },
-      { "@type": "Offer", "name": "Premium Plan", "price": "49.90", "priceCurrency": "USD", "description": "2000 requests/day, all models, highest priority, 32K output tokens" },
+      { "@type": "Offer", "name": "Pro Plan", "price": "80.00", "priceCurrency": "USD", "description": "1000 requests/day, all models, high priority queue" },
+      { "@type": "Offer", "name": "Premium Plan", "price": "350.00", "priceCurrency": "USD", "description": "5000 requests/day, all models, highest priority, 32K output tokens" },
       { "@type": "Offer", "name": "Enterprise Plan", "description": "Custom limits, dedicated GPU routing, SLA, priority support" }
     ]
   }
@@ -53,7 +53,7 @@ const softwareAppSchema = {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD",
-    "description": "Free tier available with 60 requests/day. Paid plans from $14.90/month."
+    "description": "Free tier available with 60 requests/day. Paid plans from $80/month."
   }
 };
 

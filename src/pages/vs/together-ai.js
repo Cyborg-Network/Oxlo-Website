@@ -12,7 +12,7 @@ export default function TogetherAIPage() {
   const faqs = [
     {
       question: "How is Oxlo.ai different from Together AI?",
-      answer: "The primary difference is the business model. Together AI counts every token processed and bills variably. Oxlo.ai uses a request-based SLA, meaning you purchase a fixed tier (e.g., $49.90/mo for 2000 requests per day) and every request costs the same, whether it generates 100 tokens or 10,000 tokens."
+      answer: "The primary difference is the business model. Together AI counts every token processed and bills variably. Oxlo.ai uses a request-based SLA, meaning you purchase a fixed tier (e.g., $350/mo for 5000 requests per day) and every request costs the same, whether it generates 100 tokens or 10,000 tokens."
     },
     {
       question: "Is it difficult to switch from Together AI?",

@@ -63,6 +63,14 @@ export default function HexBackground() {
     resize();
     window.addEventListener("resize", resize);
 
+    // Rebuild the hex grid when the page content height changes (e.g. navigating to a
+    // long blog post), so the animation covers the full scrollable height.
+    let contentObserver;
+    if (typeof ResizeObserver !== "undefined") {
+      contentObserver = new ResizeObserver(() => buildHex(dimRef.current.w, dimRef.current.h));
+      contentObserver.observe(document.body);
+    }
+
     const onScroll = () => { scrollRef.current = window.scrollY; };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
@@ -241,6 +249,7 @@ export default function HexBackground() {
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("mousemove", onMouse);
       document.removeEventListener("mouseleave", onLeave);
+      if (contentObserver) contentObserver.disconnect();
     };
   }, []);
 

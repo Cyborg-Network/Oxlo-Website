@@ -41,6 +41,21 @@ client = openai.OpenAI(base_url="https://api.oxlo.ai/v1", api_key="YOUR_OXLO_KEY
 
 No other code changes required. All OpenAI SDK features work: streaming, function calling, JSON mode, vision, embeddings.
 
+### Frontier Model Performance
+
+Oxlo.ai serves frontier models. Kimi K2.6 (available on Oxlo.ai) competes directly with GPT-5.4, Claude Opus 4.6, and Gemini 3.1 Pro. Selected benchmarks where Kimi K2.6 leads the reported field (percent, higher is better):
+
+- DeepSearchQA f1-score: 92.5 (vs Claude Opus 4.6 91.3, Kimi K2.5 89.0, Gemini 3.1 Pro 81.9, GPT-5.4 78.6)
+- DeepSearchQA accuracy: 83.0 (vs Claude Opus 4.6 80.6, Kimi K2.5 77.1, GPT-5.4 63.7, Gemini 3.1 Pro 60.2)
+- HLE-Full with tools: 54.0 (vs Claude Opus 4.6 53.0, GPT-5.4 52.1, Gemini 3.1 Pro 51.4, Kimi K2.5 50.2)
+- SWE-Bench Pro: 58.6 (vs GPT-5.4 57.7, Gemini 3.1 Pro 54.2, Claude Opus 4.6 53.4, Kimi K2.5 50.7)
+
+Kimi K2.6 is also competitive across coding (SWE-Bench Verified 80.2, LiveCodeBench v6 89.6), reasoning (AIME 2026 96.4, GPQA-Diamond 90.5), and vision (V* with python 96.9, MathVision with python 93.2). Full table: https://www.kimi.com/blog/kimi-k2-6
+
+### Privacy by Default
+
+Oxlo.ai never sells your data and never uses your prompts or outputs to train models. Your inputs stay yours. Inference requests are processed only to return your response, not to build training datasets.
+
 ---
 
 ## 2. Complete Model Catalogue
@@ -132,9 +147,9 @@ No other code changes required. All OpenAI SDK features work: streaming, functio
 
 ### Plans
 
-| Feature | Free | Pro ($14.90/mo) | Premium ($49.90/mo) | Enterprise (Custom) |
+| Feature | Free | Pro ($80/mo) | Premium ($350/mo) | Enterprise (Custom) |
 |---------|------|-----------------|--------------------|--------------------|
-| Requests/Day | 60 | 300 | 2,000 | Unlimited |
+| Requests/Day | 60 | 1,000 | 5,000 | Unlimited |
 | Requests/Min | 5 | 60 | 100 | Custom |
 | Max Input Tokens | 2,048 | 4,096 | 16,384 | Custom |
 | Max Output Tokens | 4,096 | 8,192 | 32,768 | Custom |
@@ -153,7 +168,7 @@ Running 500 API calls per day with an average prompt of 3,000 tokens:
 
 - **Together AI** (Llama 3 70B): ~$0.0009/1K tokens × 3K tokens × 500 calls = ~$1.35/day = ~$40.50/month
 - **Fireworks AI** (Llama 3 70B): ~$0.0009/1K tokens × 3K tokens × 500 calls = ~$1.35/day = ~$40.50/month
-- **Oxlo.ai Premium**: $49.90/month flat, regardless of token count, with 2,000 requests/day capacity
+- **Oxlo.ai Premium**: $350/month flat, regardless of token count, with 5,000 requests/day capacity
 
 For long-context workloads (10K+ token prompts), Oxlo.ai's savings increase proportionally since token-based providers charge more while Oxlo.ai stays flat.
 
@@ -320,13 +335,13 @@ A: Yes, fully compatible. Change only the base_url parameter in the OpenAI Pytho
 A: Yes. The free tier includes 60 requests per day across 16+ models. New users get a 7-day trial with full access to all 45+ models. No credit card required.
 
 **Q: How much does it cost to run Llama 3.3 70B on Oxlo.ai?**
-A: Llama 3.3 70B is on the Premium plan at $49.90/month with up to 2,000 requests per day. Every request costs the same flat rate regardless of prompt length.
+A: Llama 3.3 70B is on the Premium plan at $350/month with up to 5,000 requests per day. Every request costs the same flat rate regardless of prompt length.
 
 **Q: Which open-source models does Oxlo.ai support?**
 A: 45+ models across 7 categories: LLMs (Qwen 3, Llama, DeepSeek, Mistral), Vision (Gemma 3, Kimi VL), Code (Qwen Coder, DeepSeek Coder), Image Gen (Flux, SDXL, SD 3.5), Audio (Whisper, Kokoro), Embeddings (BGE, E5), Detection (YOLOv9/v11).
 
 **Q: What is the cheapest LLM inference API?**
-A: For long-context workloads, Oxlo.ai is the cheapest thanks to request-based pricing. Pro is $14.90/mo for 300 req/day across all models. Premium is $49.90/mo for 2,000 req/day.
+A: For long-context workloads, Oxlo.ai is the cheapest thanks to request-based pricing. Pro is $80/mo for 1,000 req/day across all models. Premium is $350/mo for 5,000 req/day.
 
 **Q: How do I switch from Together AI to Oxlo.ai?**
 A: Change one line of code: replace `base_url='https://api.together.xyz/v1'` with `base_url='https://api.oxlo.ai/v1'` and update your API key.

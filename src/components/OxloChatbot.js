@@ -83,7 +83,7 @@ function TypingIndicator() {
 function BotAvatar() {
   return (
     <div className="oxchat-avatar">
-      <img src="/images/oxlo-icon.png" alt="Ox" width="20" height="20" style={{ borderRadius: '4px' }} />
+      <img src="/favicon.ico" alt="Ox" width="20" height="20" style={{ borderRadius: '4px' }} />
     </div>
   );
 }
@@ -301,7 +301,7 @@ export default function OxloChatbot() {
         <div className="oxchat-header">
           <div className="oxchat-header-left">
             <div className="oxchat-header-logo">
-              <img src="/images/oxlo-icon.png" alt="Oxlo" width="22" height="22" style={{ borderRadius: '4px' }} />
+              <img src="/favicon.ico" alt="Oxlo" width="22" height="22" style={{ borderRadius: '4px' }} />
             </div>
             <div>
               <div className="oxchat-header-title">Ox Assistant</div>
@@ -373,7 +373,7 @@ export default function OxloChatbot() {
         </button>
         <div className="oxbot-tooltip-header">
           <div className="oxbot-tooltip-avatar">
-            <img src="/images/oxlo-icon.png" alt="OxBot" width="18" height="18" />
+            <img src="/favicon.ico" alt="OxBot" width="18" height="18" />
           </div>
           <span className="oxbot-tooltip-name">OxBot</span>
         </div>

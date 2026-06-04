@@ -26,7 +26,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "How much does it cost to run Llama 3.3 70B or Qwen 3 32B on Oxlo.ai?",
-    answer: "Both Llama 3.3 70B and Qwen 3 32B are available on Oxlo.ai's Premium plan at $49.90/month, which includes up to 2,000 API requests per day. Unlike Together AI, Fireworks AI, or OpenRouter where a single long-context query can cost $0.05+ depending on token count, every request on Oxlo.ai costs the same flat rate regardless of prompt length. New users get a 5-day free trial with full access to all premium models.",
+    answer: "Both Llama 3.3 70B and Qwen 3 32B are available on Oxlo.ai's Premium plan at $350/month, which includes up to 5,000 API requests per day. Unlike Together AI, Fireworks AI, or OpenRouter where a single long-context query can cost $0.05+ depending on token count, every request on Oxlo.ai costs the same flat rate regardless of prompt length. New users get a 5-day free trial with full access to all premium models.",
   },
   {
     question: "Does Oxlo.ai have a free tier?",
@@ -38,7 +38,15 @@ const FAQ_ITEMS = [
   },
   {
     question: "What is the cheapest LLM inference API in 2026?",
-    answer: "For long-context workloads, Oxlo.ai is the cheapest LLM inference API thanks to its unique request-based pricing model. While providers like Together AI, Fireworks AI, OpenRouter, and Replicate charge per token ($0.0002-$0.003 per 1K tokens depending on model size), Oxlo.ai charges a flat rate per API request regardless of prompt length. The Pro plan costs $14.90/month for 300 requests/day across all models, and Premium costs $49.90/month for 2,000 requests/day.",
+    answer: "For long-context workloads, Oxlo.ai is the cheapest LLM inference API thanks to its unique request-based pricing model. While providers like Together AI, Fireworks AI, OpenRouter, and Replicate charge per token ($0.0002-$0.003 per 1K tokens depending on model size), Oxlo.ai charges a flat rate per API request regardless of prompt length. The Pro plan costs $80/month for 1,000 requests/day across all models, and Premium costs $350/month for 5,000 requests/day.",
+  },
+  {
+    question: "Does Oxlo.ai train on my data or sell it?",
+    answer: "No. Oxlo.ai never sells your data and never uses your prompts or outputs to train models. Your inputs stay yours. Inference requests are processed to return your response, not to build training datasets.",
+  },
+  {
+    question: "How does Kimi K2.6 on Oxlo.ai compare to GPT-5.4, Claude Opus 4.6, and Gemini 3.1 Pro?",
+    answer: "Kimi K2.6, available on Oxlo.ai, matches or beats the frontier labs on many agentic, coding, reasoning, and vision benchmarks. It leads on DeepSearchQA (92.5 f1), DeepSearchQA accuracy (83.0), HLE-Full with tools (54.0), and SWE-Bench Pro (58.6), based on the Kimi K2.6 report at kimi.com.",
   },
 ];
 
