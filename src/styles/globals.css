@@ -5624,7 +5624,7 @@ textarea:-webkit-autofill:focus {
   .headline {
     flex-direction: column;
     gap: 8px;
-    padding: 10px 40px 10px 15px;
+    padding: 11px 34px;
   }
 
   .headline p {
@@ -5728,12 +5728,17 @@ textarea:-webkit-autofill:focus {
   }
 
   .headline p {
-    padding-right: 45px;
-    text-align: left;
+    display: block;
+    padding-right: 0;
+    text-align: center;
+    line-height: 1.45;
+    gap: 0;
   }
 
   .headline .close {
-    right: 15px;
+    right: 12px;
+    top: 12px;
+    transform: none;
   }
 
   .container {
