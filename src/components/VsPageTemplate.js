@@ -102,7 +102,7 @@ export default function VsPageTemplate({
               </table>
             </div>
             <p style={{ marginTop: "1rem", fontSize: "14px", color: "var(--text-light-48)", textAlign: "center" }}>
-              * Estimates based on Premium tier ($49.90/mo for 2,000 requests/day). Token rates based on publicly available {competitorName} pricing as of 2026.
+              * Estimates based on Premium tier ($350/mo for 5,000 requests/day). Token rates based on publicly available {competitorName} pricing as of 2026.
             </p>
           </div>
 

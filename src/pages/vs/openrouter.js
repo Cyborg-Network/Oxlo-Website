@@ -1,7 +1,7 @@
 import VsPageTemplate from "@/components/VsPageTemplate"
 
 export default function OpenRouterPage() {
-  const tldr = "OpenRouter essentially aggregates APIs from multiple providers, operating as an inference router. They charge per-token, passing along provider costs plus their margin. Oxlo.ai is fundamentally different - we host the inference hardware ourselves (like A100s and L40s) and offer a Request-Based API. This means Oxlo can offer flat-rate pricing ($49.90/mo for 2000 requests per day) that simply does not exist on aggregator platforms."
+  const tldr = "OpenRouter essentially aggregates APIs from multiple providers, operating as an inference router. They charge per-token, passing along provider costs plus their margin. Oxlo.ai is fundamentally different - we host the inference hardware ourselves (like A100s and L40s) and offer a Request-Based API. This means Oxlo can offer flat-rate pricing ($350/mo for 5000 requests per day) that simply does not exist on aggregator platforms."
 
   const cost_table = [
     { workload: "1,000 requests (3,000 tokens/req on Llama 3 70B)", competitor: "$2.70", oxlo: "$0.00 (Flat Daily Rate)", savings: "~$81/mo" },

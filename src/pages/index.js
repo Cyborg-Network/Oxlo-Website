@@ -112,7 +112,7 @@ const homepageFaqSchema = {
       "name": "How much does it cost to run Llama 3.3 70B or Qwen 3 32B on Oxlo.ai?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Both Llama 3.3 70B and Qwen 3 32B are available on Oxlo.ai's Premium plan at $49.90 per month, which includes up to 2,000 API requests per day. Unlike Together AI, Fireworks AI, or OpenRouter where a single long-context query can cost $0.05 or more depending on token count, every request on Oxlo.ai costs the same flat rate regardless of prompt length. New users get a 5-day free trial with full access to all premium models."
+        "text": "Both Llama 3.3 70B and Qwen 3 32B are available on Oxlo.ai's Premium plan at $350 per month, which includes up to 5,000 API requests per day. Unlike Together AI, Fireworks AI, or OpenRouter where a single long-context query can cost $0.05 or more depending on token count, every request on Oxlo.ai costs the same flat rate regardless of prompt length. New users get a 5-day free trial with full access to all premium models."
       }
     },
     {
@@ -136,7 +136,7 @@ const homepageFaqSchema = {
       "name": "What is the cheapest LLM inference API in 2026?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "For long-context workloads, Oxlo.ai is the cheapest LLM inference API thanks to its unique request-based pricing model. While providers like Together AI, Fireworks AI, OpenRouter, and Replicate charge per token ($0.0002 to $0.003 per 1K tokens depending on model size), Oxlo.ai charges a flat rate per API request regardless of prompt length. The Pro plan costs $14.90 per month for 300 requests per day across all models, and Premium costs $49.90 per month for 2,000 requests per day."
+        "text": "For long-context workloads, Oxlo.ai is the cheapest LLM inference API thanks to its unique request-based pricing model. While providers like Together AI, Fireworks AI, OpenRouter, and Replicate charge per token ($0.0002 to $0.003 per 1K tokens depending on model size), Oxlo.ai charges a flat rate per API request regardless of prompt length. The Pro plan costs $80 per month for 1,000 requests per day across all models, and Premium costs $350 per month for 5,000 requests per day."
       }
     },
     {
@@ -202,13 +202,25 @@ export default function Home() {
   const heroImageY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
 
   useEffect(() => {
-    fetch("https://api.oxlo.ai/stats")
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .then(data => {
-        // Merge over the fallback so a partial or empty response never blanks the stats.
-        if (data && typeof data === "object") setStats(prev => ({ ...prev, ...data }));
-      })
-      .catch(() => {});
+    let cancelled = false;
+    async function loadStats(attempt = 0) {
+      try {
+        const res = await fetch("https://api.oxlo.ai/stats", { cache: "no-store" });
+        if (!res.ok) throw new Error(`status ${res.status}`);
+        const data = await res.json();
+        // Merge over the fallback so a partial response never blanks any stat.
+        if (!cancelled && data && typeof data === "object") {
+          setStats(prev => ({ ...prev, ...data }));
+        }
+      } catch {
+        // Retry a few times before falling back to the static numbers.
+        if (!cancelled && attempt < 3) {
+          setTimeout(() => loadStats(attempt + 1), 1000 * (attempt + 1));
+        }
+      }
+    }
+    loadStats();
+    return () => { cancelled = true; };
   }, []);
 
   const pricingFeatures = [

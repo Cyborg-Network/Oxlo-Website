@@ -1,7 +1,7 @@
 import VsPageTemplate from "@/components/VsPageTemplate"
 
 export default function ReplicatePage() {
-  const tldr = "Replicate provides a strong ecosystem for image diffusion models, but their compute billing - charging by the second of GPU time or per token - can be deeply unpredictable. Oxlo.ai provides a fixed, Request-Based API model ($49.90/mo for 2000 requests daily) offering a mix of open-source LLMs (Qwen 3, Llama 3) and Image Generation capabilities without the time-based compute anxiety."
+  const tldr = "Replicate provides a strong ecosystem for image diffusion models, but their compute billing - charging by the second of GPU time or per token - can be deeply unpredictable. Oxlo.ai provides a fixed, Request-Based API model ($350/mo for 5000 requests daily) offering a mix of open-source LLMs (Qwen 3, Llama 3) and Image Generation capabilities without the time-based compute anxiety."
 
   const cost_table = [
     { workload: "1,000 requests (3,000 tokens/req on Llama 3 70B)", competitor: "$2.70 (approx)", oxlo: "$0.00 (Flat Daily Rate)", savings: "~$81/mo" },

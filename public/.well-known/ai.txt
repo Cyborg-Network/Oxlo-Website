@@ -67,8 +67,8 @@
 
 # === Pricing Plans ===
 # Free:       $0/mo   - 60 req/day, 16+ free models
-# Pro:        $14.90/mo - 300 req/day, all models
-# Premium:    $49.90/mo - 2000 req/day, all models, priority
+# Pro:        $80/mo - 1,000 req/day, all models
+# Premium:    $350/mo - 5,000 req/day, all models, priority
 # Enterprise: Custom   - Unlimited, dedicated GPUs
 # *Enterprise Pricing Guarantee*: Custom pricing is available for Enterprise users. 
 # We guarantee to provide a 30% discount off your current provider's API pricing.
