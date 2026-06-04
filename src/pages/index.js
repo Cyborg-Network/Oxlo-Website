@@ -301,9 +301,10 @@ export default function Home() {
                     </div>
                   </Link>
                 </motion.div>
-                <motion.h1 className="hero-heading" initial="hidden" animate="visible">
+                <motion.h1 className="hero-heading pillar-hero" initial="hidden" animate="visible">
                   <RevealLine words={["Frontier", "performance."]} startDelay={0.4} />
-                  <RevealLine words={["Lower", "cost.", "Total", "privacy."]} startDelay={0.7} className="hero-highlight" />
+                  <RevealLine words={["Lower", "cost."]} startDelay={0.6} />
+                  <RevealLine words={["Total", "privacy."]} startDelay={0.8} className="hero-highlight" />
                 </motion.h1>
                 <motion.p
                   className="home-desc"
@@ -393,8 +394,6 @@ export default function Home() {
           <Marquee />
         </div>
       </section>
-
-      <BenchmarkSection />
 
       {/* Cost Calculator - positioned after hero */}
       <section className="common-section" id="cost-calculator" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
@@ -490,6 +489,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <BenchmarkSection />
 
       <section className='common-section pill-section'>
         <div className='container'>
