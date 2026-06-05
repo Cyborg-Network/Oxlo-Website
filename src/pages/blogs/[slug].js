@@ -24,6 +24,7 @@ export async function getServerSideProps({ params }) {
   // Get related posts (other published posts)
   const relatedPosts = (await getPublishedPosts())
     .filter(p => p.slug !== params.slug)
+    .slice(0, 6)   // show at most 6 related posts
     .map(({ slug, title, category, date, author, image, excerpt, readTime }) => ({
       slug,
       title,
