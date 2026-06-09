@@ -18,7 +18,7 @@ export default function PrivacyPolicy() {
       <section className="common-section legal-hero-section">
         <div className="container">
           <h1 className="hero-heading center-hero-heading">Privacy Policy</h1>
-          <p className="hero-desc">Last Updated: 29 12, 2025</p>
+          <p className="hero-desc">Last Updated: June 9, 2026</p>
 
           <div className="legal-content">
             <p>
@@ -227,6 +227,16 @@ export default function PrivacyPolicy() {
               information at the time of collection (Article 29). Where we
               obtain personal data from another source, we provide this
               information within the timeframe set out above (Article 30).
+            </p>
+
+            <h2>12. No Training on Your Data</h2>
+            <p>
+              We do not use your prompts, completions, inputs, or outputs to train, fine-tune, or improve any AI model, ours or any third party's. Your data is never used for model development purposes. Each API request is processed to return a response and is not retained for any training or evaluation pipeline.
+            </p>
+
+            <h2>13. No Access to Your Prompts or Outputs</h2>
+            <p>
+              We do not access, read, or review the content of your API requests or responses unless you explicitly contact us for technical support and share content as part of that request. Even in support scenarios, access is limited to what is strictly necessary to resolve your issue and is handled under strict confidentiality obligations.
             </p>
           </div>
         </div>

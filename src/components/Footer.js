@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import Github from './icons/Github'
 import Discord from './icons/Discord'
 import Instagram from './icons/Instagram'
+import HuggingFace from './icons/HuggingFace'
 
 const Footer = () => {
 
@@ -25,8 +26,9 @@ const Footer = () => {
                             <li><Link href="https://www.linkedin.com/company/oxlo-ai/"><Linkedin /></Link></li>
                             <li><Link href="https://discord.gg/qPvNp5X8m6"><Discord /></Link></li>
                             <li><Link href="https://www.instagram.com/oxlo.ai?igsh=MTlyaGJxcGcwN2Rodg=="><Instagram /></Link></li>
-                            {/* <li><Link href="/"><Medium/></Link></li>
-                <li><Link href="/"><Github/></Link></li> */}
+                            <li><Link href="https://huggingface.co/OxloAI" title="Hugging Face">
+                                <HuggingFace />
+                            </Link></li>
                         </ul>
                     </div>
                     <div className='fw-content fw-second'>
@@ -36,7 +38,9 @@ const Footer = () => {
                                 <li><Link href="https://docs.oxlo.ai/" className={`${router.asPath === "/docs" ? "active" : ""}`}>Docs</Link></li>
                                 <li><Link href="/pricing" className={`${router.asPath === "/pricing" ? "active" : ""}`}>Pricing</Link></li>
                                 <li><Link href="mailto:hello@oxlo.ai" className={`${router.asPath === "" ? "" : ""}`}>Contact Us</Link></li>
-                                <li><Link href="/privacy-policy" className={`${router.asPath === "/privacy-policy" ? "" : ""}`}>Privacy Policy</Link></li>
+                                <li><Link href="/privacy-policy" className={`${router.asPath === "/privacy-policy" ? "active" : ""}`}>Privacy Policy</Link></li>
+                                <li><Link href="/term-of-use" className={`${router.asPath === "/term-of-use" ? "active" : ""}`}>Terms of Service</Link></li>
+                                <li><Link href="/data-processing-agreement" className={`${router.asPath === "/data-processing-agreement" ? "active" : ""}`}>Data Processing Agreement</Link></li>
                                 <li><Link href="https://www.cyborgnetwork.io/">Our Parent Company</Link></li>
                             </ul>
                         </div>

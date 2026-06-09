@@ -55,7 +55,7 @@ const pricingFaqSchema = {
     {
       "@type": "Question",
       "name": "Does Oxlo.ai offer guaranteed savings for enterprise teams?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Teams currently spending $500 or more per month on AI inference with providers like Together AI, Fireworks AI or OpenRouter are eligible for our Enterprise plan which guarantees a minimum 30 percent reduction on their current monthly bill. Contact us at hello@oxlo.ai to discuss your current usage." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Teams currently spending up to $20,000 per month on AI inference with providers like Together AI, Fireworks AI or OpenRouter are eligible for our Enterprise plan which guarantees a minimum 15 percent reduction on their current monthly bill. Contact us at hello@oxlo.ai to discuss your current usage." }
     }
   ]
 };
@@ -66,7 +66,7 @@ const PRICING_FAQ_ITEMS = [
   { question: "Does Oxlo.ai offer a free trial?", answer: "Yes. Pro and Premium plans include a 24-hour free trial. The Free tier (60 requests/day, 16+ models) is available permanently with no credit card required." },
   { question: "What happens if I exceed my daily request limit?", answer: "When you reach your daily request limit, additional requests are queued until the next day or you can upgrade your plan for higher limits. There are no overage charges - your costs are always predictable and fixed. This is unlike token-based providers where a single runaway prompt can spike your bill." },
   { question: "Can I switch plans at any time?", answer: "Yes, you can upgrade or downgrade your plan at any time. When upgrading, you get immediate access to the higher plan's limits. All plans are billed monthly with no long-term contracts required." },
-  { question: "Does Oxlo.ai offer guaranteed savings for enterprise teams?", answer: "Yes. Teams currently spending $500 or more per month on AI inference with providers like Together AI, Fireworks AI or OpenRouter are eligible for our Enterprise plan which guarantees a minimum 30 percent reduction on their current monthly bill. Contact us at hello@oxlo.ai to discuss your current usage." },
+  { question: "Does Oxlo.ai offer guaranteed savings for enterprise teams?", answer: "Yes. Teams currently spending up to $20,000 per month on AI inference with providers like Together AI, Fireworks AI or OpenRouter are eligible for our Enterprise plan which guarantees a minimum 15 percent reduction on their current monthly bill. Contact us at hello@oxlo.ai to discuss your current usage." },
 ];
 
 export default function Pricing() {
@@ -285,8 +285,8 @@ export default function Pricing() {
                 </div>
                 <div className="enterprise-commitment-box">
                   <p className="commitment-label">OUR COMMITMENT</p>
-                  <p className="commitment-heading">30% off your current AI&nbsp;bill.</p>
-                  <p className="commitment-subtext"><strong>Guaranteed.</strong> For teams spending $500 or more per month on AI inference with any provider.</p>
+                  <p className="commitment-heading">15% off your current AI&nbsp;bill.</p>
+                  <p className="commitment-subtext"><strong>Guaranteed.</strong> For teams spending up to $20,000 per month on AI inference with any provider.</p>
                 </div>
                 <Button
                   title="Book a Call →"

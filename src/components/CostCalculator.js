@@ -13,7 +13,7 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 // Oxlo Plans:
 //   Pro:     $80/mo,  1000 req/day
 //   Premium: $350/mo, 5000 req/day
-//   Enterprise: Custom, 30% guaranteed reduction
+//   Enterprise: Custom, 15% guaranteed reduction
 // ═══════════════════════════════════════════════════════════════════════════
 
 const MODELS = [
@@ -393,7 +393,7 @@ export default function CostCalculator() {
   // ─── OXLO PRICING (plan recommendation based on cheapest competitor) ───
   // < $350 cheapest competitor → Pro ($80/mo)
   // ≥ $350 and < $500 → Premium ($350/mo) — self-serve, instant signup
-  // ≥ $500 → Enterprise (30% off cheapest competitor) — custom contract
+  // ≥ $500 → Enterprise (15% off cheapest competitor) — custom contract
   let tierKey = 'pro';
   if (minCompCost >= 500) tierKey = 'enterprise';
   else if (minCompCost >= 350) tierKey = 'premium';
@@ -407,8 +407,8 @@ export default function CostCalculator() {
     oxloCost = 350;
     tierLabel = 'Premium';
   } else {
-    // Enterprise: guaranteed 30% cost reduction vs cheapest competitor
-    oxloCost = minCompCost * 0.70;
+    // Enterprise: guaranteed 15% cost reduction vs cheapest competitor
+    oxloCost = minCompCost * 0.85;
     tierLabel = 'Enterprise';
   }
 
@@ -603,7 +603,7 @@ export default function CostCalculator() {
           {tierKey === 'enterprise' && (
             <div style={{ marginTop: '12px', padding: '10px 14px', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.04)' }}>
               <p style={{ fontSize: '11px', color: '#6B7280', margin: 0, lineHeight: 1.5 }}>
-                * Estimated projection based on a guaranteed minimum 30% cost reduction.
+                * Estimated projection based on a guaranteed minimum 15% cost reduction.
                 Actual pricing is custom-tailored per contract.{' '}
                 <a href="mailto:hello@cyborgnetwork.io" style={{ color: '#03F7B5', textDecoration: 'none', fontWeight: 700 }}>Contact Us</a>
               </p>
