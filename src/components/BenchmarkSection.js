@@ -24,7 +24,7 @@ export default function BenchmarkSection() {
           <motion.div className="section-badge" viewport={{ once: true }} transition={{ ease: [0.22, 1, 0.36, 1], duration: 0.7 }} initial={{ opacity: 0, y: 30, scale: 0.9 }} whileInView={{ opacity: 1, y: 0, scale: 1 }}>
             <span>Benchmarks</span>
           </motion.div>
-          <h2 className="section-heading">Frontier performance, served on Oxlo.ai</h2>
+          <h2 className="section-heading">Frontier models, at a fraction of the cost.</h2>
           <motion.p
             className="section-desc"
             viewport={{ once: true }}
@@ -32,7 +32,7 @@ export default function BenchmarkSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
           >
-            Kimi K2.6, available on Oxlo.ai, goes head to head with the frontier labs. Here is how it compares with GPT-5.4, Claude Opus 4.6, and Gemini 3.1 Pro.
+            Kimi K2.6, available on Oxlo.ai, goes head to head with the frontier labs. See how it stacks up against GPT-5.4, Claude Opus 4.6, and Gemini 3.1 Pro.
           </motion.p>
         </div>
 
