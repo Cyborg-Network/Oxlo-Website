@@ -307,12 +307,20 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <Link href="https://www.g2.com/products/oxlo-ai/" target="_blank" rel="noopener">
-                    <div className="section-badge">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                      <span>Rate us in G2</span>
-                    </div>
-                  </Link>
+                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
+                    <Link href="https://www.g2.com/products/oxlo-ai/" target="_blank" rel="noopener">
+                      <div className="section-badge">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <span>Rate us on G2</span>
+                      </div>
+                    </Link>
+                    <Link href="https://www.producthunt.com/products/oxlo-ai?utm_source=badge-follow&utm_medium=badge&utm_source=badge-oxlo-ai" target="_blank" rel="noopener">
+                      <div className="section-badge">
+                        <svg width="18" height="18" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="currentColor" opacity="0.15"/><path d="M22.667 18.333h-4V13.5h4a2.417 2.417 0 0 1 0 4.833zm0-7.333H16.167V29h2.5v-7.167h4a4.917 4.917 0 1 0 0-9.833z" fill="currentColor"/></svg>
+                        <span>Follow us on Product Hunt</span>
+                      </div>
+                    </Link>
+                  </div>
                 </motion.div>
                 <motion.h1 className="hero-heading pillar-hero" initial="hidden" animate="visible">
                   <RevealLine words={["Privacy-first", "inference"]} startDelay={0.4} />
