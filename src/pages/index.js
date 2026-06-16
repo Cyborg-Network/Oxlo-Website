@@ -315,7 +315,7 @@ export default function Home() {
                       </div>
                     </Link>
                     <a href="https://www.producthunt.com/products/oxlo-ai?utm_source=badge-follow&utm_medium=badge&utm_source=badge-oxlo-ai" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center' }}>
-                      <img src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1245444&theme=light" alt="Oxlo.ai on Product Hunt" width="250" height="54" style={{ height: '34px', width: 'auto', borderRadius: '60px' }} />
+                      <img src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1245444&theme=dark" alt="Oxlo.ai - Scale across AI models without scaling your bill | Product Hunt" width="250" height="54" style={{ height: '34px', width: 'auto', borderRadius: '60px' }} />
                     </a>
                   </div>
                 </motion.div>
