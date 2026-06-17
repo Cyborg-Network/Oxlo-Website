@@ -87,7 +87,7 @@ export default async function handler(req, res) {
         return res.status(200).json({ success: true, post });
       }
 
-      let published = await getPublishedPosts();
+      let published = await getPublishedPosts({ listingOnly: !slug });
       if (category && category !== "All") {
         published = published.filter((p) => p.category === category);
       }
