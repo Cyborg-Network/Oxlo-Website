@@ -314,9 +314,13 @@ export default function Home() {
                         <span>Rate us on G2</span>
                       </div>
                     </Link>
-                    <a href="https://www.producthunt.com/products/oxlo-ai?utm_source=badge-follow&utm_medium=badge&utm_source=badge-oxlo-ai" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center' }}>
-                      <img src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1245444&theme=dark" alt="Oxlo.ai - Scale across AI models without scaling your bill | Product Hunt" width="250" height="54" style={{ height: '34px', width: 'auto', borderRadius: '60px' }} />
-                    </a>
+                    <Button
+                      title="View benchmarks"
+                      link="#benchmarks"
+                      size="btn-sm"
+                      theme="light"
+                      icon={scale}
+                    />
                   </div>
                 </motion.div>
                 <motion.h1 className="hero-heading pillar-hero" initial="hidden" animate="visible">
@@ -344,13 +348,9 @@ export default function Home() {
                     size="btn-md"
                     icon={rocket}
                   />
-                  <Button
-                    title="View benchmarks"
-                    link="#benchmarks"
-                    size="btn-md"
-                    theme="light"
-                    icon={scale}
-                  />
+                  <a href="https://www.producthunt.com/products/oxlo-ai?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-oxlo-ai" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center' }}>
+                    <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1169408&theme=light&t=1781677436010" alt="Oxlo.ai - Scale across AI models without scaling your bill | Product Hunt" width="250" height="54" />
+                  </a>
                 </motion.div>
               </div>
             </motion.div>
