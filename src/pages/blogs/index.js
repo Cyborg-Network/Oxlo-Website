@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cpu, Box, Database, Zap, HardDrive, DollarSign, ArrowRight } from "lucide-react";
+import { Cpu, Box, Database, Zap, HardDrive, DollarSign, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { getBlogImage } from "@/lib/blogUtils";
 
 const POSTS_PER_PAGE = 18;
@@ -46,15 +46,37 @@ export async function getServerSideProps() {
 
 export default function Blogs({ posts }) {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const filteredPosts = useMemo(() =>
     posts.filter(post => activeCategory === "All" || post.category === activeCategory),
     [posts, activeCategory]
   );
 
-  const visiblePosts = filteredPosts.slice(0, visibleCount);
-  const hasMore = visibleCount < filteredPosts.length;
+  const totalPages = Math.max(1, Math.ceil(filteredPosts.length / POSTS_PER_PAGE));
+  const startIdx = (currentPage - 1) * POSTS_PER_PAGE;
+  const visiblePosts = filteredPosts.slice(startIdx, startIdx + POSTS_PER_PAGE);
+
+  const goToPage = useCallback((page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const getPageNumbers = () => {
+    const pages = [];
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      pages.push(1);
+      if (currentPage > 3) pages.push('...');
+      const start = Math.max(2, currentPage - 1);
+      const end = Math.min(totalPages - 1, currentPage + 1);
+      for (let i = start; i <= end; i++) pages.push(i);
+      if (currentPage < totalPages - 2) pages.push('...');
+      pages.push(totalPages);
+    }
+    return pages;
+  };
 
   return (
     <>
@@ -104,7 +126,7 @@ export default function Blogs({ posts }) {
                 <li key={i} className={cat.name === activeCategory ? "active" : ""}>
                   <button
                     className="category-btn"
-                    onClick={() => { setActiveCategory(cat.name); setVisibleCount(POSTS_PER_PAGE); }}
+                    onClick={() => { setActiveCategory(cat.name); setCurrentPage(1); }}
                   >
                     {cat.icon && <span className="cat-icon">{cat.icon}</span>}
                     {cat.name}
@@ -150,14 +172,40 @@ export default function Blogs({ posts }) {
             )}
           </div>
 
-          {hasMore && (
-            <div style={{ textAlign: 'center', marginTop: '40px' }}>
+          {totalPages > 1 && (
+            <div className="blog-pagination">
               <button
-                className="btn-bottom-cta"
-                onClick={() => setVisibleCount(prev => prev + POSTS_PER_PAGE)}
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                className="blog-pagination-btn"
+                onClick={() => goToPage(currentPage - 1)}
+                disabled={currentPage === 1}
               >
-                Load more posts ({filteredPosts.length - visibleCount} remaining)
+                <ChevronLeft size={18} />
+                <span>Prev</span>
+              </button>
+
+              <div className="blog-pagination-pages">
+                {getPageNumbers().map((page, i) =>
+                  page === '...' ? (
+                    <span key={`dots-${i}`} className="blog-pagination-dots">...</span>
+                  ) : (
+                    <button
+                      key={page}
+                      className={`blog-pagination-page ${page === currentPage ? 'active' : ''}`}
+                      onClick={() => goToPage(page)}
+                    >
+                      {page}
+                    </button>
+                  )
+                )}
+              </div>
+
+              <button
+                className="blog-pagination-btn"
+                onClick={() => goToPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                <span>Next</span>
+                <ChevronRight size={18} />
               </button>
             </div>
           )}
