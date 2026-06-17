@@ -78,12 +78,17 @@ export async function getAllPosts() {
 }
 
 /** Published posts, newest first. */
-export async function getPublishedPosts() {
+export async function getPublishedPosts({ listingOnly = false } = {}) {
   await ensureSchema();
   const sql = db();
-  const rows = await sql`
-    SELECT * FROM blog_posts WHERE status = 'published' ORDER BY created_at DESC
-  `;
+  const rows = listingOnly
+    ? await sql`
+        SELECT slug, title, category, date, author, role, image, read_time, excerpt, status, source
+        FROM blog_posts WHERE status = 'published' ORDER BY created_at DESC
+      `
+    : await sql`
+        SELECT * FROM blog_posts WHERE status = 'published' ORDER BY created_at DESC
+      `;
   return rows.map(mapRow);
 }
 

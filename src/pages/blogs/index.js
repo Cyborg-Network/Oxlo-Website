@@ -1,9 +1,11 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cpu, Box, Database, Zap, HardDrive, DollarSign, ArrowRight } from "lucide-react";
 import { getBlogImage } from "@/lib/blogUtils";
+
+const POSTS_PER_PAGE = 18;
 
 const CATEGORIES = [
   { name: "All", icon: null },
@@ -21,7 +23,7 @@ export async function getServerSideProps() {
 
   let posts = [];
   try {
-    const published = await getPublishedPosts(); // already newest-first
+    const published = await getPublishedPosts({ listingOnly: true });
     posts = published.map(({ slug, title, category, date, author, image, excerpt, readTime }) => ({
       slug,
       title,
@@ -44,10 +46,15 @@ export async function getServerSideProps() {
 
 export default function Blogs({ posts }) {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
 
-  const filteredPosts = posts.filter(post => 
-    activeCategory === "All" || post.category === activeCategory
+  const filteredPosts = useMemo(() =>
+    posts.filter(post => activeCategory === "All" || post.category === activeCategory),
+    [posts, activeCategory]
   );
+
+  const visiblePosts = filteredPosts.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredPosts.length;
 
   return (
     <>
@@ -95,9 +102,9 @@ export default function Blogs({ posts }) {
             <ul className="blog-categories">
               {CATEGORIES.map((cat, i) => (
                 <li key={i} className={cat.name === activeCategory ? "active" : ""}>
-                  <button 
+                  <button
                     className="category-btn"
-                    onClick={() => setActiveCategory(cat.name)}
+                    onClick={() => { setActiveCategory(cat.name); setVisibleCount(POSTS_PER_PAGE); }}
                   >
                     {cat.icon && <span className="cat-icon">{cat.icon}</span>}
                     {cat.name}
@@ -107,19 +114,15 @@ export default function Blogs({ posts }) {
             </ul>
           </div>
 
-          <motion.div 
-            className="blogs-grid-new"
-            layout
-          >
-            <AnimatePresence>
-              {filteredPosts.map((post, index) => (
+          <div className="blogs-grid-new">
+            <AnimatePresence mode="popLayout">
+              {visiblePosts.map((post) => (
                 <motion.div
                   key={post.slug}
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.25 }}
                 >
                   <Link href={`/blogs/${post.slug}`} className="blog-card-link-new">
                     <div className="blog-card-new">
@@ -145,7 +148,19 @@ export default function Blogs({ posts }) {
                 No articles found in this category yet.
               </div>
             )}
-          </motion.div>
+          </div>
+
+          {hasMore && (
+            <div style={{ textAlign: 'center', marginTop: '40px' }}>
+              <button
+                className="btn-bottom-cta"
+                onClick={() => setVisibleCount(prev => prev + POSTS_PER_PAGE)}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+              >
+                Load more posts ({filteredPosts.length - visibleCount} remaining)
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
