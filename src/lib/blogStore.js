@@ -91,7 +91,6 @@ function mapRow(r) {
 export async function getAllPosts() {
   const cached = cacheGet("all");
   if (cached) return cached;
-  await ensureSchema();
   const sql = db();
   const rows = await sql`SELECT * FROM blog_posts ORDER BY created_at DESC`;
   const result = rows.map(mapRow);
@@ -103,7 +102,6 @@ export async function getPublishedPosts({ listingOnly = false } = {}) {
   const key = listingOnly ? "published_listing" : "published_full";
   const cached = cacheGet(key);
   if (cached) return cached;
-  await ensureSchema();
   const sql = db();
   const rows = listingOnly
     ? await sql`
@@ -122,7 +120,6 @@ export async function getPostBySlug(slug) {
   const key = `slug:${slug}`;
   const cached = cacheGet(key);
   if (cached) return cached;
-  await ensureSchema();
   const sql = db();
   const rows = await sql`
     SELECT * FROM blog_posts WHERE slug = ${slug} AND status = 'published' LIMIT 1
@@ -133,7 +130,6 @@ export async function getPostBySlug(slug) {
 }
 
 export async function slugExists(slug) {
-  await ensureSchema();
   const sql = db();
   const rows = await sql`SELECT 1 FROM blog_posts WHERE slug = ${slug} LIMIT 1`;
   return rows.length > 0;

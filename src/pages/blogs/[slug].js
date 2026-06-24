@@ -13,38 +13,44 @@ const XLogo = ({ size = 18 }) => (
 );
 
 export async function getStaticPaths() {
-  const { getPublishedPosts } = await import("@/lib/blogStore");
-  const posts = await getPublishedPosts({ listingOnly: true });
-  const paths = posts.slice(0, 50).map(p => ({ params: { slug: p.slug } }));
-  return { paths, fallback: "blocking" };
+  try {
+    const { getPublishedPosts } = await import("@/lib/blogStore");
+    const posts = await getPublishedPosts({ listingOnly: true });
+    const paths = posts.slice(0, 50).map(p => ({ params: { slug: p.slug } }));
+    return { paths, fallback: "blocking" };
+  } catch (err) {
+    console.error("blogs/[slug] getStaticPaths error:", err);
+    return { paths: [], fallback: "blocking" };
+  }
 }
 
 export async function getStaticProps({ params }) {
-  const { getPostBySlug, getPublishedPosts } = await import("@/lib/blogStore");
+  try {
+    const { getPostBySlug, getPublishedPosts } = await import("@/lib/blogStore");
 
-  const post = await getPostBySlug(params.slug);
-  if (!post) {
-    return { notFound: true };
+    const post = await getPostBySlug(params.slug);
+    if (!post) {
+      return { notFound: true };
+    }
+
+    let relatedPosts = [];
+    try {
+      relatedPosts = (await getPublishedPosts({ listingOnly: true }))
+        .filter(p => p.slug !== params.slug)
+        .slice(0, 6)
+        .map(({ slug, title, category, date, author, image, excerpt, readTime }) => ({
+          slug, title, category, date, author, image: image || "", excerpt, readTime
+        }));
+    } catch (_) {}
+
+    return {
+      props: { post, relatedPosts },
+      revalidate: 300,
+    };
+  } catch (err) {
+    console.error("blogs/[slug] getStaticProps error:", err);
+    return { notFound: true, revalidate: 60 };
   }
-
-  const relatedPosts = (await getPublishedPosts({ listingOnly: true }))
-    .filter(p => p.slug !== params.slug)
-    .slice(0, 6)
-    .map(({ slug, title, category, date, author, image, excerpt, readTime }) => ({
-      slug,
-      title,
-      category,
-      date,
-      author,
-      image: image || "",
-      excerpt,
-      readTime
-    }));
-
-  return {
-    props: { post, relatedPosts },
-    revalidate: 300,
-  };
 }
 
 export default function BlogPost({ post, relatedPosts }) {
