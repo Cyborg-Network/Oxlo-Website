@@ -38,6 +38,15 @@ const modelsItemListSchema = {
 const MODELS_DATA = [
   // --- Latest & high-demand flagship models ---
   {
+    id: "deepseek-v4-pro",
+    title: "DeepSeek V4 Pro",
+    description: "Full-scale MoE reasoning model with top-tier coding, math, and long-context performance across all major benchmarks.",
+    tags: ["LLM", "Reasoning", "Code"],
+    logo: "/images/models/deep.png",
+    trending: true,
+    comingSoon: false,
+  },
+  {
     id: "kimi-k2-6",
     title: "Kimi K2.6",
     description: "Latest high-capacity reasoning model built for long context understanding, research workflows, and complex problem solving.",
