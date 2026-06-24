@@ -28,7 +28,7 @@ export default function TermOfUse() {
 
             <h2>2. Platform Access & Free Trial</h2>
             <h3>2.1 Free Trial Access</h3>
-            <p>Newly registered users may receive up to five (5) days of complimentary access to available models. Request limits and usage caps apply during the free trial period. Free trial access does not apply to promotional codes, discounted plans, or offers redeemed through third-party partnerships.</p>
+            <p>The Pro plan includes a one (1) day complimentary trial with access to all production-ready models. Request limits and usage caps apply during the free trial period. Free trial access does not apply to promotional codes, discounted plans, or offers redeemed through third-party partnerships. The Premium plan does not include a free trial.</p>
             <h3>2.2 Model Availability</h3>
             <p>We may modify, replace, or remove available models at any time based on demand, performance, or operational considerations.</p>
             <h3>2.3 Promotional Codes</h3>
