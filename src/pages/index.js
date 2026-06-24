@@ -112,7 +112,7 @@ const homepageFaqSchema = {
       "name": "How much does it cost to run Llama 3.3 70B or Qwen 3 32B on Oxlo.ai?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Both Llama 3.3 70B and Qwen 3 32B are available on Oxlo.ai's Premium plan at $350 per month, which includes up to 5,000 API requests per day. Unlike Together AI, Fireworks AI, or OpenRouter where a single long-context query can cost $0.05 or more depending on token count, every request on Oxlo.ai costs the same flat rate regardless of prompt length. New users get a 5-day free trial with full access to all premium models."
+        "text": "Both Llama 3.3 70B and Qwen 3 32B are available on Oxlo.ai's Premium plan at $350 per month, which includes up to 5,000 API requests per day. Unlike Together AI, Fireworks AI, or OpenRouter where a single long-context query can cost $0.05 or more depending on token count, every request on Oxlo.ai costs the same flat rate regardless of prompt length. The Pro plan includes a 1-day free trial to test all production-ready models."
       }
     },
     {
@@ -120,7 +120,7 @@ const homepageFaqSchema = {
       "name": "Does Oxlo.ai have a free tier?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, Oxlo.ai offers a generous free tier with 60 requests per day across 16 or more models including DeepSeek V3, Mistral 7B, Gemma 3 4B, Whisper (speech-to-text), Kokoro (text-to-speech), BGE-Large and E5-Large (embeddings), and YOLOv9/v11 (object detection). New users also get a 5-day premium trial with full access to all 40+ models. No credit card required."
+        "text": "Yes, Oxlo.ai offers a generous free tier with 60 requests per day across 16 or more models including DeepSeek V3, Mistral 7B, Gemma 3 4B, Whisper (speech-to-text), Kokoro (text-to-speech), BGE-Large and E5-Large (embeddings), and YOLOv9/v11 (object detection). The Pro plan also includes a 1-day free trial. No credit card required."
       }
     },
     {
@@ -165,7 +165,7 @@ const howToSchema = {
   "description": "Set up your first AI API call with Oxlo.ai in under 2 minutes. Works with any OpenAI-compatible SDK.",
   "totalTime": "PT2M",
   "step": [
-    { "@type": "HowToStep", "position": 1, "name": "Create an Oxlo.ai Account", "text": "Sign up at https://portal.oxlo.ai/signup. No credit card required. You get a 5-day free trial with access to all 40+ models.", "url": "https://portal.oxlo.ai/signup" },
+    { "@type": "HowToStep", "position": 1, "name": "Create an Oxlo.ai Account", "text": "Sign up at https://portal.oxlo.ai/signup. No credit card required. Start with 60 free requests per day, or try the Pro plan with a 1-day free trial.", "url": "https://portal.oxlo.ai/signup" },
     { "@type": "HowToStep", "position": 2, "name": "Generate an API Key", "text": "Go to Dashboard > API Keys and create a new API key. Copy the key for the next step.", "url": "https://portal.oxlo.ai/dashboard/api-keys" },
     { "@type": "HowToStep", "position": 3, "name": "Install the OpenAI SDK", "text": "Install the OpenAI Python SDK with: pip install openai. Or for Node.js: npm install openai. Oxlo is fully OpenAI SDK compatible." },
     { "@type": "HowToStep", "position": 4, "name": "Make Your First API Call", "text": "Create an OpenAI client with base_url='https://api.oxlo.ai/v1' and your API key. Call client.chat.completions.create() with any supported model like 'qwen-3-32b' or 'mistral-7b'." }
