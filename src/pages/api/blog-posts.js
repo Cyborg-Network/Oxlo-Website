@@ -84,15 +84,17 @@ export default async function handler(req, res) {
       if (slug) {
         const post = await getPostBySlug(slug);
         if (!post) return res.status(404).json({ error: "Post not found" });
+        res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
         return res.status(200).json({ success: true, post });
       }
 
-      let published = await getPublishedPosts({ listingOnly: !slug });
+      let published = await getPublishedPosts({ listingOnly: true });
       if (category && category !== "All") {
         published = published.filter((p) => p.category === category);
       }
       const listing = published.map(({ content, toc, ...rest }) => rest);
 
+      res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
       return res.status(200).json({ success: true, count: listing.length, posts: listing });
     }
 

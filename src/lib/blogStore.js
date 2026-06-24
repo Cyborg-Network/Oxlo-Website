@@ -11,8 +11,6 @@
  */
 import { neon } from "@neondatabase/serverless";
 
-// Lazily create the client so importing this module never throws at build time
-// (the connection string is only required when a query actually runs).
 let _sql = null;
 function db() {
   if (!_sql) {
@@ -50,6 +48,27 @@ async function ensureSchema() {
   _schemaReady = true;
 }
 
+const CACHE_TTL = 5 * 60 * 1000;
+const cache = new Map();
+
+function cacheGet(key) {
+  const entry = cache.get(key);
+  if (!entry) return undefined;
+  if (Date.now() - entry.ts > CACHE_TTL) {
+    cache.delete(key);
+    return undefined;
+  }
+  return entry.data;
+}
+
+function cacheSet(key, data) {
+  cache.set(key, { data, ts: Date.now() });
+}
+
+function cacheInvalidate() {
+  cache.clear();
+}
+
 // DB row (snake_case) -> the shape the rest of the app already expects (camelCase).
 function mapRow(r) {
   return {
@@ -69,16 +88,21 @@ function mapRow(r) {
   };
 }
 
-/** All posts (any status), newest first. Used by the API for duplicate checks. */
 export async function getAllPosts() {
+  const cached = cacheGet("all");
+  if (cached) return cached;
   await ensureSchema();
   const sql = db();
   const rows = await sql`SELECT * FROM blog_posts ORDER BY created_at DESC`;
-  return rows.map(mapRow);
+  const result = rows.map(mapRow);
+  cacheSet("all", result);
+  return result;
 }
 
-/** Published posts, newest first. */
 export async function getPublishedPosts({ listingOnly = false } = {}) {
+  const key = listingOnly ? "published_listing" : "published_full";
+  const cached = cacheGet(key);
+  if (cached) return cached;
   await ensureSchema();
   const sql = db();
   const rows = listingOnly
@@ -89,20 +113,25 @@ export async function getPublishedPosts({ listingOnly = false } = {}) {
     : await sql`
         SELECT * FROM blog_posts WHERE status = 'published' ORDER BY created_at DESC
       `;
-  return rows.map(mapRow);
+  const result = rows.map(mapRow);
+  cacheSet(key, result);
+  return result;
 }
 
-/** A single published post by slug, or null. */
 export async function getPostBySlug(slug) {
+  const key = `slug:${slug}`;
+  const cached = cacheGet(key);
+  if (cached) return cached;
   await ensureSchema();
   const sql = db();
   const rows = await sql`
     SELECT * FROM blog_posts WHERE slug = ${slug} AND status = 'published' LIMIT 1
   `;
-  return rows.length ? mapRow(rows[0]) : null;
+  const result = rows.length ? mapRow(rows[0]) : null;
+  if (result) cacheSet(key, result);
+  return result;
 }
 
-/** True if a post with this slug already exists (any status). */
 export async function slugExists(slug) {
   await ensureSchema();
   const sql = db();
@@ -110,7 +139,6 @@ export async function slugExists(slug) {
   return rows.length > 0;
 }
 
-/** Insert a post. Caller must build the full post object. Returns the stored row. */
 export async function addPost(post) {
   await ensureSchema();
   const sql = db();
@@ -124,5 +152,6 @@ export async function addPost(post) {
        ${post.source}, ${post.content}, ${JSON.stringify(post.toc || [])}::jsonb)
     RETURNING *
   `;
+  cacheInvalidate();
   return mapRow(rows[0]);
 }

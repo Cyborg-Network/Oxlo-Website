@@ -12,8 +12,14 @@ const XLogo = ({ size = 18 }) => (
   </svg>
 );
 
-export async function getServerSideProps({ params }) {
-  // Read fresh from Neon on every request — new API-posted content appears instantly
+export async function getStaticPaths() {
+  const { getPublishedPosts } = await import("@/lib/blogStore");
+  const posts = await getPublishedPosts({ listingOnly: true });
+  const paths = posts.slice(0, 50).map(p => ({ params: { slug: p.slug } }));
+  return { paths, fallback: "blocking" };
+}
+
+export async function getStaticProps({ params }) {
   const { getPostBySlug, getPublishedPosts } = await import("@/lib/blogStore");
 
   const post = await getPostBySlug(params.slug);
@@ -21,10 +27,9 @@ export async function getServerSideProps({ params }) {
     return { notFound: true };
   }
 
-  // Get related posts (other published posts)
-  const relatedPosts = (await getPublishedPosts())
+  const relatedPosts = (await getPublishedPosts({ listingOnly: true }))
     .filter(p => p.slug !== params.slug)
-    .slice(0, 6)   // show at most 6 related posts
+    .slice(0, 6)
     .map(({ slug, title, category, date, author, image, excerpt, readTime }) => ({
       slug,
       title,
@@ -37,10 +42,8 @@ export async function getServerSideProps({ params }) {
     }));
 
   return {
-    props: {
-      post,
-      relatedPosts
-    }
+    props: { post, relatedPosts },
+    revalidate: 300,
   };
 }
 
