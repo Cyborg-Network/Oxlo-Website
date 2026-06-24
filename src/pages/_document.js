@@ -44,7 +44,7 @@ const softwareAppSchema = {
     "40+ AI models across text, vision, code, image, audio, embeddings, and detection",
     "Fully OpenAI SDK compatible - change one line of code to switch",
     "No cold starts - models stay loaded in GPU memory",
-    "5-day free trial with access to all models",
+    "Free tier with 60 requests per day, Pro plan includes 1-day free trial",
     "Streaming support for real-time responses",
     "Function calling and JSON mode support",
     "Vision model support for image understanding"

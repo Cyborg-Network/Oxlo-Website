@@ -148,7 +148,7 @@ client = OpenAI(<br/>
             </div>
             
             <div className="text-center" style={{ marginTop: "3rem" }}>
-              <Button title="Start Free Trial" link="/pricing" size="btn-md" theme="btn-primary" />
+              <Button title="Get Started" link="/pricing" size="btn-md" theme="btn-primary" />
             </div>
           </div>
         </div>

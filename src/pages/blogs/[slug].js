@@ -12,36 +12,45 @@ const XLogo = ({ size = 18 }) => (
   </svg>
 );
 
-export async function getServerSideProps({ params }) {
-  // Read fresh from Neon on every request — new API-posted content appears instantly
-  const { getPostBySlug, getPublishedPosts } = await import("@/lib/blogStore");
-
-  const post = await getPostBySlug(params.slug);
-  if (!post) {
-    return { notFound: true };
+export async function getStaticPaths() {
+  try {
+    const { getPublishedPosts } = await import("@/lib/blogStore");
+    const posts = await getPublishedPosts({ listingOnly: true });
+    const paths = posts.slice(0, 50).map(p => ({ params: { slug: p.slug } }));
+    return { paths, fallback: "blocking" };
+  } catch (err) {
+    console.error("blogs/[slug] getStaticPaths error:", err);
+    return { paths: [], fallback: "blocking" };
   }
+}
 
-  // Get related posts (other published posts)
-  const relatedPosts = (await getPublishedPosts())
-    .filter(p => p.slug !== params.slug)
-    .slice(0, 6)   // show at most 6 related posts
-    .map(({ slug, title, category, date, author, image, excerpt, readTime }) => ({
-      slug,
-      title,
-      category,
-      date,
-      author,
-      image: image || "",
-      excerpt,
-      readTime
-    }));
+export async function getStaticProps({ params }) {
+  try {
+    const { getPostBySlug, getPublishedPosts } = await import("@/lib/blogStore");
 
-  return {
-    props: {
-      post,
-      relatedPosts
+    const post = await getPostBySlug(params.slug);
+    if (!post) {
+      return { notFound: true };
     }
-  };
+
+    let relatedPosts = [];
+    try {
+      relatedPosts = (await getPublishedPosts({ listingOnly: true }))
+        .filter(p => p.slug !== params.slug)
+        .slice(0, 6)
+        .map(({ slug, title, category, date, author, image, excerpt, readTime }) => ({
+          slug, title, category, date, author, image: image || "", excerpt, readTime
+        }));
+    } catch (_) {}
+
+    return {
+      props: { post, relatedPosts },
+      revalidate: 300,
+    };
+  } catch (err) {
+    console.error("blogs/[slug] getStaticProps error:", err);
+    return { notFound: true, revalidate: 60 };
+  }
 }
 
 export default function BlogPost({ post, relatedPosts }) {

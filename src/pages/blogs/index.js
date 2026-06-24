@@ -17,8 +17,7 @@ const CATEGORIES = [
   { name: "Cost Optimization", icon: <DollarSign size={14} /> }
 ];
 
-export async function getServerSideProps() {
-  // Read fresh from Neon on every request — picks up new API-posted content instantly
+export async function getStaticProps() {
   const { getPublishedPosts } = await import("@/lib/blogStore");
 
   let posts = [];
@@ -35,12 +34,13 @@ export async function getServerSideProps() {
       readTime,
     }));
   } catch (err) {
-    console.error("blogs/index getServerSideProps error:", err);
+    console.error("blogs/index getStaticProps error:", err);
     posts = [];
   }
 
   return {
     props: { posts },
+    revalidate: 300,
   };
 }
 

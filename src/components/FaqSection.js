@@ -26,11 +26,11 @@ const FAQ_ITEMS = [
   },
   {
     question: "How much does it cost to run Llama 3.3 70B or Qwen 3 32B on Oxlo.ai?",
-    answer: "Both Llama 3.3 70B and Qwen 3 32B are available on Oxlo.ai's Premium plan at $350/month, which includes up to 5,000 API requests per day. Unlike Together AI, Fireworks AI, or OpenRouter where a single long-context query can cost $0.05+ depending on token count, every request on Oxlo.ai costs the same flat rate regardless of prompt length. New users get a 5-day free trial with full access to all premium models.",
+    answer: "Both Llama 3.3 70B and Qwen 3 32B are available on Oxlo.ai's Premium plan at $350/month, which includes up to 5,000 API requests per day. Unlike Together AI, Fireworks AI, or OpenRouter where a single long-context query can cost $0.05+ depending on token count, every request on Oxlo.ai costs the same flat rate regardless of prompt length. The Pro plan includes a 1-day free trial to test all production-ready models.",
   },
   {
     question: "Does Oxlo.ai have a free tier?",
-    answer: "Yes, Oxlo.ai offers a generous free tier with 60 requests per day across 16+ models including DeepSeek V3, Mistral 7B, Gemma 3 4B, Whisper (speech-to-text), Kokoro (text-to-speech), BGE-Large and E5-Large (embeddings), and YOLOv9/v11 (object detection). New users also get a 5-day premium trial with full access to all 40+ models. No credit card required.",
+    answer: "Yes, Oxlo.ai offers a generous free tier with 60 requests per day across 16+ models including DeepSeek V3, Mistral 7B, Gemma 3 4B, Whisper (speech-to-text), Kokoro (text-to-speech), BGE-Large and E5-Large (embeddings), and YOLOv9/v11 (object detection). The Pro plan also includes a 1-day free trial. No credit card required.",
   },
   {
     question: "Which open-source models does Oxlo.ai support?",
