@@ -52,11 +52,15 @@ html, body {
   overscroll-behavior: none;
 }
 
-/* Clip (not hidden) horizontal overflow on the body only. `clip` stops the
-   sideways jitter without turning html/body into a scroll container, so
-   vertical/momentum scrolling on mobile keeps working. Never set overflow on
-   <html> here — that is what broke scrolling. */
-body {
+/* Clip horizontal overflow at both the viewport (html) and body level.
+   `overflow-x: clip` is deliberately used instead of `hidden`: clip does NOT
+   turn the element into a scroll container and does NOT force overflow-y to
+   `auto`, so vertical/momentum scrolling keeps working (plain `hidden` here is
+   what broke scrolling earlier). Clipping at the html/viewport level is what
+   contains `position: fixed` overlays (chat tooltip, bubble pulse, background
+   canvas) whose containing block is the viewport and therefore slip past a
+   body-only clip, which was leaving a sliver of right-edge overflow. */
+html, body {
   overflow-x: clip;
 }
 
@@ -8257,6 +8261,9 @@ textarea:-webkit-autofill:focus {
   right: 28px;
   z-index: 9997;
   width: 300px;
+  /* Never let the tooltip exceed the screen on narrow phones (28px gutter each
+     side), otherwise it overflows and shifts the page sideways. */
+  max-width: calc(100vw - 56px);
   background: rgba(8, 14, 22, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
