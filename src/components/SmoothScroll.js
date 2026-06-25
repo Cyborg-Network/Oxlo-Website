@@ -9,6 +9,13 @@ export default function SmoothScroll() {
     let rafId;
     let ro;
 
+    // Skip Lenis on touch devices. On phones it fights native momentum scrolling,
+    // intercepts touch moves (making sliders/controls feel like the page shakes),
+    // and adds a constant rAF loop that drops frames. Native scroll is smoother there.
+    const isTouch = window.matchMedia('(pointer: coarse)').matches
+      || window.matchMedia('(hover: none)').matches;
+    if (isTouch) return;
+
     async function init() {
       const Lenis = (await import('lenis')).default;
       const lenis = new Lenis({
@@ -49,7 +56,11 @@ export default function SmoothScroll() {
   useEffect(() => {
     const onRouteChange = () => {
       const lenis = lenisRef.current;
-      if (!lenis) return;
+      if (!lenis) {
+        // Lenis is disabled on touch devices; fall back to native scroll-to-top.
+        window.scrollTo(0, 0);
+        return;
+      }
       lenis.scrollTo(0, { immediate: true });
       requestAnimationFrame(() => lenis.resize());
     };

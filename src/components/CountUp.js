@@ -3,7 +3,10 @@ import { useInView } from 'framer-motion';
 
 export default function CountUp({ end, suffix = '+', duration = 2000 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  // Trigger as soon as ~20% of the number scrolls into view. A negative rootMargin
+  // here used to block the animation on short mobile viewports, leaving counters
+  // stuck on 0; `amount` is reliable on touch devices with native scrolling.
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [count, setCount] = useState(0);
 
   // Numeric target + any trailing unit (e.g. "M" in "556M"). Recomputed when `end`
