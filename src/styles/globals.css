@@ -50,8 +50,14 @@ html, body {
   background-color: var(--bg-body);
   min-height: 100vh;
   overscroll-behavior: none;
-  overflow-x: hidden;
-  max-width: 100%;
+}
+
+/* Clip (not hidden) horizontal overflow on the body only. `clip` stops the
+   sideways jitter without turning html/body into a scroll container, so
+   vertical/momentum scrolling on mobile keeps working. Never set overflow on
+   <html> here — that is what broke scrolling. */
+body {
+  overflow-x: clip;
 }
 
 form * {
