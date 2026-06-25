@@ -50,6 +50,8 @@ html, body {
   background-color: var(--bg-body);
   min-height: 100vh;
   overscroll-behavior: none;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 form * {

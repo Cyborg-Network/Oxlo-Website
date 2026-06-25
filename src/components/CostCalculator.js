@@ -103,7 +103,7 @@ function TokenInput({ label, value, onChange, maxTokens }) {
 
   return (
     <div style={{ marginBottom: '20px', background: 'rgba(255,255,255,0.02)', padding: '16px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.04)' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+      <div className="oxc-tk-head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
         <span style={{ fontSize: '12px', color: '#9CA3AF', fontWeight: 600 }}>{label}</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0' }}>
           <div style={{ background: 'rgba(0,0,0,0.5)', padding: '4px 10px', borderRadius: '6px 0 0 6px', border: '1px solid rgba(255,255,255,0.1)', borderRight: 'none' }}>
@@ -432,7 +432,18 @@ export default function CostCalculator() {
           border: 1px solid rgba(255,255,255,0.06); border-radius: 20px;
           box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
         }
-        @media (max-width: 768px) { .oxc-grid { grid-template-columns: 1fr; } }
+        /* min-width:0 lets the monospace price column shrink instead of forcing
+           horizontal overflow (which made the page jitter on phones). */
+        .oxc-grid > .oxc-panel { min-width: 0; }
+        @media (max-width: 768px) {
+          .oxc-grid {
+            grid-template-columns: 1fr;
+            /* backdrop blur is a heavy mobile repaint; the animated background is
+               already disabled on touch, so the panel just needs a solid fill. */
+            background: rgba(10, 15, 22, 0.94);
+            backdrop-filter: none; -webkit-backdrop-filter: none;
+          }
+        }
         .oxc-num[type=text] { background: transparent; border: none; color: #fff; outline: none; font-family: inherit; width: 110px; text-align: right; font-size: 15px; font-weight: 700; }
         .oxc-range { -webkit-appearance: none; width: 100%; height: 4px; background: rgba(255,255,255,0.08); border-radius: 4px; outline: none; cursor: pointer; }
         .oxc-range::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #03F7B5; cursor: pointer; }
@@ -451,9 +462,15 @@ export default function CostCalculator() {
         .oxc-row:hover { background: rgba(255,255,255,0.04); }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        /* The 90px blur glow is expensive to repaint on mobile GPUs; hide it on
+           phones where it adds noticeable lag while the calculator updates. */
+        @media (max-width: 768px) { .oxc-glow { display: none; } }
+        /* Let the token-input header wrap so the K/M/B controls never overflow a
+           narrow screen. */
+        @media (max-width: 480px) { .oxc-tk-head { flex-wrap: wrap; gap: 8px; } }
       `}</style>
 
-      <div style={{ position: 'absolute', top: '10%', left: '10%', right: '10%', bottom: '10%', background: 'radial-gradient(ellipse at center, rgba(3,247,181,0.12) 0%, transparent 70%)', filter: 'blur(90px)', pointerEvents: 'none', zIndex: 0 }}></div>
+      <div className="oxc-glow" style={{ position: 'absolute', top: '10%', left: '10%', right: '10%', bottom: '10%', background: 'radial-gradient(ellipse at center, rgba(3,247,181,0.12) 0%, transparent 70%)', filter: 'blur(90px)', pointerEvents: 'none', zIndex: 0 }}></div>
 
       <div className="oxc-grid">
 

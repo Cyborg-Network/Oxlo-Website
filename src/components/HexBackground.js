@@ -11,6 +11,14 @@ export default function HexBackground() {
   const scrollRef = useRef(0);
 
   useEffect(() => {
+    // The hex grid is a mouse-driven decoration (ripples/lift follow the cursor),
+    // so touch devices gain nothing from it while paying the full cost of a
+    // full-page canvas redrawing every frame. Skip it on phones/tablets to keep
+    // scrolling smooth and stop the calculator from lagging.
+    const isTouch = window.matchMedia("(pointer: coarse)").matches
+      || window.matchMedia("(hover: none)").matches;
+    if (isTouch) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d", { alpha: true });
