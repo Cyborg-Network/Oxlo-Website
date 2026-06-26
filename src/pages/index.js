@@ -57,7 +57,7 @@ import openrouter from '../../public/images/openrouter.svg'
 import together from '../../public/images/together.svg'
 import f6s from '../../public/images/f6s.png'
 import STL from '../../public/images/STL.webp'
-import TopProd from '../../public/images/badge.png'
+
 import CostCalculator from "@/components/CostCalculator";
 import BenchmarkSection from "@/components/BenchmarkSection";
 import PrivacyHighlight from "@/components/PrivacyHighlight";
@@ -348,8 +348,8 @@ export default function Home() {
                     size="btn-md"
                     icon={rocket}
                   />
-                  <a href="https://www.producthunt.com/products/oxlo-ai?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-oxlo-ai" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center' }}>
-                    <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1169408&theme=light&t=1781677436010" alt="Oxlo.ai - Scale across AI models without scaling your bill | Product Hunt" width="250" height="54" />
+                  <a href="https://www.producthunt.com/products/oxlo-ai?embed=true&utm_source=badge-top-post-badge&utm_medium=badge&utm_campaign=badge-oxlo-ai" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center' }}>
+                    <img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=1169408&theme=light&period=daily&t=1782457639773" alt="Oxlo.ai - Scale across AI models without scaling your bill | Product Hunt" width="250" height="54" />
                   </a>
                 </motion.div>
               </div>
@@ -405,9 +405,7 @@ export default function Home() {
             <Link href="https://www.f6s.com/company/cyborg-network" target="_blank" rel="noopener">
               <Image src={f6s} alt="AI" />
             </Link>
-            <Link href="https://peerpush.net/p/oxloai-uosi" target="_blank" rel="noopener">
-              <Image src={TopProd} alt="AI" />
-            </Link>
+
           </motion.div>
           <Marquee />
         </div>
