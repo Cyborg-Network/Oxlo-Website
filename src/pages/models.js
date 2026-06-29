@@ -13,7 +13,7 @@ const modelsItemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   "name": "Oxlo.ai AI Model Registry",
-  "description": "45+ open-source and proprietary AI models available via Oxlo.ai's request-based API. Includes LLMs, vision, code, image generation, audio, embeddings, and object detection models.",
+  "description": "35+ open-source and proprietary AI models available via Oxlo.ai's request-based API. Includes LLMs, vision, code, image generation, audio, embeddings, and object detection models.",
   "numberOfItems": 46,
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Qwen 3 32B", "description": "State-of-the-art multilingual reasoning and agent tasks" },
@@ -457,18 +457,18 @@ const [searchQuery, setSearchQuery] = useState("")
   return (
     <>
       <Head>
-        <title>AI Models - 45+ Open-Source Models for Inference | Oxlo.ai</title>
+        <title>AI Models - 35+ Open-Source Models for Inference | Oxlo.ai</title>
         <meta
           name="description"
-          content="Browse 45+ AI models on Oxlo.ai: DeepSeek V4 Flash, Kimi K2.6, Gemma 3 27B, Qwen 3 32B, Llama 3.3 70B, DeepSeek R1, Mistral 7B, Whisper, and more. Deploy any model in seconds with request-based pricing."
+          content="Browse 35+ AI models on Oxlo.ai: DeepSeek V4 Flash, Kimi K2.6, Gemma 3 27B, Qwen 3 32B, Llama 3.3 70B, DeepSeek R1, Mistral 7B, Whisper, and more. Deploy any model in seconds with request-based pricing."
         />
         <meta
           name="keywords"
           content="AI models, open-source LLM, Kimi K2.6, Gemma 3 27B, Qwen 3 32B, Llama 3.3 70B, DeepSeek R1, Mistral 7B, Whisper API, SDXL API, BGE embedding, YOLOv9 API, AI model registry"
         />
         <link rel="canonical" href="https://oxlo.ai/models" />
-        <meta property="og:title" content="45+ AI Models for Inference - Oxlo.ai Model Registry" />
-        <meta property="og:description" content="Deploy Kimi K2.6, Gemma 3 27B, DeepSeek R1, and 45+ more models in seconds." />
+        <meta property="og:title" content="35+ AI Models for Inference - Oxlo.ai Model Registry" />
+        <meta property="og:description" content="Deploy Kimi K2.6, Gemma 3 27B, DeepSeek R1, and 35+ more models in seconds." />
         <meta property="og:url" content="https://oxlo.ai/models" />
         <meta name="robots" content="index, follow" />
 

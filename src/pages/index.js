@@ -187,7 +187,7 @@ const organizationSchema = {
 };
 
 // Fallback stats in case API is unavailable
-const FALLBACK_STATS = { users: 700, models_available: 45, countries: 100, tokens_display: "556M" };
+const FALLBACK_STATS = { users: 700, models_available: 35, countries: 100, tokens_display: "556M" };
 
 export default function Home() {
   const [stats, setStats] = useState(FALLBACK_STATS);
@@ -254,7 +254,7 @@ export default function Home() {
         <title>Oxlo.ai | Frontier AI Models, Lower Cost, Total Privacy</title>
         <meta
           name="description"
-          content="Run Kimi K2.6, DeepSeek V4 Flash, and 45+ frontier AI models on an OpenAI-compatible API. Request-based pricing, benchmark performance that matches the top labs, and we never sell your data or train on your prompts."
+          content="Run Kimi K2.6, DeepSeek V4 Flash, and 35+ frontier AI models on an OpenAI-compatible API. Request-based pricing, benchmark performance that matches the top labs, and we never sell your data or train on your prompts."
         />
         <meta
           name="keywords"
@@ -334,7 +334,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  Run Kimi K2.6 and 45+ open source models with unlimited agentic tool calls, secure failover, and zero data retention or training
+                  Run Kimi K2.6 and 35+ open source models with unlimited agentic tool calls, secure failover, and zero data retention or training
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: 20, scale: 0.95 }}
