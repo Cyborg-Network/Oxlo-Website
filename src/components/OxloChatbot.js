@@ -216,7 +216,7 @@ export default function OxloChatbot() {
         } else {
           setMessages([{
             role: "assistant",
-            content: "Hey there! 👋 Welcome to Oxlo.ai — your go-to platform for AI inference with flat monthly pricing. I can help you explore our 45+ models, compare plans, or see how much you'd save.\n\n[CALC_ACTION:Try the Cost Calculator ✨]",
+            content: "Hey there! 👋 Welcome to Oxlo.ai — your go-to platform for AI inference with flat monthly pricing. I can help you explore our 35+ models, compare plans, or see how much you'd save.\n\n[CALC_ACTION:Try the Cost Calculator ✨]",
           }]);
         }
       } catch {

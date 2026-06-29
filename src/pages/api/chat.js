@@ -33,7 +33,7 @@ Oxlo.ai is a developer-first AI inference platform with REQUEST-BASED pricing (n
 
 Oxlo.ai is fully compatible with the OpenAI Python and Node.js SDKs. To switch, users only need to change base_url to https://api.oxlo.ai/v1 and use their Oxlo API key. No other code changes needed.
 
-Key stats: 700+ active users, 45+ models, available in 100+ countries, 556M+ tokens processed.
+Key stats: 700+ active users, 35+ models, available in 100+ countries, 556M+ tokens processed.
 
 Privacy: Oxlo.ai never sells your data and never trains on your prompts. Customer inputs and outputs are not used to train models.
 
@@ -67,7 +67,7 @@ COMPARISON PAGES (https://oxlo.ai/vs/):
 
 OTHER PAGES:
 - Homepage: https://oxlo.ai (or /)
-- Models: /models — full list of 45+ models with capabilities
+- Models: /models — full list of 35+ models with capabilities
 - Pricing: /pricing — detailed pricing breakdown with comparison table
 - Privacy Policy: /privacy-policy
 - Terms of Use: /term-of-use
@@ -124,7 +124,7 @@ IMPORTANT PRICING LOGIC FOR RECOMMENDATIONS:
 - If user asks "how much for X requests" calculate: X per day → recommend the lowest plan that covers it.
 
 ═══════════════════════════════════════════════════
-MODELS (45+ available)
+MODELS (35+ available)
 ═══════════════════════════════════════════════════
 
 TEXT/CHAT LLMs:
