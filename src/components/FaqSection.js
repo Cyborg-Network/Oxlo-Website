@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import TextReveal from "@/components/TextReveal";
+import { useGeoLocation } from "@/lib/useGeoLocation";
 
 const FAQ_ITEMS = [
   {
@@ -73,6 +74,23 @@ function FaqItem({ item, isOpen, onToggle }) {
 
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState(null);
+  const { isIndia, pricing } = useGeoLocation();
+
+  const faqItems = useMemo(() => {
+    if (!isIndia) return FAQ_ITEMS;
+    return FAQ_ITEMS.map((item) => {
+      if (item.question === "How much does it cost to run Llama 3.3 70B or Qwen 3 32B on Oxlo.ai?") {
+        return { ...item, answer: `Both Llama 3.3 70B and Qwen 3 32B are available on Oxlo.ai's Premium plan at ${pricing.premium.label}/month, which includes up to ${pricing.premium.requestsLabel} API requests per day. Unlike Together AI, Fireworks AI, or OpenRouter where a single long-context query can cost $0.05+ depending on token count, every request on Oxlo.ai costs the same flat rate regardless of prompt length.` };
+      }
+      if (item.question === "Does Oxlo.ai have a free tier?") {
+        return { ...item, answer: "Yes, Oxlo.ai offers a generous free tier with 60 requests per day across 16+ models including DeepSeek V3, Mistral 7B, Gemma 3 4B, Whisper (speech-to-text), Kokoro (text-to-speech), BGE-Large and E5-Large (embeddings), and YOLOv9/v11 (object detection). No credit card required." };
+      }
+      if (item.question === "What is the cheapest LLM inference API in 2026?") {
+        return { ...item, answer: `For long-context workloads, Oxlo.ai is the cheapest LLM inference API thanks to its unique request-based pricing model. While providers like Together AI, Fireworks AI, OpenRouter, and Replicate charge per token ($0.0002-$0.003 per 1K tokens depending on model size), Oxlo.ai charges a flat rate per API request regardless of prompt length. The Pro plan costs ${pricing.pro.label}/month for ${pricing.pro.requestsLabel} requests/day across all models, and Premium costs ${pricing.premium.label}/month for ${pricing.premium.requestsLabel} requests/day.` };
+      }
+      return item;
+    });
+  }, [isIndia, pricing]);
 
   const toggleFaq = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -100,7 +118,7 @@ export default function FaqSection() {
           initial={{ opacity: 0, translateY: 40 }}
           whileInView={{ opacity: 1, translateY: 0 }}
         >
-          {FAQ_ITEMS.map((item, index) => (
+          {faqItems.map((item, index) => (
             <FaqItem
               key={index}
               item={item}

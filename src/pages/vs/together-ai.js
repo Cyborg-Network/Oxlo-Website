@@ -1,6 +1,8 @@
 import VsPageTemplate from "@/components/VsPageTemplate"
+import { useGeoLocation } from "@/lib/useGeoLocation"
 
 export default function TogetherAIPage() {
+  const { pricing } = useGeoLocation();
   const tldr = "Oxlo.ai is a drop-in replacement for Together AI with a fundamentally different pricing model. While Together AI charges per token - causing costs to scale linearly with prompt length - Oxlo.ai charges a flat request-based rate. For engineering teams running RAG pipelines, agents, or long-context window tasks, Oxlo.ai is significantly cheaper and offers more predictable billing. Both providers are fully OpenAI SDK compatible."
 
   const cost_table = [
@@ -12,7 +14,7 @@ export default function TogetherAIPage() {
   const faqs = [
     {
       question: "How is Oxlo.ai different from Together AI?",
-      answer: "The primary difference is the business model. Together AI counts every token processed and bills variably. Oxlo.ai uses a request-based SLA, meaning you purchase a fixed tier (e.g., $350/mo for 5000 requests per day) and every request costs the same, whether it generates 100 tokens or 10,000 tokens."
+      answer: `The primary difference is the business model. Together AI counts every token processed and bills variably. Oxlo.ai uses a request-based SLA, meaning you purchase a fixed tier (e.g., ${pricing.premium.label}/mo for ${pricing.premium.requestsLabel} requests per day) and every request costs the same, whether it generates 100 tokens or 10,000 tokens.`
     },
     {
       question: "Is it difficult to switch from Together AI?",

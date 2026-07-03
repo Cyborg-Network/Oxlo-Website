@@ -6,6 +6,7 @@ import Head from "next/head";
 import { motion } from "framer-motion";
 import Button from "@/components/Button";
 import TextReveal from "@/components/TextReveal";
+import { useGeoLocation } from "@/lib/useGeoLocation";
 
 // Pricing page Product schema
 const pricingProductSchema = {
@@ -70,6 +71,7 @@ const PRICING_FAQ_ITEMS = [
 ];
 
 export default function Pricing() {
+  const { isIndia, geoResolved, pricing } = useGeoLocation();
 
   return (
     <>
@@ -157,7 +159,7 @@ export default function Pricing() {
                   <p className="subtitle">For developers getting started with Oxlo.ai.</p>
                 </div>
                 <div className="price">
-                  $0<span>/month</span>
+                  {isIndia ? "₹0" : "$0"}<span>/month</span>
                 </div>
                 <div className="limit-title">Limit:</div>
                 <ul>
@@ -201,12 +203,12 @@ export default function Pricing() {
                   <p className="subtitle">For developers building and shipping AI-powered products.</p>
                 </div>
                 <div className="price">
-                  $80<span>/month</span>
+                  {geoResolved ? pricing.pro.label : <span className="price-skeleton" />}<span>/month</span>
                 </div>
                 <div className="limit-title">Limit:</div>
                 <ul>
                   <li>
-                    <span className="bullet"></span> 1,000 requests / day
+                    <span className="bullet"></span> {pricing.pro.requests.toLocaleString()} requests / day
                   </li>
                   <li>
                     <span className="bullet"></span> All production-ready models
@@ -218,7 +220,7 @@ export default function Pricing() {
                   size="btn-md"
                   theme="dark"
                 />
-                <p className="payment-info">1-day free trial</p>
+                <p className="payment-info">{isIndia ? "" : "1-day free trial"}</p>
                 <div className="limit-title">
                   Everything in Free, plus
                 </div>
@@ -242,12 +244,12 @@ export default function Pricing() {
                   <p className="subtitle">For teams running production workloads.</p>
                 </div>
                 <div className="price">
-                  $350<span>/month</span>
+                  {geoResolved ? pricing.premium.label : <span className="price-skeleton" />}<span>/month</span>
                 </div>
                 <div className="limit-title">Limit:</div>
                 <ul>
                   <li>
-                    <span className="bullet"></span> 5,000 requests / day
+                    <span className="bullet"></span> {pricing.premium.requests.toLocaleString()} requests / day
                   </li>
                   <li>
                     <span className="bullet"></span> Priority access + beta models
@@ -343,7 +345,7 @@ export default function Pricing() {
                     <div className="plan-header-card">
                       <h4>Free</h4>
                       <div className="price">
-                        $0<span>/month</span>
+                        {isIndia ? "₹0" : "$0"}<span>/month</span>
                       </div>
                       <Button
                         title="Get started for free"
@@ -357,10 +359,10 @@ export default function Pricing() {
                     <div className="plan-header-card">
                       <h4>Pro</h4>
                       <div className="price">
-                        $80<span>/month</span>
+                        {geoResolved ? pricing.pro.label : <span className="price-skeleton" />}<span>/month</span>
                       </div>
                       <Button
-                        title="1-day free trial"
+                        title={isIndia ? "Subscribe now" : "1-day free trial"}
                         link="https://portal.oxlo.ai/pricing?plan=pro&auto_checkout=true"
                         size="btn-md"
                         theme="dark"
@@ -371,7 +373,7 @@ export default function Pricing() {
                     <div className="plan-header-card pro">
                       <h4>Premium</h4>
                       <div className="price">
-                        $350<span>/month</span>
+                        {geoResolved ? pricing.premium.label : <span className="price-skeleton" />}<span>/month</span>
                       </div>
                       <Button
                         title="Subscribe now"
@@ -404,8 +406,8 @@ export default function Pricing() {
                 <tr>
                   <td className="feature-name">Requests included</td>
                   <td className="plan-col value">60 / day</td>
-                  <td className="plan-col value">1,000 / day</td>
-                  <td className="plan-col value">5,000 / day</td>
+                  <td className="plan-col value">{pricing.pro.requests.toLocaleString()} / day</td>
+                  <td className="plan-col value">{pricing.premium.requests.toLocaleString()} / day</td>
                   <td className="plan-col value">Custom</td>
                 </tr>
                 <tr>
@@ -603,7 +605,7 @@ export default function Pricing() {
       </section>
 
       {/* Pricing FAQ Section */}
-      <PricingFaqSection />
+      <PricingFaqSection isIndia={isIndia} />
 
 
 
@@ -612,9 +614,19 @@ export default function Pricing() {
 }
 
 // Pricing-specific FAQ accordion
-function PricingFaqSection() {
+function PricingFaqSection({ isIndia }) {
   const [openIndex, setOpenIndex] = useState(null);
   const toggleFaq = (index) => setOpenIndex(openIndex === index ? null : index);
+
+  const faqItems = useMemo(() => {
+    if (!isIndia) return PRICING_FAQ_ITEMS;
+    return PRICING_FAQ_ITEMS.map((item) => {
+      if (item.question === "Does Oxlo.ai offer a free trial?") {
+        return { ...item, answer: "The Free tier (60 requests/day, 16+ models) is available permanently with no credit card required. Paid plans for India are billed monthly with no trial period." };
+      }
+      return item;
+    });
+  }, [isIndia]);
 
   return (
     <section className="common-section pricing-faq-section" id="pricing-faq">
@@ -629,7 +641,7 @@ function PricingFaqSection() {
           initial={{ opacity: 0, translateY: 40 }}
           whileInView={{ opacity: 1, translateY: 0 }}
         >
-          {PRICING_FAQ_ITEMS.map((item, index) => (
+          {faqItems.map((item, index) => (
             <div key={index} className={`faq-item ${openIndex === index ? "open" : ""}`}>
               <button className="faq-question" onClick={() => toggleFaq(index)} aria-expanded={openIndex === index}>
                 <span>{item.question}</span>
