@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { useGeoLocation } from '@/lib/useGeoLocation';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // COMPETITOR PRICING DATA (per 1M tokens)
@@ -336,6 +337,7 @@ export default function CostCalculator() {
   const [isVisible, setIsVisible] = useState(false);
   const [showQuoteForm, setShowQuoteForm] = useState(false);
   const containerRef = useRef(null);
+  const { isIndia, pricing: geoPricing } = useGeoLocation();
   
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -555,6 +557,14 @@ export default function CostCalculator() {
               </div>
             );
           })()}
+
+          {isIndia && tierKey !== 'enterprise' && (
+            <div style={{ marginTop: '8px', padding: '10px 14px', background: 'rgba(3,247,181,0.04)', border: '1px solid rgba(3,247,181,0.15)', borderRadius: '8px', textAlign: 'center' }}>
+              <span style={{ fontSize: '12px', color: '#03F7B5', fontWeight: 600 }}>
+                India pricing: Pro {geoPricing.pro.label}/mo ({geoPricing.pro.requestsLabel} req/day) | Premium {geoPricing.premium.label}/mo ({geoPricing.premium.requestsLabel} req/day)
+              </span>
+            </div>
+          )}
 
           {/* Savings Box */}
           <div style={{
