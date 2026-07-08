@@ -31,16 +31,23 @@ const nextConfig = {
     ];
   },
 
-  async rewrites() {
+  async redirects() {
     return [
       {
         source: "/oxcode",
-        destination: "https://oxcode-site.vercel.app/",
+        destination: "https://oxcode-site.vercel.app",
+        permanent: false,
       },
       {
         source: "/oxcode/:path*",
         destination: "https://oxcode-site.vercel.app/:path*",
+        permanent: false,
       },
+    ];
+  },
+
+  async rewrites() {
+    return [
       {
         source: "/sitemap.xml",
         destination: "/sitemap.xml",
