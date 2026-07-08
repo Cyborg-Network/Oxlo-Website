@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
+const webpack = require("webpack");
+
 const nextConfig = {
   reactStrictMode: true,
 
-  webpack: (config, { webpack }) => {
+  webpack: (config) => {
     config.plugins.push(
       new webpack.ProvidePlugin({
         $: "jquery",
@@ -35,12 +37,12 @@ const nextConfig = {
     return [
       {
         source: "/oxcode",
-        destination: "https://oxcode-site.vercel.app",
+        destination: "https://oxcode.oxlo.ai",
         permanent: false,
       },
       {
         source: "/oxcode/:path*",
-        destination: "https://oxcode-site.vercel.app/:path*",
+        destination: "https://oxcode.oxlo.ai/:path*",
         permanent: false,
       },
     ];
