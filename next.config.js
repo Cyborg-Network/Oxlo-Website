@@ -13,6 +13,23 @@ const nextConfig = {
     return config;
   },
 
+  // Oxcode website 
+const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: "/oxcode",
+        destination: "https://oxcode-site.vercel.app/",
+      },
+      {
+        source: "/oxcode/:path*",
+        destination: "https://oxcode-site.vercel.app/:path*",
+      },
+    ];
+  },
+};
+
+module.exports = nextConfig;
   // SEO & AI-discoverability headers
   async headers() {
     return [
