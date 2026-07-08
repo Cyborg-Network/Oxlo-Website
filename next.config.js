@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
-const webpack = require("webpack");
 const nextConfig = {
   reactStrictMode: true,
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+
+  webpack: (config, { webpack }) => {
     config.plugins.push(
       new webpack.ProvidePlugin({
         $: "jquery",
@@ -13,24 +13,6 @@ const nextConfig = {
     return config;
   },
 
-  // Oxcode website 
-const nextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: "/oxcode",
-        destination: "https://oxcode-site.vercel.app/",
-      },
-      {
-        source: "/oxcode/:path*",
-        destination: "https://oxcode-site.vercel.app/:path*",
-      },
-    ];
-  },
-};
-
-module.exports = nextConfig;
-  // SEO & AI-discoverability headers
   async headers() {
     return [
       {
@@ -49,9 +31,16 @@ module.exports = nextConfig;
     ];
   },
 
-  // Rewrites for sitemap and clean URL patterns
   async rewrites() {
     return [
+      {
+        source: "/oxcode",
+        destination: "https://oxcode-site.vercel.app/",
+      },
+      {
+        source: "/oxcode/:path*",
+        destination: "https://oxcode-site.vercel.app/:path*",
+      },
       {
         source: "/sitemap.xml",
         destination: "/sitemap.xml",
