@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const webpack = require("webpack");
 
+const OXCODE = "https://www.oxcode.ai";
+
 const nextConfig = {
   reactStrictMode: true,
 
@@ -24,10 +26,6 @@ const nextConfig = {
             key: "X-Robots-Tag",
             value: "index, follow",
           },
-          {
-            key: "Link",
-            value: '<https://oxlo.ai/llms.txt>; rel="ai-content-declaration"',
-          },
         ],
       },
     ];
@@ -35,16 +33,15 @@ const nextConfig = {
 
   async redirects() {
     return [
-      {
-        source: "/oxcode",
-        destination: "https://oxcode.oxlo.ai",
-        permanent: false,
-      },
-      {
-        source: "/oxcode/:path*",
-        destination: "https://oxcode.oxlo.ai/:path*",
-        permanent: false,
-      },
+      // Legal pages live at different paths on oxcode.ai.
+      { source: "/privacy-policy", destination: `${OXCODE}/privacy`, permanent: false },
+      { source: "/term-of-use", destination: `${OXCODE}/terms`, permanent: false },
+      { source: "/data-processing-agreement", destination: `${OXCODE}/dpa`, permanent: false },
+      // Root needs its own rule: the catch-all param below cannot match an empty path.
+      { source: "/", destination: OXCODE, permanent: false },
+      // robots.txt and sitemap.xml stay reachable so crawlers can discover these
+      // redirects. api/ holds this site's own route handlers.
+      { source: "/:path((?!api/|robots\\.txt|sitemap\\.xml).*)", destination: OXCODE, permanent: false },
     ];
   },
 
