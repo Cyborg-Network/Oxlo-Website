@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import Head from "next/head"
 import Button from "@/components/Button"
 import { ChevronDown, ArrowRightLeft } from "lucide-react"
+import { useGeoLocation } from "@/lib/useGeoLocation"
 
 export default function VsPageTemplate({
   competitorName,
@@ -20,6 +21,7 @@ export default function VsPageTemplate({
 }) {
   const [openIndex, setOpenIndex] = useState(null);
   const toggleFaq = (index) => setOpenIndex(openIndex === index ? null : index);
+  const { pricing } = useGeoLocation();
 
   return (
     <>
@@ -102,7 +104,7 @@ export default function VsPageTemplate({
               </table>
             </div>
             <p style={{ marginTop: "1rem", fontSize: "14px", color: "var(--text-light-48)", textAlign: "center" }}>
-              * Estimates based on Premium tier ($350/mo for 5,000 requests/day). Token rates based on publicly available {competitorName} pricing as of 2026.
+              * Estimates based on Premium tier ({pricing.premium.label}/mo for {pricing.premium.requestsLabel} requests/day). Token rates based on publicly available {competitorName} pricing as of 2026.
             </p>
           </div>
 
